@@ -1,9 +1,9 @@
 <script>
-	import Tiels from '../lib/components/grid-tiels.svelte';
+	import Tiels from '$lib/components/gridtiles/grid-tiels.svelte';
 </script>
 
 <svelte:head>
-	<title>Home</title>
+	<title>callow.in</title>
 	<meta name="description" content="Callow" />
 </svelte:head>
 <Tiels />
