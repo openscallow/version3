@@ -1,15 +1,16 @@
 <script>
   import { onMount } from 'svelte';
+  import { getProductsWithCache } from './cacheUtils.js';
   import '$lib/components/gridtiles/style.css'
-  
+
   let products = [];
   let error = null;
   let container;
   let lastTile;
   let observer;
-  const endpoints = ['getProduct2', 'getProduct3', 'getProduct4']; // Add more as needed
+  const endpoints = ['getProduct', 'getProduct2', 'getProduct3', 'getProduct4']; // Added 'getProduct' for initial fetch
   let currentEndpointIndex = 0;
-  
+
   onMount(async () => {
     try {
       await fetchInitialProducts();
@@ -18,35 +19,35 @@
       error = err.message;
     }
   });
-  
+
   async function fetchInitialProducts() {
-    const response = await fetch('./getProduct');
-    if (!response.ok) {
-      throw new Error('Failed to fetch initial JSON data');
-    }
-    const initialProducts = await response.json();
+    const initialProducts = await getProductsWithCache(endpoints[currentEndpointIndex], fetchProductsFromServer);
     products = initialProducts;
+    currentEndpointIndex++;
   }
-  
+
   async function fetchMoreProducts() {
     if (currentEndpointIndex >= endpoints.length) {
       return false;
     }
     const currentEndpoint = endpoints[currentEndpointIndex];
-    const response = await fetch(`./${currentEndpoint}`);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch JSON data from ${currentEndpoint}`);
-    }
-    const newProducts = await response.json();
+    const newProducts = await getProductsWithCache(currentEndpoint, fetchProductsFromServer);
     
     // Filter out duplicates before adding new products
-    const uniqueNewProducts = newProducts.filter(newProduct => 
+    const uniqueNewProducts = newProducts.filter(newProduct =>
       !products.some(existingProduct => existingProduct.id === newProduct.id)
     );
-    
     products = [...products, ...uniqueNewProducts];
     currentEndpointIndex++;
     return uniqueNewProducts.length > 0;
+  }
+
+  async function fetchProductsFromServer(endpoint) {
+    const response = await fetch(`./${endpoint}`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch JSON data from ${endpoint}`);
+    }
+    return response.json();
   }
   
   function setupIntersectionObserver() {
