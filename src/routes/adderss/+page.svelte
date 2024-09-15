@@ -18,7 +18,7 @@
 
   function handleSave() {
     if (schoolName.trim()) {
-      localStorage.setItem('userSchool', schoolName.trim());
+      localStorage.setItem('userAddress', schoolName.trim());
       console.log('School name stored successfully');
       // Redirect or show success message
 window.location.href = '../MVC';
