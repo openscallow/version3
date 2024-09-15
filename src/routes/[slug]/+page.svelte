@@ -1,76 +1,71 @@
 <script>
-    import { onMount } from 'svelte';
-    
-    import { page } from '$app/stores';
-    import {productDatabase} from '$lib/json/product.js'
-
-    const productNameUrl = $page.url.pathname.substring(1)
-
-    const productObj = productDatabase[productNameUrl];
+  import { onMount } from 'svelte';
+  import { page } from '$app/stores';
+  import { productDatabase } from '$lib/json/product.js';
+  import { addToRecentlyViewed } from '$lib/stores/recentlyViewed.js';
+  import '../../app.css';
+  import './product.css';
+  import minus from '$lib/images/icon-minus.svg';
+  import plus from '$lib/images/icon-plus.svg';
+  import next from '$lib/images/icon-next.svg';
+  import previous from '$lib/images/icon-previous.svg';
  
-    
-    import '../../app.css';
-    import './product.css';
-    import minus from '$lib/images/icon-minus.svg';
-    import plus from '$lib/images/icon-plus.svg';
-   
-    import next from '$lib/images/icon-next.svg';
-    import previous from '$lib/images/icon-previous.svg';
-
-
-    let thumbImagesDivs = [];
-    let activeImage = productObj.img;
-    let currentIndex = 0;
-    let productQuantity = 1;
-  
-    let mobileMenuOpen = false;
-    let lightBoxOpen = false;
-
-    // information about product
-    let productName = productObj.name;
-    let currentPrice = productObj.currentPrice;
-    let previousPrice = productObj.previousPrice;  
-
-
-    $: totalImages = 1; // Assuming we have 4 images based on the imports
-    
-   
-
-  
+  const productNameUrl = $page.url.pathname.substring(1);
+  const productObj = productDatabase[productNameUrl];
  
-  
-
-  
-    function incrementQuantity() {
-      productQuantity += 1;
+  let thumbImagesDivs = [];
+  let activeImage = productObj.img;
+  let currentIndex = 0;
+  let productQuantity = 1;
+  let mobileMenuOpen = false;
+  let lightBoxOpen = false;
+ 
+  // information about product
+  let productName = productObj.name;
+  let currentPrice = productObj.currentPrice;
+  let previousPrice = productObj.previousPrice;
+ 
+  $: totalImages = 1; // Assuming we have 4 images based on the imports
+ 
+  function incrementQuantity() {
+    productQuantity += 1;
+  }
+ 
+  function decrementQuantity() {
+    if (productQuantity > 1) {
+      productQuantity -= 1;
     }
-  
-    function decrementQuantity() {
-      if (productQuantity > 1) {
-        productQuantity -= 1;
-      }
-    }
-
-    function addToCart() {
-      // Implement add to cart functionality here
-      console.log(`Added ${productQuantity} items to cart`);
-    }
-
-    // Scaffold the order summary
-    function placeOrder() {
-      const data = {
-        name: productName,
-        items: productQuantity,
-        currentPrice: currentPrice,
-        previousPrice: previousPrice,
-        index : productNameUrl
-      };
-      
-      sessionStorage.setItem('userData', JSON.stringify(data));
-      window.location.href = '../MVC';
-    }
-    
-</script>
+  }
+ 
+  function addToCart() {
+    // Implement add to cart functionality here
+    console.log(`Added ${productQuantity} items to cart`);
+  }
+ 
+  // Scaffold the order summary
+  function placeOrder() {
+    const data = {
+      name: productName,
+      items: productQuantity,
+      currentPrice: currentPrice,
+      previousPrice: previousPrice,
+      index: productNameUrl
+    };
+    sessionStorage.setItem('userData', JSON.stringify(data));
+    window.location.href = '../MVC';
+  }
+ 
+  // Add to recently viewed on mount
+  onMount(() => {
+    addToRecentlyViewed({
+      id: productNameUrl,
+      name: productName,
+      image: activeImage,
+      price: currentPrice,
+      // Add any other relevant product data
+    });
+  });
+ </script>
 
 <main class="main">
   <section class="product-wrapper">
