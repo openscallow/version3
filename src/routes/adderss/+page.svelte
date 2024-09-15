@@ -21,6 +21,9 @@
       localStorage.setItem('userSchool', schoolName.trim());
       console.log('School name stored successfully');
       // Redirect or show success message
+window.location.href = '../MVC';
+
+
     } else {
       console.log('School name is empty, not stored');
       // Show error message to user
