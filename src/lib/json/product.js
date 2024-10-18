@@ -6,7 +6,8 @@ export let productDatabase ={
         description: "This stapler features an all-steel construction with a built-in staple remover and reload indicator. It uses No.10 staples, with a loading capacity of 50 staples and can staple up to 20 sheets of 75-80 gsm paper. The stapler has a 52mm throat depth, is manually loaded, supports conventional stapling, and includes a tacking function.",
         currentPrice: 70,
         previousPrice: 75,
-        id:0
+        id:0,
+        images: ["https://m.media-amazon.com/images/I/81VadRn+t-L._SX679_.jpg", "https://m.media-amazon.com/images/I/A14hDXFRp0L._SX355_.jpg"]
     },  
     1:{
         img: "https://m.media-amazon.com/images/I/51DeDlq-imL.jpg",

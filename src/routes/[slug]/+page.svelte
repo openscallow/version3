@@ -7,13 +7,12 @@
   import './product.css';
   import minus from '$lib/images/icon-minus.svg';
   import plus from '$lib/images/icon-plus.svg';
-  import next from '$lib/images/icon-next.svg';
-  import previous from '$lib/images/icon-previous.svg';
+  import Slider from '$lib/components/productSlider/slider.svelte';
  
   const productNameUrl = $page.url.pathname.substring(1);
   const productObj = productDatabase[productNameUrl];
  
-  let thumbImagesDivs = [];
+  let images = [...productObj.images]; // Array with single image
   let activeImage = productObj.img;
   let currentIndex = 0;
   let productQuantity = 1;
@@ -25,7 +24,7 @@
   let currentPrice = productObj.currentPrice;
   let previousPrice = productObj.previousPrice;
  
-  $: totalImages = 1; // Assuming we have 4 images based on the imports
+  $: totalImages = images.length;
  
   function incrementQuantity() {
     productQuantity += 1;
@@ -42,7 +41,6 @@
     console.log(`Added ${productQuantity} items to cart`);
   }
  
-  // Scaffold the order summary
   function placeOrder() {
     const data = {
       name: productName,
@@ -55,57 +53,42 @@
     window.location.href = '../MVC';
   }
  
-  // Add to recently viewed on mount
   onMount(() => {
     addToRecentlyViewed({
       id: productNameUrl,
       name: productName,
       image: activeImage,
       price: currentPrice,
-      // Add any other relevant product data
     });
   });
- </script>
+</script>
 
 <main class="main">
   <section class="product-wrapper">
     <div class="container">
       <div class="product-images-wrapper">
         <div class="preview-image-wrapper">
-          <img
-            src={activeImage}
-            class="preview-image"
-            alt="Product Image"
-          />
-          <div class="arrows hide-for-desktop">
-            <div class="next" >
-              <img src={next} alt="Next Icon" />
-            </div>
-            <div class="prev" >
-              <img src={previous} alt="Previous Icon" />
-            </div>
-          </div>
+          <Slider {images} height="400px" />
+        
           <div class="count">
             <p>
-              <span class="current">{currentIndex + 1}</span> of
-              <span class="total">{totalImages}</span>
+              <span class="current">1</span> of
+              <span class="total">1</span>
             </p>
           </div>
         </div>
   
         <div class="thumbs-wrapper hide-for-mobile">
-          {#each thumbImagesDivs as thumb, i}
-            <div class="thumb-image" class:active={i === currentIndex} on:click={() => {currentIndex = i; showThumbsAsActive();}}>
-              <img
-                src={thumb.src}
-                alt="Product Thumb Image"
-              />
-            </div>
-          {/each}
+          <div class="thumb-image active">
+            <img src={activeImage} alt="Product Thumb Image" />
+          </div>
+          <div class="thumb-image">
+            <img src={activeImage} alt="Product Thumb Image" />
+          </div>
         </div>
       </div>
       <div class="product-details-wrapper">
-        <p class="product-brabd">{productObj.company}</p>
+        <p class="product-brand">{productObj.company}</p>
         <h1 class="product-title">{productName}</h1>
         <p class="product-description">{productObj.description}</p>
   
@@ -136,7 +119,6 @@
             class="button add-btn"
             on:click={placeOrder}
           >
-            
             Buy Now
           </button>
         </form>
