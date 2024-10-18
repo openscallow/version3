@@ -12,7 +12,7 @@
   onMount(() => {
     if (images.length > 1) {
       swiper = new Swiper('.swiper-container', {
-        loop: true,
+        loop: false,
         pagination: {
           el: '.swiper-pagination',
           clickable: true
