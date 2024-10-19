@@ -8,24 +8,19 @@
   import minus from '$lib/images/icon-minus.svg';
   import plus from '$lib/images/icon-plus.svg';
   import Slider from '$lib/components/productSlider/slider.svelte';
- 
+  import '@tailwind'
+  //retrive information about product
   const productNameUrl = $page.url.pathname.substring(1);
   const productObj = productDatabase[productNameUrl];
- 
-  let images = [...productObj.images]; // Array with single image
-  let activeImage = productObj.img;
-  let currentIndex = 0;
-  let productQuantity = 1;
-  let mobileMenuOpen = false;
-  let lightBoxOpen = false;
- 
-  // information about product
+
   let productName = productObj.name;
   let currentPrice = productObj.currentPrice;
   let previousPrice = productObj.previousPrice;
- 
-  $: totalImages = images.length;
- 
+  let images = [...productObj.images]; 
+
+  //Quantity logic
+  let productQuantity = 1;
+  
   function incrementQuantity() {
     productQuantity += 1;
   }
@@ -35,12 +30,8 @@
       productQuantity -= 1;
     }
   }
- 
-  function addToCart() {
-    // Implement add to cart functionality here
-    console.log(`Added ${productQuantity} items to cart`);
-  }
- 
+
+  //buy btn action
   function placeOrder() {
     const data = {
       name: productName,
@@ -53,6 +44,7 @@
     window.location.href = '../MVC';
   }
  
+  //update recently viewed 
   onMount(() => {
     addToRecentlyViewed({
       id: productNameUrl,
@@ -61,6 +53,9 @@
       price: currentPrice,
     });
   });
+
+  //issue 
+  let thumbImage = productObj.img; //code : 01
 </script>
 
 <main class="main">
@@ -70,22 +65,19 @@
         <div class="preview-image-wrapper">
           <Slider {images} height="400px" />
         
-          <div class="count">
-            <p>
-              <span class="current">1</span> of
-              <span class="total">1</span>
-            </p>
-          </div>
+        
         </div>
   
+        <!-- code : 01 -->
         <div class="thumbs-wrapper hide-for-mobile">
           <div class="thumb-image active">
-            <img src={activeImage} alt="Product Thumb Image" />
+            <img src={thumbImage} alt="Product Thumb" />
           </div>
           <div class="thumb-image">
-            <img src={activeImage} alt="Product Thumb Image" />
+            <img src={thumbImage} alt="Product Thumb" />
           </div>
         </div>
+
       </div>
       <div class="product-details-wrapper">
         <p class="product-brand">{productObj.company}</p>
@@ -102,7 +94,7 @@
           </div>
         </div>
   
-        <form on:submit|preventDefault={addToCart} class="add-to-cart-form">
+        <form class="add-to-cart-form">
           <div class="product-quantity">
             <button type="button" class="button minus" on:click={decrementQuantity}>
               <img src={minus} alt="Minus Icon" />
@@ -113,12 +105,7 @@
             </button>
           </div>
   
-          <button
-            type="submit"
-            aria-label="Add to cart"
-            class="button add-btn"
-            on:click={placeOrder}
-          >
+          <button type="submit" class="button add-btn" on:click={placeOrder}>
             Buy Now
           </button>
         </form>
@@ -126,11 +113,3 @@
     </div>
   </section>
 </main>
-
-<!-- LightBox -->
-<div class="lightbox-wrapper" class:open={lightBoxOpen}>
-  <div class="lightbox-content"></div>
-</div>
-
-<!-- Overlay -->
-<div class="overlay" class:open={mobileMenuOpen || lightBoxOpen} on:click={() => { mobileMenuOpen = false; lightBoxOpen = false; }}></div>

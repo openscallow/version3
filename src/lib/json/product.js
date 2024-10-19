@@ -1,3 +1,5 @@
+// import { Images } from "lucide-svelte";
+
 export let productDatabase ={
     0:{
         img: "https://m.media-amazon.com/images/I/81VadRn+t-L._SX679_.jpg",
@@ -16,7 +18,8 @@ export let productDatabase ={
         description: "Package includes 1 packs of Kangaro NO. 10-1M heavy-duty, zinc-coated, rust-resistant steel staple pins (1000 pins each), durable and long-lasting for efficient and error-free usage.",
         currentPrice: 5,
         previousPrice: 10,
-        id:1
+        id:1,
+        images: ["https://m.media-amazon.com/images/I/51DeDlq-imL.jpg"]
     },
     2:{
         img: "https://m.media-amazon.com/images/I/61imoDGpnxL._SY355_.jpg",
@@ -25,7 +28,8 @@ export let productDatabase ={
         description: "Super fluorescent highlighter with longer writing length, a special non-porous polypropylene body for extended shelf life, uniform ink flow from unique ink injection technology, washable non-toxic ink, a pocket clip for easy carrying, and available in five colors: yellow, pink, green, orange, and blue.",
         currentPrice: 20,
         previousPrice: 25,
-        id:2
+        id:2,
+        images: ["https://m.media-amazon.com/images/I/61imoDGpnxL._SY355_.jpg"]
     },
     3:{
         img: "https://m.media-amazon.com/images/I/41SEuM4iUPL._SY450_.jpg",
@@ -34,7 +38,8 @@ export let productDatabase ={
         description: "Cello Blue Polycarbonate Ballpoint Pen, Transparent.",
         currentPrice: 9,
         previousPrice: 10,
-        id:3
+        id:3,
+        images: ["https://m.media-amazon.com/images/I/41SEuM4iUPL._SY450_.jpg"]
     },
     4:{
         img: "https://m.media-amazon.com/images/I/81bv2pWZh1L._SY450_.jpg",
@@ -43,7 +48,8 @@ export let productDatabase ={
         description: "Cello Blue Polycarbonate Ballpoint Pen, Transparent.",
         currentPrice: 45,
         previousPrice: 50,
-        id:4
+        id:4,
+        images: ["https://m.media-amazon.com/images/I/81bv2pWZh1L._SY450_.jpg"]
     },
     5:{
         img: "https://m.media-amazon.com/images/I/71s5w4CzntL._SY450_.jpg",
@@ -52,7 +58,8 @@ export let productDatabase ={
         description: "Saino Softek Ballpoint Pen, Blue ink, suitable for adults. Available in extra fine and fine point types.",
         currentPrice: 3,
         previousPrice: 5,
-        id:5
+        id:5,
+        images: ["https://m.media-amazon.com/images/I/71s5w4CzntL._SY450_.jpg"]
     },
     6:{
         img: "https://m.media-amazon.com/images/I/61ztN-eSVlL._SY355_.jpg",
@@ -61,7 +68,8 @@ export let productDatabase ={
         description: "Saino Softek Ballpoint Pen, Blue ink, suitable for adults. Available in extra fine and fine point types.",
         currentPrice: 48,
         previousPrice: 60,
-        id:6
+        id:6,
+        images: ["https://m.media-amazon.com/images/I/61ztN-eSVlL._SY355_.jpg"]
     },
     7:{
         img: "https://m.media-amazon.com/images/I/31qyEuA+uWL._SY355_.jpg",
@@ -70,7 +78,8 @@ export let productDatabase ={
         description: "Generic Plastic, Portable, ideal for Artists, Teachers, and Students. Manufactured by Doms.",
         currentPrice: 10,
         previousPrice: 15,
-        id:7
+        id:7,
+        images: ["https://m.media-amazon.com/images/I/31qyEuA+uWL._SY355_.jpg"]
     },
     8:{
         img: "https://m.media-amazon.com/images/I/51B8qqUlIhS._SX425_.jpg",
@@ -79,7 +88,8 @@ export let productDatabase ={
         description: "Generic Plastic, Portable, ideal for Artists, Teachers, and Students. Manufactured by Doms.",
         currentPrice: 4,
         previousPrice: 5,
-        id:8
+        id:8,
+        images: ["https://m.media-amazon.com/images/I/51B8qqUlIhS._SX425_.jpg"]
     },
     9:{
         img: "https://m.media-amazon.com/images/I/81i88ah80oL._SX569_.jpg",
@@ -88,7 +98,8 @@ export let productDatabase ={
         description: "Generic Plastic, Portable, ideal for Artists, Teachers, and Students. Manufactured by Doms.",
         currentPrice:   4,
         previousPrice: 5,
-        id:9
+        id:9,
+        images: ["https://m.media-amazon.com/images/I/81i88ah80oL._SX569_.jpg"]
     },
     10:{
         img: "https://i0.wp.com/sbcstore.in/wp-content/uploads/2022/07/61mXKuJ9VvL._SL1500_.jpg?resize=600%2C400&ssl=1",
@@ -97,7 +108,8 @@ export let productDatabase ={
         description: "Add variety and personality to your note with this 2x3 inch, 100-sheet pack.",
         currentPrice:   30,
         previousPrice: 35,
-        id:10
+        id:10,
+        images: ["https://i0.wp.com/sbcstore.in/wp-content/uploads/2022/07/61mXKuJ9VvL._SL1500_.jpg?resize=600%2C400&ssl=1"]
     },
     11:{
         img: "https://m.media-amazon.com/images/I/81GzA22HjdL._SY450_.jpg",
@@ -106,7 +118,8 @@ export let productDatabase ={
         description: "A high-quality ruled notebook, ideal for students and professionals alike.",
         currentPrice: 55,
         previousPrice: 60,
-        id: 11
+        id: 11,
+        images: ["https://m.media-amazon.com/images/I/81GzA22HjdL._SY450_.jpg"]
     },
     12:{
         img: "https://m.media-amazon.com/images/I/71WcwtLvJfL._SY355_.jpg",
@@ -115,7 +128,8 @@ export let productDatabase ={
         description: "Complete geometry set with ruler, compass, protractor, and more, suitable for all age groups.",
         currentPrice: 120,
         previousPrice: 140,
-        id: 12
+        id: 12,
+        images: ["https://m.media-amazon.com/images/I/71WcwtLvJfL._SY355_.jpg"]
     },
     13:{
         img: "https://m.media-amazon.com/images/I/61dSXSk80+L._SY355_.jpg",
@@ -124,7 +138,8 @@ export let productDatabase ={
         description: "Pack of 1 extra dark pencils, ideal for writing and sketching.",
         currentPrice: 5,
         previousPrice: 6,
-        id: 13
+        id: 13,
+        images: ["https://m.media-amazon.com/images/I/61dSXSk80+L._SY355_.jpg"]
     },
     14:{
         img: "https://m.media-amazon.com/images/I/61XfAo84D+L._SY450_.jpg",
@@ -133,7 +148,8 @@ export let productDatabase ={
         description: "Pack of 10 extra dark pencils, ideal for writing and sketching.",
         currentPrice: 60,
         previousPrice: 70,
-        id: 14
+        id: 14,
+        images: ["https://m.media-amazon.com/images/I/61XfAo84D+L._SY450_.jpg"]
     },
     15:{
         img: "https://m.media-amazon.com/images/I/61oPdzZOAXL._SY450_.jpg",
@@ -142,7 +158,8 @@ export let productDatabase ={
         description: "Set of 4 whiteboard markers in assorted colors, suitable for office and educational use.",
         currentPrice: 90,
         previousPrice: 100,
-        id: 15
+        id: 15,
+        images: ["https://m.media-amazon.com/images/I/61oPdzZOAXL._SY450_.jpg"]
     },
     16:{
         img: "https://m.media-amazon.com/images/I/71-uxbQrlcL._SY450_.jpg",
@@ -151,7 +168,8 @@ export let productDatabase ={
         description: "Pack of 15 oil pastels in vibrant colors, perfect for artistic projects.",
         currentPrice: 60,
         previousPrice: 70,
-        id: 16
+        id: 16,
+        images: ["https://m.media-amazon.com/images/I/71-uxbQrlcL._SY450_.jpg"]
     },
     17:{
         img: "https://m.media-amazon.com/images/I/31aFafrbBKL._SY445_.jpg",
@@ -160,7 +178,8 @@ export let productDatabase ={
         description: "A large 20 g bottle of Fevicol MR, a multipurpose adhesive for all craft projects.",
         currentPrice: 10,
         previousPrice: 10,
-        id: 17
+        id: 17,
+        images: ["https://m.media-amazon.com/images/I/31aFafrbBKL._SY445_.jpg"]
     },
     18:{
         img: "https://m.media-amazon.com/images/I/61ctE6kAXWL._SY355_.jpg",
@@ -169,7 +188,8 @@ export let productDatabase ={
         description: "A 200-page spiral-bound notebook with a durable cover, perfect for notes and journaling.",
         currentPrice: 80,
         previousPrice: 100,
-        id: 18
+        id: 18,
+        images: ["https://m.media-amazon.com/images/I/61ctE6kAXWL._SY355_.jpg"]
     },
     19:{
         img: "https://m.media-amazon.com/images/I/61WZK+0yiaL._SX522_.jpg",
@@ -178,7 +198,8 @@ export let productDatabase ={
         description: "A comprehensive geometry box with all essential tools for precise measurements.",
         currentPrice: 140,
         previousPrice: 160,
-        id: 19
+        id: 19,
+        images: ["https://m.media-amazon.com/images/I/61WZK+0yiaL._SX522_.jpg"]
     },
     20:{
         img: "https://m.media-amazon.com/images/I/61l7hpuuoTL._SY450_.jpg",
@@ -187,7 +208,8 @@ export let productDatabase ={
         description: "A gel pens, perfect for everyday use.",
         currentPrice: 25,
         previousPrice: 30,
-        id: 20
+        id: 20,
+        images: ["https://m.media-amazon.com/images/I/61l7hpuuoTL._SY450_.jpg"]
     },
     21:{
         img: "https://m.media-amazon.com/images/I/715KSZ8WJKL._SY355_.jpg",
@@ -196,7 +218,8 @@ export let productDatabase ={
         description: "A set of 4 smooth-writing gel pens, perfect for everyday use.",
         currentPrice: 100,
         previousPrice: 120,
-        id: 21
+        id: 21,
+        images: ["https://m.media-amazon.com/images/I/715KSZ8WJKL._SY355_.jpg"]
     },
     22:{
         img: "https://m.media-amazon.com/images/I/71iWi+0I8UL._SX679_.jpg",
@@ -205,7 +228,8 @@ export let productDatabase ={
         description: "A compact punching machine, ideal for office and school document management.",
         currentPrice: 170,
         previousPrice: 225,
-        id: 22
+        id: 22,
+        images: ["https://m.media-amazon.com/images/I/71iWi+0I8UL._SX679_.jpg"]
     },
     23:{
         img: "https://m.media-amazon.com/images/I/61vmh8FcZ5L._SY450_.jpg",
@@ -214,7 +238,8 @@ export let productDatabase ={
         description: "A lightweight whiteboard duster, perfect for clean erasing.",
         currentPrice: 160,
         previousPrice: 1000,
-        id: 23
+        id: 23,
+        images: ["https://m.media-amazon.com/images/I/61vmh8FcZ5L._SY450_.jpg"]
     },
     24:{
         img: "https://m.media-amazon.com/images/I/51nn+Lt+8kL._SL1000_.jpg",
@@ -223,7 +248,8 @@ export let productDatabase ={
         description: "a glue sticks, ideal for paper crafting and sticking.",
         currentPrice: 9,
         previousPrice: 10,
-        id: 24
+        id: 24,
+        images: ["https://m.media-amazon.com/images/I/51nn+Lt+8kL._SL1000_.jpg"]
     },
     25:{
         img: "https://m.media-amazon.com/images/I/51etxLIWodL._SY355_.jpg",
@@ -232,7 +258,8 @@ export let productDatabase ={
         description: "A smooth-writing ballpoint pens, ideal for everyday use.",
         currentPrice: 8,
         previousPrice: 10,
-        id: 25
+        id: 25,
+        images: ["https://m.media-amazon.com/images/I/51etxLIWodL._SY355_.jpg"]
     },
     26:{
         img: "https://m.media-amazon.com/images/I/51TV+K+PloL._SY300_SX300_.jpg",
@@ -241,7 +268,8 @@ export let productDatabase ={
         description: "A set of 5 smooth-writing ballpoint pens, ideal for everyday use.",
         currentPrice: 50,
         previousPrice: 45,
-        id: 26
+        id: 26,
+        images: ["https://m.media-amazon.com/images/I/51TV+K+PloL._SY300_SX300_.jpg"]
     },
     27:{
         img: "https://m.media-amazon.com/images/I/51jNezlRY1L.jpg",
@@ -250,7 +278,8 @@ export let productDatabase ={
         description: "A 40-page drawing book, ideal for sketching and creative projects.",
         currentPrice: 40,
         previousPrice: 50,
-        id: 27
+        id: 27,
+        images: ["https://m.media-amazon.com/images/I/51jNezlRY1L.jpg"]
     }
   
   }
