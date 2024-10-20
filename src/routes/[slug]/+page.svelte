@@ -64,8 +64,6 @@
       <div class="product-images-wrapper">
         <div class="preview-image-wrapper">
           <Slider {images} height="400px" />
-        
-        
         </div>
   
         <!-- code : 01 -->
