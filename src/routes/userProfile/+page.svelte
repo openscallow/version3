@@ -124,7 +124,7 @@
             {loading ? 'Uploading...' : 'Upload'}
         </button>
 
-        <div class="flex gap-2"><ShieldCheck /><p>yor imagr is fully secured with us <a href="/" style="color: blue;">Learn more</a> </p></div>
+        <div class="flex gap-2"><ShieldCheck /><p>your imagr is fully secured with us <a href="/" style="color: blue;">Learn more</a> </p></div>
 
         {#if success}
             <p style="color:green">File uploaded successfully!</p>
