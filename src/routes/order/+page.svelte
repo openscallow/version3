@@ -2,8 +2,7 @@
     import  Progress from '$lib/components/step-progressbar.svelte';
     import Delivery from '../../lib/components/delivery.svelte';
 
-    // Unfold session storage
-    import { browser } from '$app/environment';
+   
     
     let prodcutObj =JSON.parse(sessionStorage.getItem("userData"));
     const userAddress = localStorage.getItem('userAddress');

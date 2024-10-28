@@ -22,7 +22,6 @@
         let mobile =sessionStorage.getItem('mobile');
         localStorage.setItem('user', user);
         localStorage.setItem('mobile', mobile);
-        // window.open('./experiment');
         window.location.href = '../experiment';
       }else{
         alert('wrong otp')
