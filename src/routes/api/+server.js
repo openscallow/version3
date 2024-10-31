@@ -1,27 +1,30 @@
-import mysql from 'mysql2/promise';
+// Import the pg pool from your db configuration
+import { pool } from '$lib/db.js';
+import { json } from '@sveltejs/kit';
 
 export async function POST({ request }) {
-  let connection;
   const { name, mobile } = await request.json();
-
+  
   try {
-    connection = await mysql.createConnection({
-      host: 'callowdatabase.cpam6os8m3nn.ap-south-1.rds.amazonaws.com',
-        user: 'gautam',
-        password: 'Gautam404&',
-        database: 'callowdb'
-    });
+    // Using $1, $2 for PostgreSQL parameterized queries
+    const query = 'INSERT INTO "user" (name, mobile) VALUES ($1, $2) RETURNING id';
+    const result = await pool.query(query, [name, mobile]);
+    
+    // PostgreSQL returns the inserted record in rows[0]
+    return new Response(
+      JSON.stringify({ id: result.rows[0].id }), 
+      { status: 201 }
+    );
 
-    const query = 'INSERT INTO user (name, mobile) VALUES (?, ?)';
-    const [result] = await connection.execute(query, [name, mobile]);
-
-    return new Response(JSON.stringify({ id: result.insertId }), { status: 201 });
   } catch (error) {
     console.error('Error inserting into the database:', error);
-    return new Response(JSON.stringify({ error: 'Database insertion failed' }), { status: 500 });
-  } finally {
-    if (connection) {
-      await connection.end();
+
+    // Handle specific PostgreSQL errors
+    if (error.code === '23505') { // unique violation
+      errorResponse.error = 'A record with this information already exists';
+      return new Response(JSON.stringify(errorResponse), { status: 409 });
     }
+    
+    return new Response(JSON.stringify(errorResponse), { status: 500 });
   }
 }

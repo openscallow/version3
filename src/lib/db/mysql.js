@@ -7,7 +7,21 @@ const pool = mysql.createPool({
   database: 'callowdb' // e.g., 'mydatabase'
 });
 
-export async function query(sql, params) {
-  const [results] = await pool.execute(sql, params);
-  return results;
+// export async function query(sql, params) {
+//   const [results] = await pool.execute(sql, params);
+//   return results;
+// }
+
+
+async function testConnection() {
+  try {
+    const res = await pool.query('SELECT * FROM user');
+    console.log('Query Result:', res.rows);
+  } catch (error) {
+    console.error('Database Connection Error:', error); // Log any errors
+  } finally {
+    pool.end(); // Ensure the pool is closed
+  }
 }
+
+testConnection();
