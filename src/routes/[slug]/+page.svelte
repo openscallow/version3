@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { page } from '$app/stores';
+  import { goto } from '$app/navigation';
   import { productDatabase } from '$lib/json/product.js';
   import { addToRecentlyViewed } from '$lib/stores/recentlyViewed.js';
   import '../../app.css';
@@ -49,7 +50,7 @@
     addToRecentlyViewed({
       id: productNameUrl,
       name: productName,
-      image: activeImage,
+      image: productObj.img,
       price: currentPrice,
     });
   });

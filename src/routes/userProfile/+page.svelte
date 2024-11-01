@@ -76,6 +76,7 @@
                 let imageUploader = await response.json()
                 if (typeof window !== 'undefined') {
                     localStorage.setItem('profileImage', imageUploader.fileName);
+                    updateDB();
                 }
                 
             } else{
@@ -100,6 +101,21 @@
             document.getElementById("imageUploader").click()
         });
     })
+
+    async function updateDB(){
+        if (typeof window !== 'undefined') {
+            let profile = localStorage.getItem('profileImage');
+            let mobile = localStorage.getItem('mobile');
+
+            const response = await fetch('/userProfile/api/imageUpdater', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ mobile, profile})
+            });
+        }
+    }
 </script>
 
 <div class="w-full flex items-center justify-center px-2.5 mt-10">

@@ -5,7 +5,7 @@
     let mobile;
     let address;
     let product;
-    let indexs;
+    let index;
 
     
     function getUserData() {
@@ -14,30 +14,30 @@
             mobile = localStorage.getItem('mobile');
             address = localStorage.getItem('userAddress');
             let productObj =JSON.parse(sessionStorage.getItem("userData"));
-            indexs = `${productObj.index}`;
+            index = `${productObj.index}`;
             product = `${productObj.items}`
-            console.log(name, mobile, address, product, indexs);
+            console.log(name, mobile, address, product, index);
         }
     }
     
     async function addUser() {
-        console.log(name, mobile, address, product, indexs);
+        console.log(name, mobile, address, product, index);
         try {
-            const response = await fetch('/api2', {
+            const response = await fetch('/experiment2', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ name, mobile, address, product, indexs})
+                body: JSON.stringify({ name, mobile, address, product, index})
             });
             console.log(response);
             if (response.ok) {
-                const result = await response.json();
-                console.log('User added with ID:', result.id);
+                // const result = await response.json();
+                // console.log('User added with ID:', result.id);
                 if (typeof sessionStorage !== 'undefined') {
                     let checkIsOrder = sessionStorage.getItem('userData');
                     if (checkIsOrder) {
-                        console.log('User added with');
+                        console.log('User added');
 
                         window.location.href = '/';
                         
@@ -53,7 +53,7 @@
     
     onMount(() => {
         getUserData();
-        console.log(indexs)
+        // console.log(index)
         addUser();
     });
     </script>

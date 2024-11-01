@@ -18,18 +18,18 @@ export async function POST({ request }) {
 
     let client;
     try {
-        const { name, mobile } = await request.json();
+        const { name, mobile, address, product, index } = await request.json();
+        const Status = "pending";
 
         //check connection is estanlished
         client = await pool.connect();
         console.log("connection connected succesfuly");
 
         // initalize inserting process 
-        const query = `INSERT INTO users (name,mobile) 
-        VALUES ($1, $2);`;
+        const query = `INSERT INTO orders (name,mobile, address, product, status, index) 
+        VALUES ($1, $2, $3, $4, $5, $6);`;
 
-        // const values = [data.name,data.mobile,data.address,data.product,data.status,data.index];
-        await client.query(query, [name, mobile]);
+        await client.query(query, [name, mobile, address, product, Status, index]);
         console.log("inserted data successfully ")
         
         //send back response

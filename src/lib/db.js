@@ -2,7 +2,7 @@ import pkg from 'pg';
 const { Pool } = pkg;
 
 // Configure your database connection.
-const pool = new Pool({
+export const pool = new Pool({
   user: 'gautam',
   host: 'callowpostgresql.cpam6os8m3nn.ap-south-1.rds.amazonaws.com',
   database: 'postgres',
