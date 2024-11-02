@@ -30,7 +30,7 @@
     breakpoints: {
       1024: {
         slidesPerView: 5,
-        spaceBetween: 24,
+        spaceBetween: 10,
         navigation: {
           enabled: true,
         },
@@ -58,8 +58,8 @@
     <div class="swiper-container">
       <div class="swiper-wrapper">
         {#each $recentlyViewed as item}
-          <div class="swiper-slide px-2">
-            <div class="tile">
+          <div class="swiper-slide">
+            <div class="tile mt-2">
               <a 
                 href="/{item.id}" 
                 rel="noopener noreferrer"
@@ -91,9 +91,9 @@
             <div class="text-center p-8">
               <ArrowRightCircle 
                 size={48} 
-                class="mx-auto mb-4 text-gray-400 group-hover:text-gray-600 transition-colors"
+                class="mx-auto text-gray-400 group-hover:text-gray-600 transition-colors"
               />
-              <span class="text-sm font-medium text-gray-500 group-hover:text-gray-700">
+              <span class="text-md font-medium text-gray-500 group-hover:text-gray-700">
                 View All Items
               </span>
             </div>
@@ -108,7 +108,7 @@
       </div>
     </div>
     
-    <div class="h-4" />
+    <!-- <div class="h-4" /> -->
   </div>
 {/if}
 
