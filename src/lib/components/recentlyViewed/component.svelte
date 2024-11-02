@@ -59,13 +59,13 @@
       <div class="swiper-wrapper">
         {#each $recentlyViewed as item}
           <div class="swiper-slide">
-            <div class="tile mt-2 min-h-[360px]">
+            <div class="tile mt-2 min-h-[200px]">
               <a 
                 href="/{item.id}" 
                 rel="noopener noreferrer"
                 class="block"
               >
-                <div class="image-container relative aspect-[3/4] overflow-hidden rounded-lg">
+                <div class="image-container relative overflow-hidden rounded-lg">
                   <img 
                     src={item.image} 
                     alt={item.name}
