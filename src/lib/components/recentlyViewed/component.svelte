@@ -46,7 +46,7 @@
 </script>
 
 {#if $recentlyViewed.length > 2}
-  <div class="w-full max-w-full overflow-hidde bg-slate-900 bg-gradient-radial from-white via-[#1a202c]/60 to-[#1a202c] my-4 md:mx-4 md:rounded-md relative">
+  <div class="w-full max-w-full overflow-hidde bg-slate-900 bg-gradient-radial from-white via-[#1a202c]/60 to-[#1a202c] my-4 md:mx-4 md:rounded-md relative min-h-[360px]">
     <div class="flex items-center justify-between px-4 py-4">
       <h2 class="text-xl text-white">Recently Viewed</h2>
       <!-- Show View all link only on mobile -->
