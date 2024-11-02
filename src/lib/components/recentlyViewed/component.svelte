@@ -134,6 +134,13 @@
     -moz-user-select: none;
   }
 
+  .tile {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
   :global(.swiper-wrapper) {
     margin: 0;
     padding: 0;
