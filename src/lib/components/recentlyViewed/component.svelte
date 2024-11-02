@@ -62,7 +62,7 @@
               <a 
                 href="/{item.id}" 
                 rel="noopener noreferrer"
-                class="block w-full h-full"
+                class="block"
               >
                 <div class="image-container relative aspect-[3/4] overflow-hidden rounded-lg">
                   <img 
@@ -136,33 +136,17 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    /* Make tiles take full height of container */
-    min-height: 280px;
   }
 
-  /* Mobile-specific tile styles */
   @media (max-width: 1023px) {
-    .tile {
-      min-height: 320px;  /* Larger height on mobile */
-    }
-
     .tile .image-container {
-      height: 85%;  /* Make image container take up more space */
-    }
-
-    .tile h3 {
-      font-size: 0.925rem;  /* Slightly larger text on mobile */
-      margin-top: 0.75rem;
-      padding: 0 0.25rem;
+      min-height: 200px;
     }
   }
 
   :global(.swiper-wrapper) {
     margin: 0;
     padding: 0;
-    /* Add height to ensure tiles stretch properly */
-    height: auto !important;
-    min-height: 320px;
   }
 
   :global(.swiper-button-prev),
