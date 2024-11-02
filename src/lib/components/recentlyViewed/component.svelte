@@ -46,9 +46,10 @@
 </script>
 
 {#if $recentlyViewed.length > 2}
-  <div class="w-full max-w-full overflow-hidden bg-slate-900 bg-gradient-radial from-white via-[#1a202c]/60 to-[#1a202c] my-4 md:mx-4 md:rounded-md relative">
+  <div class="w-full max-w-full overflow-hidde bg-slate-900 bg-gradient-radial from-white via-[#1a202c]/60 to-[#1a202c] my-4 md:mx-4 md:rounded-md relative">
     <div class="flex items-center justify-between px-4 py-4">
       <h2 class="text-xl text-white">Recently Viewed</h2>
+      <!-- Show View all link only on mobile -->
       <a href="/recently-viewed" class="flex items-center gap-1 text-white hover:opacity-80 transition-opacity lg:hidden">
         <ArrowRight size={25} />
       </a>
@@ -81,6 +82,7 @@
           </div>
         {/each}
         
+        <!-- Special end slide for desktop view -->
         <div class="swiper-slide px-2 hidden lg:flex">
           <a 
             href="/recently-viewed" 
@@ -99,6 +101,7 @@
         </div>
       </div>
       
+      <!-- Navigation arrows - only visible on desktop -->
       <div class="hidden lg:block">
         <div class="swiper-button-prev !text-white !bg-black/50 rounded-full !w-10 !h-10 !left-2"></div>
         <div class="swiper-button-next !text-white !bg-black/50 rounded-full !w-10 !h-10 !right-2"></div>
@@ -129,19 +132,6 @@
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
-  }
-
-  .tile {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  @media (max-width: 1023px) {
-    .tile .image-container {
-      min-height: 200px;
-    }
   }
 
   :global(.swiper-wrapper) {
