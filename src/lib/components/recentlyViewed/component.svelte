@@ -13,7 +13,7 @@
     modules: [Navigation, FreeMode, Mousewheel],
     loop: false,
     slidesPerView: 3,
-    spaceBetween: 12,
+    spaceBetween: 3,
     freeMode: {
       enabled: true,
       sticky: false,
@@ -46,73 +46,83 @@
 </script>
 
 {#if $recentlyViewed.length > 2}
-  <div class="w-full max-w-full overflow-hidde bg-slate-900 bg-gradient-radial from-white via-[#1a202c]/60 to-[#1a202c] my-4 md:mx-4 md:rounded-md relative min-h-[360px]">
-    <div class="flex items-center justify-between px-4 py-4">
-      <h2 class="text-xl text-white">Recently Viewed</h2>
-      <!-- Show View all link only on mobile -->
-      <a href="/recently-viewed" class="flex items-center gap-1 text-white hover:opacity-80 transition-opacity lg:hidden">
-        <ArrowRight size={25} />
-      </a>
-    </div>
-    
-    <div class="swiper-container">
-      <div class="swiper-wrapper">
-        {#each $recentlyViewed as item}
-          <div class="swiper-slide">
+  <div class="recently-viewed-container relative w-full">
+    <div class="w-full max-w-full bg-slate-900 bg-gradient-radial from-white via-[#1a202c]/60 to-[#1a202c] my-4 md:mx-4 md:rounded-md">
+      <div class="flex items-center justify-between px-4 py-4">
+        <h2 class="text-xl text-white">Recently Viewed</h2>
+        <!-- Show View all link only on mobile -->
+        <a href="/recently-viewed" class="flex items-center gap-1 text-white hover:opacity-80 transition-opacity lg:hidden">
+          <ArrowRight size={25} />
+        </a>
+      </div>
+      
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          {#each $recentlyViewed as item}
+            <div class="swiper-slide p-0 rounded-sm my-2">
+              <div class="tile mt-2">
+                <a 
+                  href="/{item.id}" 
+                  rel="noopener noreferrer"
+                  class="block"
+                >
+                  <div class="image-container relative overflow-hidden">
+                    <img 
+                      src={item.image} 
+                      alt={item.name}
+                      loading="lazy"
+                      class="w-full h-full object-cover"
+                      draggable="false"
+                    />
+                  </div>
+                  <h3 class="mt-2 text-md font-medium text-gray-900 line-clamp-2">
+                    {item.name}
+                  </h3>
+                </a>
+              </div>
+            </div>
+          {/each}
+          
+          <!-- Symmetric end slide for desktop view -->
+          <div class="swiper-slide p-0 rounded-sm my-2 hidden lg:block">
             <div class="tile mt-2">
               <a 
-                href="/{item.id}" 
-                rel="noopener noreferrer"
-                class="block"
+                href="/recently-viewed" 
+                class="block h-full group"
               >
-                <div class="image-container relative overflow-hidden rounded-lg">
-                  <img 
-                    src={item.image} 
-                    alt={item.name}
-                    loading="lazy"
-                    class="w-full h-full object-cover"
-                    draggable="false"
-                  />
+                <div class="image-container relative overflow-hidden bg-gray-100 hover:bg-gray-200 transition-colors h-full">
+                  <div class="absolute inset-0 flex items-center justify-center flex-col">
+                    <ArrowRightCircle 
+                      size={48} 
+                      class="text-gray-400 group-hover:text-gray-600 transition-colors"
+                    />
+                    <span class="mt-4 text-md font-medium text-gray-500 group-hover:text-gray-700 block">
+                      View All Items
+                    </span>
+                  </div>
                 </div>
-                <h3 class="mt-2 text-sm font-medium text-gray-900 truncate">
-                  {item.name}
-                </h3>
               </a>
             </div>
           </div>
-        {/each}
+        </div>
         
-        <!-- Special end slide for desktop view -->
-        <div class="swiper-slide px-2 hidden lg:flex">
-          <a 
-            href="/recently-viewed" 
-            class="w-full flex items-center justify-center bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors group"
-          >
-            <div class="text-center p-8">
-              <ArrowRightCircle 
-                size={48} 
-                class="mx-auto text-gray-400 group-hover:text-gray-600 transition-colors"
-              />
-              <span class="text-md font-medium text-gray-500 group-hover:text-gray-700">
-                View All Items
-              </span>
-            </div>
-          </a>
+        <!-- Navigation arrows - only visible on desktop -->
+        <div class="hidden lg:block">
+          <div class="swiper-button-prev !text-white !bg-black/50 rounded-full !w-10 !h-10 !left-2"></div>
+          <div class="swiper-button-next !text-white !bg-black/50 rounded-full !w-10 !h-10 !right-2"></div>
         </div>
       </div>
       
-      <!-- Navigation arrows - only visible on desktop -->
-      <div class="hidden lg:block">
-        <div class="swiper-button-prev !text-white !bg-black/50 rounded-full !w-10 !h-10 !left-2"></div>
-        <div class="swiper-button-next !text-white !bg-black/50 rounded-full !w-10 !h-10 !right-2"></div>
-      </div>
+      <div class="h-4" />
     </div>
-    
-    <!-- <div class="h-4" /> -->
   </div>
 {/if}
 
 <style>
+  .recently-viewed-container {
+    overflow-x: clip;
+  }
+
   :global(.swiper-container) {
     overflow: hidden;
     position: relative;
