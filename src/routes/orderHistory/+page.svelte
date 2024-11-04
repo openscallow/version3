@@ -1,7 +1,6 @@
 <script>
   import '@tailwind'
   import { onMount } from 'svelte'
-  import { MoveRight } from 'lucide-svelte';
   import {productDatabase} from '$lib/json/product.js'
 
   let orders = [];
@@ -58,7 +57,7 @@
             <p class="product-details">Items: {order.product}</p>
             <p class="product-details my-4">School/College: {order.address}</p>
             <div class="card-actions ">
-              <button class="btn btn-outline btn-error">Cancel order<MoveRight/></button>
+              <button class="btn btn-outline btn-error">Cancel order</button>
             </div>
           </div>
         </div>  
