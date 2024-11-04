@@ -3,7 +3,7 @@
   import { page } from '$app/stores';
   import { goto } from '$app/navigation';
   import { productDatabase } from '$lib/json/product.js';
-  import { addToRecentlyViewed } from '$lib/stores/recentlyViewed.js';
+  import { addToRecentlyViewed } from '$lib/components/recentlyViewed/recentView.js';
   import '../../app.css';
   import './product.css';
   import minus from '$lib/images/icon-minus.svg';
