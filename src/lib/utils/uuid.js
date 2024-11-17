@@ -18,10 +18,7 @@ export default function generateReferralCode({ parts = 1, uppercase = false } = 
     // Return in requested case
     return uppercase ? code.toUpperCase() : code;
 }
-
-// Example usage:
-// import generateReferralCode from './referralCodeGenerator.js';
-// 
+ 
 // console.log(generateReferralCode()); // default: lowercase, 1 part
 // console.log(generateReferralCode({ parts: 2 })); // lowercase, 2 parts
 // console.log(generateReferralCode({ uppercase: true })); // uppercase, 1 part

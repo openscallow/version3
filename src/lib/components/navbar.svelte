@@ -32,11 +32,7 @@
   </script>
   
   <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+
     .navbar {
       background-color: var(--primary-color);
       color: white;
@@ -160,9 +156,9 @@
       <div class="nav-links">
         <a href="./" class="active">Home</a>
         <a href="./orderHistory">Orders</a>
-        <a href="#">Blog</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
+        <a href="#blog">Blog</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
         {#if storedData===''}
         <a href="./signUp">signUp</a>
         <a href="./login">login</a>
@@ -195,9 +191,9 @@
     <div class="sidebar-nav">
       <a href="./" class="active">Home</a>
       <a href="./orderHistory">Orders</a>
-      <a href="#">Blog</a>
-      <a href="#">About</a>
-      <a href="#">Contact</a>
+      <a href="#blog">Blog</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
       {#if storedData===''}
         <a href="./signUp">signUp</a>
         <a href="./login">login</a>
@@ -205,5 +201,5 @@
     </div>
   </div>
   
-  <div class="overlay {isSidebarOpen ? 'show' : ''}" on:click={closeSidebar}></div>
+  <button class="overlay {isSidebarOpen ? 'show' : ''}" on:click={closeSidebar}></button>
   
