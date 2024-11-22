@@ -4,7 +4,6 @@
   import { Eye, EyeOff } from 'lucide-svelte';
   import './style.css'
 
-
   let username = '';
   let mobileNumber = '';
   let password = '';
@@ -43,7 +42,10 @@
   function handleSubmit() {
     if (formValid()) {
       console.log("Form submitted successfully");
-      // Here you can add your sign-up logic
+      sessionStorage.setItem('name', username);
+      sessionStorage.setItem('mobile', mobileNumber);
+     
+      window.location.href = `./MVCFOROTP?${mobileNumber}`;
     }
   }
 
@@ -126,4 +128,3 @@
     </form>
   </div>
 </div>
-
