@@ -1,9 +1,11 @@
 <script>
-  import { Menu, Search } from "lucide-svelte";
- import Fuse from 'fuse.js';
- import { onMount } from 'svelte';
- import { goto } from '$app/navigation';
- import {productDatabase} from '$lib/json/product.js'
+import { Search } from "lucide-svelte";
+import Fuse from 'fuse.js';
+import { onMount } from 'svelte';
+import { goto } from '$app/navigation';
+import {productDatabase} from '$lib/json/product.js'
+import '@tailwind'
+import './style.css'
 
  let query = "";
  let searchResults = [];
@@ -67,17 +69,11 @@
  </script>
  
  <div class="container">
- <div class="search-bar">
- <input
- type="text"
- bind:value={query}
- on:input={handleSearch}
- placeholder="Search products..."
- >
- <button class="search-button" on:click={handleSearchClick}>
- <Search class="icon"/>
- </button>
- </div>
+ 
+ <label class="input input-bordered flex items-center gap-2 mb-2 md:w-1/2 w-full ">
+  <input type="text" class="grow" placeholder="Search Callow.in" bind:value={query} on:input={handleSearch}/>
+  <button on:click={handleSearchClick}><Search class="h-4 w-4 opacity-70"/></button> 
+ </label>
  
  {#if error}
  <p class="error-message">{error}</p>
@@ -100,98 +96,5 @@
  </div>
  
  <style>
-     .container {
-    z-index: 2;
-    background-color: #f0f4f8;
-    position: absolute;
-    top: 0;
-    min-width: 100vw;
-    min-height: 100vh;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
 
-  .search-bar {
-    display: flex;
-    background-color: white;
-    border-radius: 25px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    width: 80%;
-    max-width: 600px;
-    transition: all 0.3s ease;
-    margin-bottom: 20px;
-  }
-
-  .search-bar:focus-within {
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-    transform: translateY(-2px);
-  }
-
-  input {
-    flex-grow: 1;
-    border: none;
-    padding: 12px 20px;
-    font-size: 16px;
-    outline: none;
-  }
-
-  .search-button {
-    background-color: #4a90e2;
-    border: none;
-    color: white;
-    padding: 12px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .search-button:hover {
-    background-color: #3a7bc8;
-  }
-
-  .icon {
-    width: 20px;
-    height: 20px;
-  }
-
-  .results-list {
-    list-style-type: none;
-    padding: 0;
-    width: 80%;
-    max-width: 600px;
-  }
-
-  .result-item {
-    background-color: white;
-    margin-bottom: 10px;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: all 0.2s ease;
-  }
-
-  .result-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-  }
-
-  .product-name {
-    font-weight: bold;
-    color: #333;
-  }
-
-  .company-name {
-    color: #666;
-    font-size: 0.9em;
-  }
-
-  .no-results {
-    color: #666;
-    font-style: italic;
-  }
  </style>
