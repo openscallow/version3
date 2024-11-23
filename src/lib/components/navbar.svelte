@@ -4,11 +4,11 @@
 
     let isSidebarOpen = false;
     let searchQuery = '';
-    let storedData = '';
+    let hasAccount = '';
   
     onMount(() => {
       // Any additional setup logic can be added here
-      storedData = localStorage.getItem('mobile') || '';
+      hasAccount = localStorage.getItem('mobile') || '' || localStorage.getItem('customer_correlated');
     });
   
     function toggleSidebar() {
@@ -159,7 +159,7 @@
         <a href="#blog">Blog</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
-        {#if storedData===''}
+        {#if hasAccount===''}
         <a href="./signUp">signUp</a>
         <a href="./login">login</a>
         {/if}
@@ -194,7 +194,7 @@
       <a href="#blog">Blog</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
-      {#if storedData===''}
+      {#if hasAccount===''}
         <a href="./signUp">signUp</a>
         <a href="./login">login</a>
       {/if}

@@ -94,7 +94,3 @@ import './style.css'
  <p class="no-results">No results found</p>
  {/if}
  </div>
- 
- <style>
-
- </style>

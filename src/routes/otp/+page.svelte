@@ -1,4 +1,8 @@
 <script>
+  import '@tailwind'
+  import './style.css'
+  import uuid from '$lib/utils/uuid.js'
+
     let otpInputs = ['', '', '', ''];
   
     function digitValidate(event, index) {
@@ -14,19 +18,43 @@
       }
     }
   
-    function verifyOTP() {
-      // Implement your OTP verification logic here
-      let xyz = sessionStorage.getItem('otp');
+    function verifyOTP() { 
+    
+      let xyz = sessionStorage.getItem('otp')
+      
       if (xyz === otpInputs.join('')){
-        let user =sessionStorage.getItem('name');
-        let mobile =sessionStorage.getItem('mobile');
-        localStorage.setItem('user', user);
-        localStorage.setItem('mobile', mobile);
-        window.location.href = '../experiment';
+        createNewCustomer()
       }else{
         alert('wrong otp')
       }
       console.log('Verifying OTP:', otpInputs.join(''),xyz);
+    }
+
+    async function createNewCustomer(){
+      let customer_id = uuid({parts : 4})
+      let customer_name = sessionStorage.getItem('name')
+      let customer_mobile = sessionStorage.getItem('mobile')
+      let customer_password = sessionStorage.getItem('password')
+      let customer_referral_code = uuid()
+
+      try {
+        const response = await fetch('/otp/api',{
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ customer_id, customer_name, customer_mobile, customer_password, customer_referral_code})
+          
+        })
+
+        if(response.ok){
+          if(typeof window !== 'undefined' && window.sessionStorage){
+            localStorage.setItem('customer_correlated', JSON.stringify({i:customer_id, r:customer_referral_code}))
+            window.location.href = '/'
+          }
+        }
+        
+      } catch (error) {
+        console.log(error)
+      }
     }
   </script>
   
@@ -56,69 +84,3 @@
       </div>
     </div>
   </div>
-  
-  <style>
-    :global(body) {
-      background: #eee;
-      font-family: Arial, sans-serif;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    .row {
-      display: flex;
-      justify-content: center;
-    }
-    .col-md-4 {
-      width: 100%;
-      max-width: 400px;
-    }
-    .otp-card {
-      background: white;
-      box-shadow: 0px 3px 6px 0px #cacaca;
-      padding: 20px;
-      border-radius: 4px;
-      text-align: center;
-      margin-top: 50px;
-    }
-    .title {
-      font-weight: 600;
-      margin-top: 20px;
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
-    .otp-form {
-      margin-top: 20px;
-      margin-bottom: 20px;
-    }
-    .otp-input {
-      display: inline-block;
-      width: 50px;
-      height: 50px;
-      text-align: center;
-      font-size: 24px;
-      margin: 0 5px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    hr {
-      margin: 20px 0;
-      border: none;
-      border-top: 1px solid #eee;
-    }
-    .verify-btn {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      width: 100%;
-      border-radius: 4px;
-    }
-    .verify-btn:hover {
-      background-color: #0056b3;
-    }
-  </style>

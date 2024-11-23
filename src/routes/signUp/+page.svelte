@@ -44,7 +44,8 @@
       console.log("Form submitted successfully");
       sessionStorage.setItem('name', username);
       sessionStorage.setItem('mobile', mobileNumber);
-     
+      sessionStorage.setItem('password', password); 
+
       window.location.href = `./MVCFOROTP?${mobileNumber}`;
     }
   }
