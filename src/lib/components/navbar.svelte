@@ -156,9 +156,9 @@
       <div class="nav-links">
         <a href="./" class="active">Home</a>
         <a href="./orderHistory">Orders</a>
-        <a href="#blog">Blog</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
         {#if hasAccount===''}
         <a href="./signUp">signUp</a>
         <a href="./login">login</a>
@@ -191,9 +191,9 @@
     <div class="sidebar-nav">
       <a href="./" class="active">Home</a>
       <a href="./orderHistory">Orders</a>
-      <a href="#blog">Blog</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
       {#if hasAccount===''}
         <a href="./signUp">signUp</a>
         <a href="./login">login</a>
