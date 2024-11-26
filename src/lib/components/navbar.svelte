@@ -4,11 +4,11 @@
 
     let isSidebarOpen = false;
     let searchQuery = '';
-    let hasAccount = '';
+    let hasAccount ='';
   
     onMount(() => {
       // Any additional setup logic can be added here
-      hasAccount = localStorage.getItem('mobile') || '' || localStorage.getItem('customer_correlated');
+      hasAccount = localStorage.getItem('customer_correlated')|| null ;
     });
   
     function toggleSidebar() {
@@ -29,6 +29,7 @@
       console.log("hois")
       window.location.href="./search"
     }
+    console.log(hasAccount)
   </script>
   
   <style>
@@ -159,7 +160,7 @@
         <a href="/blog">Blog</a>
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
-        {#if hasAccount===''}
+        {#if !hasAccount}
         <a href="./signUp">signUp</a>
         <a href="./login">login</a>
         {/if}
@@ -194,7 +195,7 @@
       <a href="/blog">Blog</a>
       <a href="/about">About</a>
       <a href="/contact">Contact</a>
-      {#if hasAccount===''}
+      {#if !hasAccount}
         <a href="./signUp">signUp</a>
         <a href="./login">login</a>
       {/if}
@@ -202,4 +203,3 @@
   </div>
   
   <button class="overlay {isSidebarOpen ? 'show' : ''}" on:click={closeSidebar}></button>
-  

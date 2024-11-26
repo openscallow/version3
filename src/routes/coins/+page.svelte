@@ -1,13 +1,17 @@
 <script>
     import '@tailwind'
-    import { UserCheck } from 'lucide-svelte'
+    import { UserCheck, ClipboardCopy } from 'lucide-svelte'
     import { onMount } from 'svelte';
 
     let coin_balance
     let referrals
+    let customer_referral_link
     onMount(async ()=>{
+      if (localStorage.getItem('customer_correlated')) { 
+      
         let customer_id = JSON.parse(localStorage.getItem('customer_correlated')).i
         let customer_referral_code = JSON.parse(localStorage.getItem('customer_correlated')).r
+        customer_referral_link = `callow.in/signUp?ref=`+JSON.parse(localStorage.getItem('customer_correlated')).r
    
         
         try {
@@ -35,6 +39,20 @@
         } catch (error) {
           console.log(error)
         }
+      }
+    })
+
+    onMount(()=>{
+      
+
+    document.getElementById("copyButton").addEventListener("click", async () => {
+        try {
+            await navigator.clipboard.writeText(customer_referral_link);
+            alert("Text copied to clipboard!");
+        } catch (err) {
+            console.error("Failed to copy text: ", err);
+        }
+    });
     })
 </script>
   
@@ -59,6 +77,11 @@
       </div>
     </div>
   </div>
+
+  <label class="input input-bordered flex items-center gap-2 mx-4">
+    <input type="text" class="grow" bind:value={customer_referral_link}/>
+    <ClipboardCopy id="copyButton" class="cursor-pointer"/>
+  </label>
   
   <div class="history px-4">
     {#if referrals}
