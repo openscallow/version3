@@ -3,6 +3,7 @@
   import '../../app.css';
   import { Eye, EyeOff } from 'lucide-svelte';
   import './style.css'
+  import { page } from '$app/stores';
 
   let username = '';
   let mobileNumber = '';
@@ -10,6 +11,8 @@
   let showPassword = false;
   let validationMessage = '';
   let mobileValidationMessage = '';
+
+  const referred_id = $page.url.searchParams.get('ref')
 
   function validateMobileNumber(number) {
     return number.length === 10;
@@ -44,7 +47,8 @@
       console.log("Form submitted successfully");
       sessionStorage.setItem('name', username);
       sessionStorage.setItem('mobile', mobileNumber);
-      sessionStorage.setItem('password', password); 
+      sessionStorage.setItem('password', password);
+      sessionStorage.setItem('referred_id', referred_id); 
 
       window.location.href = `./MVCFOROTP?${mobileNumber}`;
     }

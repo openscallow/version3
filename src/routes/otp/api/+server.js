@@ -4,18 +4,18 @@ export async function POST({ request }) {
 
     let client;
     try {
-        const { customer_id, customer_name, customer_mobile, customer_password, customer_referral_code } = await request.json();
+        const { customer_id, customer_name, customer_mobile, customer_password, customer_referral_code, customer_referred_by } = await request.json();
 
         //check connection is estanlished
         client = await pool.connect();
         console.log("connection connected succesfuly");
 
         // initalize inserting process 
-        const query = `INSERT INTO customers (customer_id, customer_name, customer_mobile, customer_password, customer_referral_code) 
-        VALUES ($1, $2, $3, $4, $5);`
+        const query = `INSERT INTO customers (customer_id, customer_name, customer_mobile, customer_password, customer_referral_code, customer_referred_by) 
+        VALUES ($1, $2, $3, $4, $5, $6);`
 
         
-        await client.query(query, [customer_id, customer_name, customer_mobile, customer_password, customer_referral_code]);
+        await client.query(query, [customer_id, customer_name, customer_mobile, customer_password, customer_referral_code, customer_referred_by]);
         console.log(`customer created with id: ${customer_id} successfully`)
         
         //send back response

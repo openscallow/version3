@@ -23,6 +23,8 @@
       let xyz = sessionStorage.getItem('otp')
       
       if (xyz === otpInputs.join('')){
+        const button = document.getElementsByClassName('verify-btn')
+        button[0].disabled = true
         createNewCustomer()
       }else{
         alert('wrong otp')
@@ -36,19 +38,21 @@
       let customer_mobile = sessionStorage.getItem('mobile')
       let customer_password = sessionStorage.getItem('password')
       let customer_referral_code = uuid()
+      let customer_referred_by = sessionStorage.getItem('referred_id') || null
 
       try {
         const response = await fetch('/otp/api',{
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({ customer_id, customer_name, customer_mobile, customer_password, customer_referral_code})
+          body: JSON.stringify({ customer_id, customer_name, customer_mobile, customer_password, customer_referral_code, customer_referred_by})
           
         })
 
         if(response.ok){
           if(typeof window !== 'undefined' && window.sessionStorage){
             localStorage.setItem('customer_correlated', JSON.stringify({i:customer_id, r:customer_referral_code}))
-            window.location.href = '/'
+            sessionStorage.getItem('userData') ?  window.location.href = '/order' : window.location.href = '/'
+            
           }
         }
         
