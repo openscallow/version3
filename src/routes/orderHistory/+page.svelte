@@ -3,7 +3,7 @@
   import { onMount } from 'svelte'
   import {productDatabase} from '$lib/json/product.js'
 
-  let orders = [];
+  let orders = $state([]);
 
   onMount(async () => {
       const mobile = localStorage.getItem('mobile');

@@ -3,9 +3,9 @@
     import { UserCheck, ClipboardCopy } from 'lucide-svelte'
     import { onMount } from 'svelte';
 
-    let coin_balance
-    let referrals
-    let customer_referral_link
+    let coin_balance = $state()
+    let referrals = $state()
+    let customer_referral_link = $state()
     onMount(async ()=>{
       if (localStorage.getItem('customer_correlated')) { 
       

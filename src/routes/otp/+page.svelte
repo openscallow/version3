@@ -3,7 +3,7 @@
   import './style.css'
   import uuid from '$lib/utils/uuid.js'
 
-    let otpInputs = ['', '', '', ''];
+    let otpInputs = $state(['', '', '', '']);
   
     function digitValidate(event, index) {
       otpInputs[index] = event.target.value.replace(/[^0-9]/g, '');
@@ -74,14 +74,14 @@
                 class="otp-input"
                 type="text"
                 bind:value={otpInputs[index]}
-                on:input={(e) => digitValidate(e, index)}
-                on:keyup={() => tabChange(index)}
+                oninput={(e) => digitValidate(e, index)}
+                onkeyup={() => tabChange(index)}
                 maxlength="1"
               >
             {/each}
           </form>
           <hr>
-          <button class='verify-btn' on:click={verifyOTP}>
+          <button class='verify-btn' onclick={verifyOTP}>
             Verify
           </button>
         </div>

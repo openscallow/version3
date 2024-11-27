@@ -1,7 +1,7 @@
 <script>
   import { Info, Save, School } from 'lucide-svelte';
 
-  let schoolName = '';
+  let schoolName = $state('');
 
   const schools = [
     "AKSHARJYOTI HIGHER SECONDARY SCHOOL",
@@ -46,7 +46,7 @@ window.location.href = '../MVC';
     />
     <datalist id="school">
       {#each schools as school}
-        <option value={school} />
+        <option value={school}></option>
       {/each}
     </datalist>
   </div>
@@ -56,7 +56,7 @@ window.location.href = '../MVC';
     <span>You can change this information anytime</span>
   </div>
   
-  <button on:click={handleSave} class="save-button">
+  <button onclick={handleSave} class="save-button">
     <Save size={20} />
     <span>Save School</span>
   </button>

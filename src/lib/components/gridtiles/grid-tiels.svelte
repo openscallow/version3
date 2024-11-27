@@ -1,13 +1,15 @@
 <script>
+  import { run } from 'svelte/legacy';
+
   import { onMount } from 'svelte';
   import { getProductsWithCache } from './cacheUtils.js';
   import '$lib/components/gridtiles/style.css'
 
-  let products = [];
-  let error = null;
-  let container;
-  let lastTile;
-  let observer;
+  let products = $state([]);
+  let error = $state(null);
+  let container = $state();
+  let lastTile = $state();
+  let observer = $state();
   const endpoints = ['getProduct', 'getProduct2', 'getProduct3', 'getProduct4']; // Added 'getProduct' for initial fetch
   let currentEndpointIndex = 0;
 
@@ -79,12 +81,14 @@
     }
   }
   
-  $: if (products.length > 0) {
-    lastTile = container?.querySelector('.tile:last-child');
-    if (lastTile && observer) {
-      observer.observe(lastTile);
+  run(() => {
+    if (products.length > 0) {
+      lastTile = container?.querySelector('.tile:last-child');
+      if (lastTile && observer) {
+        observer.observe(lastTile);
+      }
     }
-  }
+  });
   
   // Function to generate a unique key for each product
   function getUniqueKey(product) {

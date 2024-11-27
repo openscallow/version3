@@ -1,41 +1,20 @@
 <script>
+  import { run, preventDefault } from 'svelte/legacy';
+
     import '@tailwind';
     import { onMount } from 'svelte';
     import { ShieldCheck } from 'lucide-svelte';
 
-    let file;
-    let loading = false;
-    let success = false;
-    let error = null;
-    let fileInfo = null;
+    let file = $state();
+    let loading = $state(false);
+    let success = $state(false);
+    let error = $state(null);
+    let fileInfo = $state(null);
 
     
 
 
    
-    // Reactive declaration for file information
-    $: if (file && file[0]) {
-        const selectedFile = file[0];
-        fileInfo = {
-            name: selectedFile.name,
-            size: formatFileSize(selectedFile.size),
-            type: selectedFile.type,
-            rawSize: selectedFile.size  // Keep raw size for validation
-        };
-
-        // Add this part for image preview
-    const imagePreview = document.getElementById('imagePreview');
-    const objectURL = URL.createObjectURL(selectedFile);
-    imagePreview.src = objectURL;
-        // Log file details to console
-        console.log('Selected file details:', {
-            name: selectedFile.name,
-            size: formatFileSize(selectedFile.size),
-            type: selectedFile.type
-        });
-    } else {
-        fileInfo = null;
-    }
 
     function formatFileSize(bytes) {
         if (!bytes) return '0 Bytes';
@@ -116,12 +95,37 @@
             });
         }
     }
+    // Reactive declaration for file information
+    run(() => {
+    if (file && file[0]) {
+          const selectedFile = file[0];
+          fileInfo = {
+              name: selectedFile.name,
+              size: formatFileSize(selectedFile.size),
+              type: selectedFile.type,
+              rawSize: selectedFile.size  // Keep raw size for validation
+          };
+
+          // Add this part for image preview
+      const imagePreview = document.getElementById('imagePreview');
+      const objectURL = URL.createObjectURL(selectedFile);
+      imagePreview.src = objectURL;
+          // Log file details to console
+          console.log('Selected file details:', {
+              name: selectedFile.name,
+              size: formatFileSize(selectedFile.size),
+              type: selectedFile.type
+          });
+      } else {
+          fileInfo = null;
+      }
+  });
 </script>
 
 <div class="w-full flex items-center justify-center px-2.5 mt-10">
   
     
-    <form on:submit|preventDefault={handleSubmit} class=" form flex flex-col items-center gap-5">
+    <form onsubmit={preventDefault(handleSubmit)} class=" form flex flex-col items-center gap-5">
         <div class="indicator cursor-pointer">
             <span class="indicator-item indicator-middle badge badge-neutral">+</span>
             <div class="avatar">

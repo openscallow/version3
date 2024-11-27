@@ -20,7 +20,7 @@
   let images = [...productObj.images]; 
 
   //Quantity logic
-  let productQuantity = 1;
+  let productQuantity = $state(1);
   
   function incrementQuantity() {
     productQuantity += 1;
@@ -95,16 +95,16 @@
   
         <form class="add-to-cart-form">
           <div class="product-quantity">
-            <button type="button" class="button minus" on:click={decrementQuantity}>
+            <button type="button" class="button minus" onclick={decrementQuantity}>
               <img src={minus} alt="Minus Icon" />
             </button>
             <span class="product-quantity-num">{productQuantity}</span>
-            <button type="button" class="button plus" on:click={incrementQuantity}>
+            <button type="button" class="button plus" onclick={incrementQuantity}>
               <img src={plus} alt="Plus Icon" />
             </button>
           </div>
   
-          <button type="submit" class="button add-btn" on:click={placeOrder}>
+          <button type="submit" class="button add-btn" onclick={placeOrder}>
             Buy Now
           </button>
         </form>

@@ -1,11 +1,17 @@
 <script>
-  export let steps = [
+  /**
+   * @typedef {Object} Props
+   * @property {any} [steps]
+   * @property {number} [currentStep]
+   */
+
+  /** @type {Props} */
+  let { steps = [
     { label: 'Address', completed: true, link: '../adderss' },
     { label: 'Payment', completed: true, link: '#delivery' },
     { label: 'Order', completed: false, link: '#payment' },
-  ];
- export let currentStep = 3;
- $: activeStep = steps[currentStep];
+  ], currentStep = $bindable(3) } = $props();
+ let activeStep = $derived(steps[currentStep]);
  
  function handleStepClick(index) {
    if (index <= currentStep) {

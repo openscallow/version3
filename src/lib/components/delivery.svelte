@@ -1,14 +1,26 @@
 <script>
   import { ChevronRight } from 'lucide-svelte';
 
-  export let shippingAddress = '';
-  export let items = 1;
-  export let currentPrice = 0;
-  export let previousPrice = 0;
   let subtotal = currentPrice * items;
   let delivery = 0;
   let orderTotal = subtotal + delivery;
-  export let savings = (previousPrice - currentPrice)*items;
+  /**
+   * @typedef {Object} Props
+   * @property {string} [shippingAddress]
+   * @property {number} [items]
+   * @property {number} [currentPrice]
+   * @property {number} [previousPrice]
+   * @property {any} [savings]
+   */
+
+  /** @type {Props} */
+  let {
+    shippingAddress = '',
+    items = 1,
+    currentPrice = 0,
+    previousPrice = 0,
+    savings = (previousPrice - currentPrice)*items
+  } = $props();
   let savingsPercentage = 100-(Math.floor((currentPrice/previousPrice)*100));
 
   function place() {
@@ -66,7 +78,7 @@
     </div>
   </div>
   
-  <button class="place-order-button" on:click={place}>Place your order</button>
+  <button class="place-order-button" onclick={place}>Place your order</button>
 </div>
 
 <style>

@@ -7,10 +7,10 @@ import {productDatabase} from '$lib/json/product.js'
 import '@tailwind'
 import './style.css'
 
- let query = "";
- let searchResults = [];
+ let query = $state("");
+ let searchResults = $state([]);
  let fuse;
- let error = "";
+ let error = $state("");
 
  function convertProductDatabaseToArray(productDatabase) {
   return Object.values(productDatabase).map(product => {
@@ -71,8 +71,8 @@ import './style.css'
  <div class="container">
  
  <label class="input input-bordered flex items-center gap-2 mb-2 md:w-1/2 w-full ">
-  <input type="text" class="grow" placeholder="Search Callow.in" bind:value={query} on:input={handleSearch}/>
-  <button on:click={handleSearchClick}><Search class="h-4 w-4 opacity-70"/></button> 
+  <input type="text" class="grow" placeholder="Search Callow.in" bind:value={query} oninput={handleSearch}/>
+  <button onclick={handleSearchClick}><Search class="h-4 w-4 opacity-70"/></button> 
  </label>
  
  {#if error}

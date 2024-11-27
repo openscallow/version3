@@ -2,9 +2,9 @@
     import { onMount } from 'svelte';
     import '../../app.css'
 
-    let isSidebarOpen = false;
-    let searchQuery = '';
-    let hasAccount ='';
+    let isSidebarOpen = $state(false);
+    let searchQuery = $state('');
+    let hasAccount =$state('');
   
     onMount(() => {
       // Any additional setup logic can be added here
@@ -165,15 +165,15 @@
         <a href="./login">login</a>
         {/if}
       </div>
-      <form class="search-form" on:submit={handleSearchSubmit}>
+      <form class="search-form" onsubmit={handleSearchSubmit}>
         <input
           type="search"
           placeholder="Search..."
           bind:value={searchQuery}
-          on:click={blankPage}
+          onclick={blankPage}
         />
       </form>
-      <button class="menu-toggle" on:click={toggleSidebar}>☰</button>
+      <button class="menu-toggle" onclick={toggleSidebar}>☰</button>
     </div>
   </nav>
   
@@ -187,7 +187,7 @@
           <rect width="10" height="10" x="12" y="12" rx="2" fill="#4ade80" />
         </svg>
       </div>
-      <button class="sidebar-close" on:click={closeSidebar}>&times;</button>
+      <button class="sidebar-close" onclick={closeSidebar}>&times;</button>
     </div>
     <div class="sidebar-nav">
       <a href="./" class="active">Home</a>
@@ -202,4 +202,4 @@
     </div>
   </div>
   
-  <button class="overlay {isSidebarOpen ? 'show' : ''}" on:click={closeSidebar}></button>
+  <button class="overlay {isSidebarOpen ? 'show' : ''}" onclick={closeSidebar}></button>

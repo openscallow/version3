@@ -1,10 +1,10 @@
 <script>
     import '../../app.css';
-    let username = '';
+    let username = $state('');
     let password = '';
-    let showPassword = false;
-    let validationMessage = '';
-    let mobile = '';
+    let showPassword = $state(false);
+    let validationMessage = $state('');
+    let mobile = $state('');
     
     function formvalid() {
       if (false) {
@@ -33,7 +33,7 @@
   
   <div class="login-page">
     <div class="form">
-      <form class="login-form" on:submit={handleSubmit}>
+      <form class="login-form" onsubmit={handleSubmit}>
         <h2>CREAT YOUR ACCOUNT</h2>
         <input type="text" required placeholder="Username" bind:value={username} autocomplete="off" />
         <div class="password-input">
@@ -43,7 +43,7 @@
               required
               placeholder="Password"
               bind:value={username}
-              on:input={formvalid}
+              oninput={formvalid}
               autocomplete="off"
             />
           {:else}

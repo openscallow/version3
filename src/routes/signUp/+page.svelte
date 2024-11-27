@@ -1,16 +1,18 @@
 <script>
+  import { preventDefault } from 'svelte/legacy';
+
   import '@tailwind'
   import '../../app.css';
   import { Eye, EyeOff } from 'lucide-svelte';
   import './style.css'
   import { page } from '$app/stores';
 
-  let username = '';
-  let mobileNumber = '';
-  let password = '';
-  let showPassword = false;
-  let validationMessage = '';
-  let mobileValidationMessage = '';
+  let username = $state('');
+  let mobileNumber = $state('');
+  let password = $state('');
+  let showPassword = $state(false);
+  let validationMessage = $state('');
+  let mobileValidationMessage = $state('');
 
   const referred_id = $page.url.searchParams.get('ref')
 
@@ -65,7 +67,7 @@
 
 <div class="px-2 mt-10 w-full flex items-center justify-center">
   <div class="form relative drop-shadow-[0.5px_0.5px_1px_var(--primary-color)] rounded-md w-90 bg-white p-10">
-    <form class="signup-form" on:submit|preventDefault={handleSubmit}>
+    <form class="signup-form" onsubmit={preventDefault(handleSubmit)}>
       <h2>CREATE YOUR ACCOUNT</h2>
 
       <div class="mb-5">
@@ -84,7 +86,7 @@
           required 
           placeholder="Mobile Number" 
           bind:value={mobileNumber} 
-          on:input={handleMobileInput} 
+          oninput={handleMobileInput} 
           autocomplete="off" 
         />
         {#if mobileValidationMessage}
@@ -100,7 +102,7 @@
               required
               placeholder="Password"
               bind:value={password}
-              on:input={formValid}
+              oninput={formValid}
               autocomplete="off"
             />
           {:else}
@@ -109,12 +111,12 @@
               required
               placeholder="Password"
               bind:value={password}
-              on:input={formValid}
+              oninput={formValid}
               autocomplete="off"
             />
           {/if}
 
-          <button type="button" on:click={toggleShowPassword} class="cursor-pointer" aria-label="Toggle password visibility">
+          <button type="button" onclick={toggleShowPassword} class="cursor-pointer" aria-label="Toggle password visibility">
             {#if showPassword}
             <Eye />
             {:else}

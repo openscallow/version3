@@ -4,8 +4,14 @@
   import 'swiper/css/bundle';
   import '@tailwind';
 
-  export let images = [];
-  export let height = '400px';
+  /**
+   * @typedef {Object} Props
+   * @property {any} [images]
+   * @property {string} [height]
+   */
+
+  /** @type {Props} */
+  let { images = [], height = '400px' } = $props();
 
   let swiper;
 
