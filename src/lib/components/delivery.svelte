@@ -1,19 +1,6 @@
 <script>
   import { ChevronRight } from 'lucide-svelte';
 
-  let subtotal = currentPrice * items;
-  let delivery = 0;
-  let orderTotal = subtotal + delivery;
-  /**
-   * @typedef {Object} Props
-   * @property {string} [shippingAddress]
-   * @property {number} [items]
-   * @property {number} [currentPrice]
-   * @property {number} [previousPrice]
-   * @property {any} [savings]
-   */
-
-  /** @type {Props} */
   let {
     shippingAddress = '',
     items = 1,
@@ -38,15 +25,15 @@
   <div class="order-details">
     <div class="detail-row">
       <span>Subtotal ({items} item):</span>
-      <span>₹{subtotal}</span>
+      <span>₹{currentPrice * items}</span>
     </div>
     <div class="detail-row">
       <span>Delivery:</span>
-      <span>₹{delivery}</span>
+      <span>0</span>
     </div>
     <div class="detail-row total">
       <span>Order Total:</span>
-      <span>₹{orderTotal}</span>
+      <span>₹{currentPrice * items}</span>
     </div>
   </div>
   
