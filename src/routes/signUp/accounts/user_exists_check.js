@@ -1,12 +1,11 @@
 export default async function checkUserAccount() {
-    try {
-        const mobile = sessionStorage.getItem('mobile');
-       
-        
-        if (!mobile) {
-            throw new Error('Mobile number not found in session storage.');
-        }
+    const mobile = sessionStorage.getItem('mobile');
+    
+    if (!mobile || !/^\d{10}$/.test(mobile)) {
+        throw new Error('Invalid mobile number');
+    }
 
+    try {
         const response = await fetch('./signUp/accounts', {
             method: 'POST', 
             headers: {
@@ -15,18 +14,15 @@ export default async function checkUserAccount() {
             body: JSON.stringify({ mobile }),
         });
 
-        // Parse the response
-        if (response.status === 409) {
-            return true
-            
-        }else if(response.status === 201){   
-            return false
-            
-        }else{
-            location.reload()
+        switch (response.status) {
+            case 409: return true;  // User exists
+            case 201: return false; // New user
+            default: 
+                console.error('Unexpected response status:', response.status);
+                throw new Error('Account check failed');
         }
     } catch (error) {
-        console.error('Error checking user account:', error.message);
-        return { error: error.message };
+        console.error('Error checking user account:', error);
+        throw error;
     }
 }
