@@ -60,14 +60,14 @@
       let userPresent = await checkUserAccount()
       console.log(userPresent)
       if(!userPresent){
-        // window.location.href = `./MVCFOROTP?${mobileNumber}`;
+        window.location.href = `./MVCFOROTP?${mobileNumber}`;
       }else{
         isLoading = false
         let modal = document.getElementById("my_modal_2")
         modal.showModal()
 
         setTimeout(()=>{
-          // window.location.href = `./login`;
+          window.location.href = `./login`;
         },3000)
       }
       

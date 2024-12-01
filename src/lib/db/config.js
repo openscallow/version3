@@ -8,10 +8,10 @@ const { Pool } = pkg;
 
 
 const dbConfig = {
-    user: process.env.USERX,
+    user: process.env.USERX || env.USERX,
     host: process.env.HOST || env.HOST,
-    database: process.env.DATABASE,
-    password: process.env.PASSWORD,
+    database: process.env.DATABASE || env.DATABASE,
+    password: process.env.PASSWORD || env.PASSWORD,
     port: 5432,
     ssl: {
         rejectUnauthorized: false
