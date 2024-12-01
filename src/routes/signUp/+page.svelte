@@ -6,7 +6,7 @@
   import './style.css'
   import { page } from '$app/stores';
   import { onMount } from 'svelte';
-  import { checkUserAccount } from './accounts/user_exists_check.js';
+  import { checkUserAccount } from './accounts/user_exists_check';
   let isLoading = $state(false)
   let loadingButton
   let username = $state('')
