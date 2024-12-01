@@ -58,15 +58,16 @@
       sessionStorage.setItem('referred_id', referred_id);
 
       let userPresent = await checkUserAccount()
+      console.log(userPresent)
       if(!userPresent){
-        window.location.href = `./MVCFOROTP?${mobileNumber}`;
+        // window.location.href = `./MVCFOROTP?${mobileNumber}`;
       }else{
         isLoading = false
         let modal = document.getElementById("my_modal_2")
         modal.showModal()
 
         setTimeout(()=>{
-          window.location.href = `./login`;
+          // window.location.href = `./login`;
         },3000)
       }
       
@@ -156,7 +157,7 @@
               id="submitButton"
               class="singup flex items-center justify-center disabled:bg-gray-700 disabled:cursor-not-allowed">
               {#if !isLoading}
-              SING UP
+              SIGN UP
               {:else}
               <span class="loading loading-ring loading-sm"></span>
               {/if}
