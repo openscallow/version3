@@ -1,18 +1,20 @@
 <script>
   import { preventDefault } from 'svelte/legacy';
-
   import '@tailwind'
   import '../../app.css';
   import { Eye, EyeOff } from 'lucide-svelte';
   import './style.css'
   import { page } from '$app/stores';
-
-  let username = $state('');
-  let mobileNumber = $state('');
-  let password = $state('');
-  let showPassword = $state(false);
-  let validationMessage = $state('');
-  let mobileValidationMessage = $state('');
+  import { onMount } from 'svelte';
+  import checkUserAccount from './accounts/user_exists_check.js';
+  let isLoading = $state(false)
+  let loadingButton
+  let username = $state('')
+  let mobileNumber = $state('')
+  let password = $state('')
+  let showPassword = $state(false)
+  let validationMessage = $state('')
+  let mobileValidationMessage = $state('')
 
   const referred_id = $page.url.searchParams.get('ref')
 
@@ -44,15 +46,30 @@
     showPassword = !showPassword;
   }
 
-  function handleSubmit() {
+  async function handleSubmit() {
     if (formValid()) {
+      loadingButton.disabled = true
+      isLoading = true
+
       console.log("Form submitted successfully");
       sessionStorage.setItem('name', username);
       sessionStorage.setItem('mobile', mobileNumber);
       sessionStorage.setItem('password', password);
-      sessionStorage.setItem('referred_id', referred_id); 
+      sessionStorage.setItem('referred_id', referred_id);
 
-      window.location.href = `./MVCFOROTP?${mobileNumber}`;
+      let userPresent = await checkUserAccount()
+      if(!userPresent){
+        window.location.href = `./MVCFOROTP?${mobileNumber}`;
+      }else{
+        isLoading = false
+        let modal = document.getElementById("my_modal_2")
+        modal.showModal()
+
+        setTimeout(()=>{
+          window.location.href = `./login`;
+        },3000)
+      }
+      
     }
   }
 
@@ -63,6 +80,11 @@
     mobileNumber = mobileNumber.slice(0, 10);
     formValid();
   }
+
+  onMount(()=>{
+    loadingButton = document.querySelector("#submitButton")
+  
+  })
 </script>
 
 <div class="px-2 mt-10 w-full flex items-center justify-center">
@@ -130,8 +152,28 @@
         {/if}
       </div>
 
-      <button type="submit" class="singup">SIGN UP</button>
+      <button type="submit" 
+              id="submitButton"
+              class="singup flex items-center justify-center disabled:bg-gray-700 disabled:cursor-not-allowed">
+              {#if !isLoading}
+              SING UP
+              {:else}
+              <span class="loading loading-ring loading-sm"></span>
+              {/if}
+      </button>
       <p class="message">Already have an account? <a href="../login">Sign In</a></p>
     </form>
   </div>
 </div>
+
+<!-- Open the modal using ID.showModal() method -->
+
+<dialog id="my_modal_2" class="modal">
+  <div class="modal-box">
+    <h3 class="text-lg font-bold">Account Already exsist</h3>
+    <p class="py-4">We glad that your mobile number is already linked with account thus we are redirecting you to login page in <span class="text-blue-700">3 second</span></p>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>
