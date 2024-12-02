@@ -45,12 +45,12 @@
           modal.showModal()
 
           setTimeout(()=>{
-            window.location.href = `/`
+            window.location.href = `./`
           }, 2000)
           
         }else{
           alert("something went wrong please try again")
-          window.location.href = `/`
+          window.location.href = `./`
         }
         
      

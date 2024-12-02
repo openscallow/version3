@@ -36,7 +36,7 @@
           modal.showModal()
 
           setTimeout(()=>{
-            window.location.href = `/`
+            window.location.href = `./`
           }, 2000)
         }
         else{
@@ -49,7 +49,7 @@
     }
 
     function passwordForgot(){
-      window.location.href = `/login/password_reset`;
+      window.location.href = `./login/password_reset`;
     }
 
   </script>
