@@ -1,32 +1,55 @@
 <script>
-    import '../../app.css';
-    let username = $state('');
-    let password = '';
-    let showPassword = $state(false);
-    let validationMessage = $state('');
-    let mobile = $state('');
-    
-    function formvalid() {
-      if (false) {
-        validationMessage = "Minimum 8 characters";
-        return false;
-      } else {
-        validationMessage = "";
-        return true;
-      }
+    import '../../app.css'
+    import '@tailwind'
+    import usercheck from './check_user.js'
+
+    let password = $state('')
+    let validationMessage = $state('')
+    let mobile = $state('')
+    function formValid() {
+    let isValid = true;
+
+    if (password.length < 8 || password.length > 20) {
+      validationMessage = "Password must be between 8 and 20 characters";
+      isValid = false;
+    } else {
+      validationMessage = "";
     }
-  
-    function toggleShowPassword() {
-      showPassword = !showPassword;
+
+    if (mobile.length > 0  && mobile.length < 11) {
+      validationMessage = "";
+    } else {
+      validationMessage = "Mobile number must contain 10 digits";
+      isValid = false;
     }
-  
-    function handleSubmit() {
-      if (formvalid()) {
-        sessionStorage.setItem('name', username);
+
+    return isValid;
+  }
+ 
+   async function handleSubmit() {
+      if (formValid()) {
+        sessionStorage.setItem('password', password);
         sessionStorage.setItem('mobile', mobile);
-     
-        window.location.href = `./MVCFOROTP?${mobile}`;
+
+        if( await usercheck() ){
+          let modal = document.getElementById("my_modal_2")
+          modal.showModal()
+
+          setTimeout(()=>{
+            window.location.href = `/`
+          }, 2000)
+        }
+        else{
+          let modal = document.getElementById("my_modal_2")
+          let content = document.getElementById("content")
+          content.innerText = "password or mobile number is incorrect"
+          modal.showModal()
+        }
       }
+    }
+
+    function passwordForgot(){
+      window.location.href = `/login/password_reset`;
     }
 
   </script>
@@ -34,37 +57,41 @@
   <div class="login-page">
     <div class="form">
       <form class="login-form" onsubmit={handleSubmit}>
-        <h2>CREAT YOUR ACCOUNT</h2>
-        <input type="text" required placeholder="Username" bind:value={username} autocomplete="off" />
-        <div class="password-input">
-          {#if showPassword}
-            <input
+        <h2>LOGIN IN YOUR ACCOUNT</h2>
+        
+        <input
               type="text"
               required
+              show
               placeholder="Password"
-              bind:value={username}
-              oninput={formvalid}
+              bind:value={password}
               autocomplete="off"
-            />
-          {:else}
-            <input
+        />
+
+        <input
               type="Mobile"
               required
               placeholder="Mobile"
-              bind:value={mobile}
-              
+              bind:value={mobile}  
               autocomplete="off"
             />
-          {/if}
-       
-        </div>
-        <span id="vaild-pass">{validationMessage}</span>
-        <button type="submit">SIGN IN</button>
-        <!-- <p class="message"><a href="#">Forgot your password?</a></p> -->
+        <span id="vaild-pass" class="text-red-500">{validationMessage}</span>
+        <button  id="submit" type="submit" class="outline-none bg-[#1a202c] w-full border-0 mt-2 rounded-md px-4 py-3 text-white text-sm transition-all duration-400 ease-in-out cursor-pointer hover:bg-black hover:text-white focus:bg-black focus:text-white active:bg-black active:text-white">SIGN IN</button>
+
+        <button class="btn btn-link"  id="forgot" onclick={passwordForgot}>Forgot password</button>
       </form>
     </div>
   </div>
-  
+  <dialog id="my_modal_2" class="modal">
+    <div class="modal-box" id="content">
+      <h3 class="text-lg font-bold">You logged in</h3>
+      <p class="py-4">redirecting you to home page keep shoping <span class="text-blue-700">3 second</span></p>
+    </div>
+    <form method="dialog" class="modal-backdrop">
+      <button>close</button>
+    </form>
+  </dialog>
+
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,500;0,600;0,700;1,100;1,200;1,300&display=swap');
   
@@ -74,9 +101,7 @@
       box-sizing: border-box;
       font-family: "Poppins", sans-serif;
     }
-  
-    
-  
+
     .login-page {
       padding-inline: 10px;
       margin-top: 40px;
@@ -96,12 +121,8 @@
       padding: 40px;
     }
   
-    .password-input {
-      position: relative;
-    }
-  
 
-  
+
     .form input {
       outline: 0;
       background: #f2f2f2;
@@ -118,30 +139,7 @@
     }
   
     span {
-      color: red;
       margin: 10px 0;
       font-size: 14px;
-    }
-  
-    .form button {
-      outline: 0;
-      background: var(--primary-color);
-      width: 100%;
-      border: 0;
-      margin-top: 10px;
-      border-radius: 3px;
-      padding: 15px;
-      color: #FFFFFF;
-      font-size: 15px;
-      transition: all 0.4s ease-in-out;
-      cursor: pointer;
-    }
-  
-    .form button:hover,
-    .form button:active,
-    .form button:focus {
-      background: black;
-      color: #fff;
-    }
-  
+    }  
   </style>

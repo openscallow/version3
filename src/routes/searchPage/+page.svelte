@@ -1,6 +1,10 @@
 <script>
     import { page } from '$app/stores';
+    import { onMount } from 'svelte';
     
+    onMount(()=>{
+      location.reload()
+    })
     let query = $page.url.searchParams.get('query') || '';
     let results = JSON.parse($page.url.searchParams.get('results') || '[]');
 
