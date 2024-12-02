@@ -23,7 +23,7 @@
       if (formvalid()) {
         isLoading = true
         let mobile = sessionStorage.getItem('mobile')
-        let response = await fetch('/login/password_reset/newPassword', {
+        let response = await fetch('./login/password_reset/newPassword', {
           method:'POST',
           headers: {
                 'Content-Type': 'application/json',
