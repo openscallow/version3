@@ -22,6 +22,7 @@
       event.preventDefault(); // Prevent default form submission behavior
       if (formvalid()) {
         sessionStorage.setItem('mobile', mobile);
+       
         window.location.href = `./password_reset/resetOtp?${mobile}`
       }
     }

@@ -1,7 +1,7 @@
 <script>
     import '@tailwind'
     import './style.css'
-    import uuid from '$lib/utils/uuid.js'
+    
   
       let otpInputs = $state(['', '', '', '']);
     

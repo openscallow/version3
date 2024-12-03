@@ -2,6 +2,7 @@
     import '../../app.css'
     import '@tailwind'
     import usercheck from './check_user.js'
+    import { goto } from '$app/navigation';
 
     let password = $state('')
     let validationMessage = $state('')
