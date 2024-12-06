@@ -141,10 +141,7 @@ async function isCoupon() {
 <div class=" flex flex-col flex-1 justify-center items-center px-4">
     <div class="bg-white w-full rounded-md ">
         <h2 class="pb-4 border-b-2 p-4">Checkout</h2>
-        <div class="flex items-center justify-between px-4 py-2">
-            <p class="text-sm font-medium text-gray-900">Subtotal</p>
-            <p class="font-semibold text-gray-700">₹500</p>
-        </div>
+       
         <div class="flex items-center justify-between px-4 py-2">
             <p class="text-sm font-medium text-gray-900">Code discount</p>
             <p class="font-semibold text-red-700">{code_discount}</p>
