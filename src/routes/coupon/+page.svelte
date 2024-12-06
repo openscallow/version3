@@ -125,7 +125,7 @@ async function isCoupon() {
     <div class="bg-white w-full rounded-md ">
         <h2 class="pb-4 border-b-2 p-4">Apply coupons</h2>
         <div class="join w-full p-4">
-            <input id="couponCode" class="input input-bordered join-item w-full" type="text" placeholder="Apply your coupons here" value="WELCOME50"/>
+            <input id="couponCode" class="input input-bordered join-item w-full" type="text" placeholder="Apply your coupons here"/>
             <div class="h-full w-4 join-item"></div>
             <button id="btnApply" class="btn join-item bg-blue-500 w-1/4"  onclick={()=>{
               btnsummary.disabled = true
