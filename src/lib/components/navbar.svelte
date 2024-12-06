@@ -156,7 +156,9 @@
       </div>
       <div class="nav-links">
         <a href="./" class="active">Home</a>
+        {#if hasAccount}
         <a href="./orderHistory">Orders</a>
+        {/if}
         <a href="/blog">Blog</a>
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
@@ -191,7 +193,9 @@
     </div>
     <div class="sidebar-nav">
       <a href="./" class="active">Home</a>
+      {#if hasAccount}
       <a href="./orderHistory">Orders</a>
+      {/if}
       <a href="/blog">Blog</a>
       <a href="/about">About</a>
       <a href="/contact">Contact</a>

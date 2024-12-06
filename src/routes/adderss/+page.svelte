@@ -18,10 +18,10 @@
 
   function handleSave() {
     if (schoolName.trim()) {
-      localStorage.setItem('userAddress', schoolName.trim());
+      localStorage.setItem('institute_name', schoolName.trim());
       console.log('School name stored successfully');
       // Redirect or show success message
-window.location.href = '../MVC';
+window.location.href = './checkout';
 
 
     } else {

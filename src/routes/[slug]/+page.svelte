@@ -35,14 +35,20 @@
   //buy btn action
   function placeOrder() {
     const data = {
+      id: productNameUrl,
       name: productName,
-      items: productQuantity,
+      quantity: productQuantity,
       currentPrice: currentPrice,
-      previousPrice: previousPrice,
-      index: productNameUrl
+      actualPrice: previousPrice
     };
-    sessionStorage.setItem('userData', JSON.stringify(data));
-    window.location.href = '../MVC';
+    sessionStorage.setItem('product', JSON.stringify(data));
+
+    if(localStorage.getItem('customer_correlated')){
+      window.location.href = '/checkout'
+    }else{
+      window.location.href = '/signUp'
+    }
+    // window.location.href = '../MVC';
   }
  
   //update recently viewed 
