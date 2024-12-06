@@ -2,12 +2,14 @@
     import { page } from '$app/stores';
     import { onMount } from 'svelte';
     
-    onMount(()=>{
-      setTimeout(()=>{
+    
+
+    setTimeout(()=>{
+      onMount(()=>{
         location.reload()
-      },1000)
       
-    })
+    }) 
+      },1000)
     let query = $page.url.searchParams.get('query') || '';
     let results = JSON.parse($page.url.searchParams.get('results') || '[]');
 
