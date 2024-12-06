@@ -158,7 +158,7 @@
         <a href="./" class="active">Home</a>
         {#if hasAccount}
         <a href="./orderHistory">Orders</a>
-        <a href="./coins">Orders</a>
+        <a href="./coins">Coins</a>
         {/if}
         <a href="/blog">Blog</a>
         <a href="/about">About</a>
@@ -196,7 +196,7 @@
       <a href="./" class="active">Home</a>
       {#if hasAccount}
       <a href="./orderHistory">Orders</a>
-      <a href="./coins">Orders</a>
+      <a href="./coins">Coins</a>
       {/if}
       <a href="/blog">Blog</a>
       <a href="/about">About</a>
