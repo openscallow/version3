@@ -1,20 +1,12 @@
 <script>
     import { page } from '$app/stores';
-    import { onMount } from 'svelte';
+
     
     
     let query = $page.url.searchParams.get('query') || '';
     let results = JSON.parse($page.url.searchParams.get('results') || '[]');
 
-   onMount(()=>{
-    document.addEventListener("DOMContentLoaded", () => {
-    // Wait a short time to ensure everything is fully loaded
-    setTimeout(() => {
-      location.reload(); // Reload the page
-    }, 2000); // Adjust the delay (in milliseconds) if necessary
-  });
-
-   })
+ 
     </script>
     
     <h1>Search Results for : {query}</h1>
