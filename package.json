@@ -27,6 +27,7 @@
 		"lucide-svelte": "^0.414.0",
 		"mysql2": "^3.11.0",
 		"pg": "^8.13.1",
+		"svelte-vertical-timeline": "^2.0.0",
 		"swiper": "^11.1.14",
 		"uuid": "^11.0.3"
 	}
