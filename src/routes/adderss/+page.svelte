@@ -1,142 +1,122 @@
 <script>
-  import { Info, Save, School } from 'lucide-svelte';
+  import '@tailwind'
+  import Fuse from 'fuse.js'
+  import { Search } from 'lucide-svelte'
+  import { onMount } from 'svelte'
 
-  let schoolName = $state('');
+  // Data
+  const institutes = [
+    {
+        institute: "Jay Ambe school",
+        address: "12 Main Street, Surat",
+        pincode: 395006,
+        institute_code: 123,
+        src: "https://raghavfoundation.org.in/wp-content/uploads/2023/05/school-image.jpg"
+    },
+    {
+        institute: "Sunrise School",
+        address: "45 Sunrise Avenue, Surat",
+        pincode: 395007,
+        institute_code: 124,
+        src: "https://www.unicef.org/syria/sites/unicef.org.syria/files/styles/two_column/public/UNI597552.webp?itok=P6ELdDSX"
+    },
+    {
+        institute: "Green Valley",
+        address: "89 Green Lane, Surat",
+        pincode: 395008,
+        institute_code: 125,
+        src: "https://www.unicef.org/syria/sites/unicef.org.syria/files/styles/hero_extended/public/UNI597570.webp?itok=ZZNjrnol"
+    },
+    {
+        institute: "Bright Future",
+        address: "123 Future Road, Surat",
+        pincode: 395009,
+        institute_code: 126,
+        src: "https://www.unicef.org/syria/sites/unicef.org.syria/files/styles/media_large_image/public/UNI571006.webp?itok=jXnigvUs"
+    },
+    {
+        institute: "Star Academy",
+        address: "77 Star Boulevard, Surat",
+        pincode: 395010,
+        institute_code: 127,
+        src: "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+    },
+    {
+        institute: "Harmony School",
+        address: "56 Harmony Street, Surat",
+        pincode: 395011,
+        institute_code: 128,
+        src: "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+    }
+];
 
-  const schools = [
-    "AKSHARJYOTI HIGHER SECONDARY SCHOOL",
-    "ANGLO URDU HIGH SCHOOL",
-    "ANKUR HIGH SCHOOL",
-    "ANKUR VIDHYABHAVAN(H.S.)",
-    "ASHADEEP UCCHTAR MADHYAMIK SHALA",
-    "ASHADEEP VIDHYALAY",
-    "ASPIRE PUBLIC SCHOOL",
-    "B.H.KALSARIYA UCHCHATAR MADH. SHALA",
-    "BOGHRA AND AGRAWAL HIGHER SECONDARY SCHOOL",
-    "C. S. VIDYA BHARTI ENGLISH SCHOOL"
-  ];
 
-  function handleSave() {
-    if (schoolName.trim()) {
-      localStorage.setItem('institute_name', schoolName.trim());
-      console.log('School name stored successfully');
-      // Redirect or show success message
-window.location.href = './checkout';
+  // Fuse.js options
+  const options = {
+    keys: ['institute', 'pincode', 'address'], 
+    threshold: 0.3,
+  }
 
+  let fuse
+  let searchQuery = ''
+  let results = []
 
-    } else {
-      console.log('School name is empty, not stored');
-      // Show error message to user
+  onMount(() => {
+    // Initialize Fuse.js
+    fuse = new Fuse(institutes, options)
+    // Show only the first 5 results by default
+    results = institutes.slice(0, 5)
+  })
+
+  // Function to handle search input
+  const handleSearch = (event) => {
+    searchQuery = event.target.value
+    results = searchQuery
+      ? fuse.search(searchQuery).map(result => result.item)
+      : institutes.slice(0, 5) // Limit to 5 when input is empty
+  }
+
+  function handleSelect(institute, institute_code){
+    if(institute && institute_code){
+      localStorage.setItem('institute_name', institute)
+      localStorage.setItem('institute_code', institute_code)
     }
   }
 </script>
 
-<div class="container">
-  <div class="header">
-    <School color="#3b82f6" size={32} />
-    <h2>Enter Your School</h2>
-  </div>
-  
-  <div class="input-wrapper">
+<div class="container p-4">
+  <label class="input input-bordered flex items-center gap-2">
     <input
-      list="school"
-      class="school-input"
-      placeholder="Start typing your school name..."
-      bind:value={schoolName}
+      type="text"
+      class="grow"
+      placeholder="Search"
+      oninput={handleSearch}
     />
-    <datalist id="school">
-      {#each schools as school}
-        <option value={school}></option>
+    <Search class="h-4 w-4 opacity-70" />
+  </label>
+
+  <ul class="mt-4">
+    {#if results.length}
+      {#each results as result}
+      <div class="card bg-base-100 w-full shadow-lg rounded-md mb-4">
+        <figure>
+          <img
+            src={result.src}
+            alt={result.institute} />
+        </figure>
+        <div class="card-body">
+          <h2 class="card-title">{result.institute}</h2>
+          <p><strong> Address: </strong> {result.address}</p>
+          <p><strong> Pincode: </strong> {result.pincode}</p>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary" onclick={()=>{handleSelect(result.institute, result.institute_code)}}>select</button>
+          </div>
+        </div>
+      </div>
+      
       {/each}
-    </datalist>
-  </div>
-  
-  <div class="info-text">
-    <Info color="#3b82f6" size={18} />
-    <span>You can change this information anytime</span>
-  </div>
-  
-  <button onclick={handleSave} class="save-button">
-    <Save size={20} />
-    <span>Save School</span>
-  </button>
+    {:else}
+      <li class="text-gray-500">No results found</li>
+    {/if}
+  </ul>
 </div>
-
-<style>
-  .container {
-    max-width: 400px;
-    margin: 40px auto;
-    padding: 24px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-
-  .header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 24px;
-  }
-
-  .header h2 {
-    margin: 0 0 0 12px;
-    font-size: 24px;
-    font-weight: bold;
-    color: #1f2937;
-  }
-
-  .input-wrapper {
-    margin-bottom: 16px;
-  }
-
-  .school-input {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    border: 1px solid #d1d5db;
-    border-radius: 4px;
-    transition: all 0.2s ease-in-out;
-  }
-
-  .school-input:focus {
-    outline: none;
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-  }
-
-  .info-text {
-    display: flex;
-    align-items: center;
-    margin-bottom: 24px;
-    font-size: 14px;
-    color: #6b7280;
-  }
-
-  .info-text :global(svg) {
-    margin-right: 8px;
-  }
-
-  .save-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 12px;
-    background-color: #3b82f6;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-  }
-
-  .save-button:hover {
-    background-color: #2563eb;
-  }
-
-  .save-button :global(svg) {
-    margin-right: 8px;
-  }
-</style>
