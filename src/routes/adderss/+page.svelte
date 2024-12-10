@@ -12,6 +12,13 @@
         pincode: 395004,
         institute_code: 1,
         src: "https://callowproduct.s3.ap-south-1.amazonaws.com/school/govermentSchoolGajera.webp"
+    },
+    {
+        institute: "Matrubhumi Vidhya Bhavan",
+        address: "Ved Road, Navjivan Society, Katargam, Surat, Gujarat",
+        pincode: 395004,
+        institute_code: 2,
+        src: "https://callowproduct.s3.ap-south-1.amazonaws.com/school/matrubhumischool.webp"
     }
 
 ];
