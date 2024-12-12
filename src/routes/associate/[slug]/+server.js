@@ -1,25 +1,33 @@
 import { pool } from '$lib/db/config.js';
 
 export async function POST({ request }) {
+    console.log("POST method invoked");
 
     try {
     let { institute_name } =  await request.json()
 
     const query = `
-            SELECT 
-                order_id,
-                customer_id,
-                created_at, 
-                items_count, 
-                total_amount, 
-                discount_amount, 
-                promo_code, 
-                payment_method 
-            FROM 
-                customerorders 
-            WHERE 
-                institute_name = $1 AND status = 'Pending';
-    `;
+    SELECT 
+        co.order_id,
+        co.customer_id,
+        co.created_at, 
+        co.items_count, 
+        co.total_amount, 
+        co.discount_amount, 
+        co.promo_code, 
+        co.payment_method,
+        c.customer_name,
+        c.customer_picture
+    FROM 
+        customerorders co
+    JOIN 
+        customers c 
+    ON 
+        co.customer_id = c.customer_id
+    WHERE 
+        co.institute_name = $1 AND co.status = 'Pending';
+`;
+
 
     let {rows} = await pool.query(query, [institute_name])
 
@@ -37,7 +45,5 @@ export async function POST({ request }) {
             headers: { 'Content-Type': 'application/json' },
         });
     }
-    
-
-
 }
+

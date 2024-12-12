@@ -75,6 +75,7 @@
       <div class="card bg-base-100 w-full shadow-lg rounded-md mb-4">
         <figure>
           <img
+            loading="lazy"
             src={result.src}
             alt={result.institute} />
         </figure>
