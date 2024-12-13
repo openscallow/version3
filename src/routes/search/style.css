@@ -1,7 +1,7 @@
 html{
   overflow: hidden;
 }
-.container {
+/* .div {
     z-index: 2;
     background-color: #f0f4f8;
     position: absolute;
@@ -13,13 +13,13 @@ html{
     flex-direction: column;
     align-items: center;
     overflow: hidden;
-  }
+  } */
 
   .results-list {
     list-style-type: none;
     padding: 0;
-    width: 80%;
-    max-width: 600px;
+    width: 100%;
+    /* max-width: 600px; */
   }
 
   .result-item {

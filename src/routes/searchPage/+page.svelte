@@ -1,34 +1,41 @@
 <script>
-    import { page } from '$app/stores';
+  import { onMount } from 'svelte';
 
-    
-    
-    let query = $page.url.searchParams.get('query') || '';
-    let results = JSON.parse($page.url.searchParams.get('results') || '[]');
+  let query = '';   // Initialize query string
+  let results = []; // Initialize results array
 
- 
-    </script>
+  onMount(() => {
+    // Retrieve the search query and results from sessionStorage
+    const storedResults = sessionStorage.getItem('searchResults');
     
-    <h1>Search Results for : {query}</h1>
-    <div class="container">
-    {#if results.length > 0}
-      
-        {#each results as result}
-        <div class="tile">
-          <a href={"/"+ result.id} rel="noopener noreferrer">
-            <div class="image-container">
+    // Check if search results are available in sessionStorage
+    if (storedResults) {
+      results = JSON.parse(storedResults);
+      // Retrieve query from sessionStorage if needed (or retain the query from the previous page)
+      query = sessionStorage.getItem('searchQuery') || '';
+    } else {
+      console.log("No search results found in sessionStorage.");
+    }
+  });
+</script>
+
+<h1>Search Results for: {query}</h1>
+<div class="container">
+  {#if results.length > 0}
+    {#each results as result}
+      <div class="tile">
+        <a href={"/" + result.id} rel="noopener noreferrer">
+          <div class="image-container">
             <img src={result.img} alt={result.name} />
           </div>
-            <h2>{result.name}</h2>
-          </a>
-        </div>
-          
-        {/each}
-    
-    {:else}
-      <p>No results found.</p>
-    {/if}
-  </div>
+          <h2>{result.name}</h2>
+        </a>
+      </div>
+    {/each}
+  {:else}
+    <p>No results found.</p>
+  {/if}
+</div>
 
 
     <style>
