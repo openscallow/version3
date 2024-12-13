@@ -2,8 +2,7 @@
   import { Search } from "lucide-svelte";
   import Fuse from 'fuse.js';
   import { onMount } from 'svelte';
-  import { goto } from '$app/navigation';
-  import { productDatabase } from '$lib/json/product.js'
+  import { productDatabase } from '$lib/json/product.js' //this may should go into mongodb
   import '@tailwind'
   import './style.css'
   
@@ -50,7 +49,7 @@
   
     if (searchResults.length > 0) {
       // Store both the search query and the results in sessionStorage
-      sessionStorage.setItem('searchQuery', query); // Store the query
+      sessionStorage.setItem('searchQuery', query);
       sessionStorage.setItem('searchResults', JSON.stringify(searchResults.map(result => ({
         name: result.item.name,
         company: result.item.company,
