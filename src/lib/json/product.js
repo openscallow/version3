@@ -280,6 +280,15 @@ export let productDatabase ={
         previousPrice: 50,
         id: 27,
         images: ["https://m.media-amazon.com/images/I/51jNezlRY1L.jpg"]
+    },
+    28:{
+        img: "https://m.media-amazon.com/images/I/81I0oQ-F5NL._SX679_.jpg",
+        company: "Classmate",
+        name: "Cylendrical Desk Pen, Pencil, Stationery Holder",
+        description: "A 40-page drawing book, ideal for sketching and creative projects.",
+        currentPrice: 9,
+        previousPrice: 100,
+        id: 28,
+        images: ["https://m.media-amazon.com/images/I/81I0oQ-F5NL._SX679_.jpg"]
     }
-  
   }
