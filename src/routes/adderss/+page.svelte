@@ -19,6 +19,20 @@
         pincode: 395004,
         institute_code: 2,
         src: "https://callowproduct.s3.ap-south-1.amazonaws.com/school/matrubhumischool.webp"
+    },
+    {
+        institute: "Matrubhumi Vidhya Bhavan",
+        address: "Gurukul Road, 3rd floor, apple square, Dabholi char rasta, near Matrubhumi Vidhya Bhavan, Surat, Gujarat ",
+        pincode: 395004,
+        institute_code: 3,
+        src: "https://callowproduct.s3.ap-south-1.amazonaws.com/school/sulabha+class.webp"
+    },
+    {
+        institute: "V.T Choksi English Medium School",
+        address: "Sumul dairy road, katargam, Surat, Gujarat",
+        pincode: 395004,
+        institute_code: 4,
+        src: "https://callowproduct.s3.ap-south-1.amazonaws.com/school/VTCHOKSI.webp"
     }
 
 ];
