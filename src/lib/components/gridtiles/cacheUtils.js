@@ -35,6 +35,7 @@ export async function getProductsWithCache(endpoint) {
     }
     const products = await response.json()
     setCachedProducts(endpoint, products)
+    console.log(endpoint, products)
     return products
   } catch (error) {
     console.error(`Failed to fetch products: ${error.message}`);

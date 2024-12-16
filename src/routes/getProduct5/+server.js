@@ -7,7 +7,7 @@ export async function GET() {
 
   const command = new GetObjectCommand({
     Bucket: 'callowproduct',
-    Key: 'fourthfile.json'
+    Key: 'fifthfile.json'
   });
 
   try {
@@ -16,16 +16,17 @@ export async function GET() {
     for await (const chunk of response.Body) {
       chunks.push(chunk);
     }
+
     const buffer = Buffer.concat(chunks);
 
     return new Response(buffer, {
       headers: {
-        'Content-Type': 'json',
+        'Content-Type': 'application/json',
         'Content-Disposition': 'inline; filename="fifthfile.json"'
       }
     });
   } catch (err) {
-    console.error('Error fetching image from S3:', err);
-    throw error(500, 'Error fetching image from S3');
+    console.error('Error fetching file from S3:', err);
+    throw error(500, 'Error fetching file from S3');
   }
 }
