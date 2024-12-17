@@ -21,7 +21,7 @@
         src: "https://callowproduct.s3.ap-south-1.amazonaws.com/school/matrubhumischool.webp"
     },
     {
-        institute: "Matrubhumi Vidhya Bhavan",
+        institute: "Sulabh classes",
         address: "Gurukul Road, 3rd floor, apple square, Dabholi char rasta, near Matrubhumi Vidhya Bhavan, Surat, Gujarat ",
         pincode: 395004,
         institute_code: 3,
@@ -33,6 +33,13 @@
         pincode: 395004,
         institute_code: 4,
         src: "https://callowproduct.s3.ap-south-1.amazonaws.com/school/VTCHOKSI.webp"
+    },
+    {
+        institute: "J.H.B Sardar High School",
+        address: "New Rander Road, sugam society, Adajan Patiya, Surat, Gujarat",
+        pincode: 395005,
+        institute_code: 5,
+        src: "https://callowproduct.s3.ap-south-1.amazonaws.com/school/JHB+SARDAR.webp"
     }
 
 ];

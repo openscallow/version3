@@ -283,12 +283,22 @@ export let productDatabase ={
     },
     28:{
         img: "https://m.media-amazon.com/images/I/81I0oQ-F5NL._SX679_.jpg",
-        company: "Classmate",
+        company: "Art Ranger",
         name: "Cylendrical Desk Pen, Pencil, Stationery Holder",
-        description: "A 40-page drawing book, ideal for sketching and creative projects.",
-        currentPrice: 9,
+        description: "The Art Ranger Pen & Pencil Holder is a lightweight, polished metal organizer ideal for office, home, or study tables. Its compact, round design and black finish make it both functional and stylish for organizing essentials.",
+        currentPrice: 99,
         previousPrice: 100,
         id: 28,
-        images: ["https://m.media-amazon.com/images/I/81I0oQ-F5NL._SX679_.jpg"]
+        images: ["https://m.media-amazon.com/images/I/81I0oQ-F5NL._SX679_.jpg", "https://m.media-amazon.com/images/I/81Tg5uPDqCL._SX679_.jpg"]
+    },
+    29:{
+        img: "https://m.media-amazon.com/images/I/41duozgs09S._SX300_SY300_QL70_FMwebp_.jpg",
+        company: "Doms",
+        name: "Doms X1 Premium Mathematical Drawing Instrument Box | compass box",
+        description: "Product : 1 Compass, 1 Divider Arm, 1 Set Square 45degree, 1 Set Square 60degree, 1 Scale (15cm), 1 Eraser, 1 Sharpener, 1 (0.5) Mechanical Pencil, 1 Protractor 180degree, 1 Stencil | Set of 10 Instruments",
+        currentPrice: 145,
+        previousPrice: 150,
+        id: 29,
+        images: ["https://m.media-amazon.com/images/I/41duozgs09S._SX300_SY300_QL70_FMwebp_.jpg", "https://m.media-amazon.com/images/I/717wr2kfkWS._SX522_.jpg", "https://m.media-amazon.com/images/I/71A0y+1ueeS._SX522_.jpg"]
     }
   }
