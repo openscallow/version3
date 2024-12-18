@@ -124,7 +124,7 @@ export let productDatabase ={
     12:{
         img: "https://m.media-amazon.com/images/I/71WcwtLvJfL._SY355_.jpg",
         company: "Camlin",
-        name: "Camlin Geometry Box",
+        name: "Camlin Geometry Box | કંપાસ બોક્સ",
         description: "Complete geometry set with ruler, compass, protractor, and more, suitable for all age groups.",
         currentPrice: 120,
         previousPrice: 140,
@@ -294,11 +294,21 @@ export let productDatabase ={
     29:{
         img: "https://m.media-amazon.com/images/I/41duozgs09S._SX300_SY300_QL70_FMwebp_.jpg",
         company: "Doms",
-        name: "Doms X1 Premium Mathematical Drawing Instrument Box | compass box",
+        name: "Doms X1 Premium Mathematical Drawing Instrument Box | કંપાસ બોક્સ",
         description: "Product : 1 Compass, 1 Divider Arm, 1 Set Square 45degree, 1 Set Square 60degree, 1 Scale (15cm), 1 Eraser, 1 Sharpener, 1 (0.5) Mechanical Pencil, 1 Protractor 180degree, 1 Stencil | Set of 10 Instruments",
         currentPrice: 145,
         previousPrice: 150,
         id: 29,
         images: ["https://m.media-amazon.com/images/I/41duozgs09S._SX300_SY300_QL70_FMwebp_.jpg", "https://m.media-amazon.com/images/I/717wr2kfkWS._SX522_.jpg", "https://m.media-amazon.com/images/I/71A0y+1ueeS._SX522_.jpg"]
+    },
+    30:{
+        img: "https://m.media-amazon.com/images/I/71tPPYHHMqL._SX522_.jpg",
+        company: "Cello",
+        name: "Cello Arc 0.7Mm Mechanical Pencil | કાકરા પેન્સિલ",
+        description: "Product : 1 Compass, 1 Divider Arm, 1 Set Square 45degree, 1 Set Square 60degree, 1 Scale (15cm), 1 Eraser, 1 Sharpener, 1 (0.5) Mechanical Pencil, 1 Protractor 180degree, 1 Stencil | Set of 10 Instruments",
+        currentPrice: 19,
+        previousPrice: 20,
+        id: 30,
+        images: ["https://m.media-amazon.com/images/I/71tPPYHHMqL._SX522_.jpg", "https://m.media-amazon.com/images/I/717wr2kfkWS._SX522_.jpg", "https://m.media-amazon.com/images/I/51Kx422hEFL._SX522_.jpg"]
     }
   }
