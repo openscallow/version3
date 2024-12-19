@@ -295,20 +295,32 @@ export let productDatabase ={
         img: "https://m.media-amazon.com/images/I/41duozgs09S._SX300_SY300_QL70_FMwebp_.jpg",
         company: "Doms",
         name: "Doms X1 Premium Mathematical Drawing Instrument Box | કંપાસ બોક્સ",
-        description: "Product : 1 Compass, 1 Divider Arm, 1 Set Square 45degree, 1 Set Square 60degree, 1 Scale (15cm), 1 Eraser, 1 Sharpener, 1 (0.5) Mechanical Pencil, 1 Protractor 180degree, 1 Stencil | Set of 10 Instruments",
+        description: "1 Compass, 1 Divider Arm, 1 Set Square 45degree, 1 Set Square 60degree, 1 Scale (15cm), 1 Eraser, 1 Sharpener, 1 (0.5) Mechanical Pencil, 1 Protractor 180degree, 1 Stencil | Set of 10 Instruments",
         currentPrice: 145,
         previousPrice: 150,
         id: 29,
-        images: ["https://m.media-amazon.com/images/I/41duozgs09S._SX300_SY300_QL70_FMwebp_.jpg", "https://m.media-amazon.com/images/I/717wr2kfkWS._SX522_.jpg", "https://m.media-amazon.com/images/I/71A0y+1ueeS._SX522_.jpg"]
+        images: ["https://m.media-amazon.com/images/I/41duozgs09S._SX300_SY300_QL70_FMwebp_.jpg", "https://m.media-amazon.com/images/I/71A0y+1ueeS._SX522_.jpg"]
     },
     30:{
         img: "https://m.media-amazon.com/images/I/71tPPYHHMqL._SX522_.jpg",
         company: "Cello",
         name: "Cello Arc 0.7Mm Mechanical Pencil | કાકરા પેન્સિલ",
-        description: "Product : 1 Compass, 1 Divider Arm, 1 Set Square 45degree, 1 Set Square 60degree, 1 Scale (15cm), 1 Eraser, 1 Sharpener, 1 (0.5) Mechanical Pencil, 1 Protractor 180degree, 1 Stencil | Set of 10 Instruments",
+        description: "One machenical lead pen and one pack of lead worth 5 rupees",
         currentPrice: 19,
         previousPrice: 20,
         id: 30,
         images: ["https://m.media-amazon.com/images/I/71tPPYHHMqL._SX522_.jpg", "https://m.media-amazon.com/images/I/717wr2kfkWS._SX522_.jpg", "https://m.media-amazon.com/images/I/51Kx422hEFL._SX522_.jpg"]
+    },
+    31:{
+        img: "https://m.media-amazon.com/images/I/51BNTW4IL2L._SX300_SY300_QL70_FMwebp_.jpg",
+        company: "Camlin ",
+        name: "Camlin Lead Hb (0.7 Mm,Pack Of 30 Leads)| કાકરા પેન્સિલ",
+        description: "Camlin Kokuyo Ltd. 0.7mm black ink pen, made of plastic, suitable for toddlers.",
+        currentPrice: 145,
+        previousPrice: 150,
+        id: 31,
+        images: ["https://m.media-amazon.com/images/I/71tPPYHHMqL._SX522_.jpg", "https://m.media-amazon.com/images/I/717wr2kfkWS._SX522_.jpg", "https://m.media-amazon.com/images/I/51Kx422hEFL._SX522_.jpg"]
     }
+
+    
   }
