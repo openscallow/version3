@@ -309,7 +309,7 @@ export let productDatabase ={
         currentPrice: 19,
         previousPrice: 20,
         id: 30,
-        images: ["https://m.media-amazon.com/images/I/71tPPYHHMqL._SX522_.jpg", "https://m.media-amazon.com/images/I/717wr2kfkWS._SX522_.jpg", "https://m.media-amazon.com/images/I/51Kx422hEFL._SX522_.jpg"]
+        images: ["https://m.media-amazon.com/images/I/71tPPYHHMqL._SX522_.jpg", "https://m.media-amazon.com/images/I/51Kx422hEFL._SX522_.jpg"]
     },
     31:{
         img: "https://m.media-amazon.com/images/I/51BNTW4IL2L._SX300_SY300_QL70_FMwebp_.jpg",
@@ -319,7 +319,7 @@ export let productDatabase ={
         currentPrice: 145,
         previousPrice: 150,
         id: 31,
-        images: ["https://m.media-amazon.com/images/I/71tPPYHHMqL._SX522_.jpg", "https://m.media-amazon.com/images/I/717wr2kfkWS._SX522_.jpg", "https://m.media-amazon.com/images/I/51Kx422hEFL._SX522_.jpg"]
+        images: ["https://m.media-amazon.com/images/I/71455qPeS8L._SX522_.jpg"]
     }
 
     
