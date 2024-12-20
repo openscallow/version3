@@ -3,7 +3,7 @@
 
     import '@tailwind';
     import { onMount } from 'svelte';
-    import { ShieldCheck } from 'lucide-svelte';
+    import { ShieldCheck,  Camera  } from 'lucide-svelte';
 
     let file = $state();
     let loading = $state(false);
@@ -130,7 +130,7 @@
             <span class="indicator-item indicator-middle badge badge-neutral">+</span>
             <div class="avatar">
                 <div class="ring-primary ring-offset-base-100 w-24 rounded-full ring ring-offset-2">
-                    <img id="imagePreview" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="fuck alt" />
+                    <img id="imagePreview" src="avtar.svg" alt="fuck alt" />
                 </div>
             </div>
         </div>
