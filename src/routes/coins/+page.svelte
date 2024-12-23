@@ -31,7 +31,7 @@
           let response = await fetch('coins/api/referral-timeline',{
             method: 'POST',
             headers: { 'Content-Type' : 'application/json' },
-            body: JSON.stringify({customer_referral_code})
+            body: JSON.stringify({customer_id})
           })
 
           let data = await response.json()
@@ -92,6 +92,7 @@
         <div class="collapse-content">
           <p>Date: {referral.created_at.split('T')[0]}</p>
           <p>Earn: 10 coins</p>
+          <p>Status: {referral.status}</p>
         </div>
       </div>
       {/each}

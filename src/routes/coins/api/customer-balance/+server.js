@@ -16,20 +16,15 @@ export async function POST({ request }) {
         console.log("Connection connected successfully");
 
         // Parameterized query to prevent SQL injection
-        const query = `
-            SELECT customer_id, SUM(coin_balance) AS total_coin_balance
-            FROM coin_transactions
-            WHERE customer_id = $1
-            GROUP BY customer_id;
-        `;
+        const query = `SELECT current_coins FROM customers WHERE customer_id = $1`;
 
         // Execute the query with parameterized value
         const result = await client.query(query, [customer_id]);
 
-        console.log(`Customer's current balance retrieved: ${result.rows[0].total_coin_balance}`);
+        console.log(`Customer's current balance retrieved: ${result.rows[0].current_coins}`);
 
         // Send back response with the retrieved balance
-        return new Response(JSON.stringify({ total_coin_balance: result.rows[0].total_coin_balance }), {
+        return new Response(JSON.stringify({ total_coin_balance: result.rows[0].current_coins }), {
             status: 200,
             headers:{
                 'Cache-Control': 'public, max-age=3600'

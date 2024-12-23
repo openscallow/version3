@@ -3,21 +3,19 @@ import { pool } from '$lib/db/config.js';
 export async function POST({ request }) {
     let client;
     try {
-        const { customer_referral_code }= await request.json()
+        const {customer_id }= await request.json()
         
-        console.log(customer_referral_code)
-        // Ensure the customer_id is correctly sanitized and type-safe
-        if (!customer_referral_code || typeof customer_referral_code !== 'string') {
-            throw new Error("Invalid customer_referral_code");
-        }
+        console.log(customer_id)
 
         // Check connection is established
         client = await pool.connect();
         console.log("Connection connected successfully");
 
-        const query = `SELECT customer_name, created_at FROM customers WHERE customer_referred_by = $1;`
+        const query = `SELECT transaction_type, status, source, created_at FROM coin_transactions WHERE customer_id = $1`;
 
-        const result = await client.query(query, [customer_referral_code]);
+      
+
+        const result = await client.query(query, [customer_id]);
 
         console.log(`Customer's referral recored retrieve:` ,result.rows);
 
