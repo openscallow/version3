@@ -75,9 +75,7 @@
                       draggable="false"
                     />
                   </div>
-                  <h3 class="mt-2 text-md font-medium text-gray-900 line-clamp-2">
-                    {item.name}
-                  </h3>
+                  
                 </a>
               </div>
             </div>
