@@ -11,7 +11,7 @@
   let productFetcher = fetchProduct(); 
 
   let observer = $state()
-  const endpoints = ['getProduct', 'getProduct2', 'getProduct3', 'getProduct4', 'getProduct5'];
+  const endpoints = ['getProduct', 'getProduct2', 'getProduct3', 'getProduct4', 'getProduct5', 'getProduct6'];
   
   async function handleIntersection(entries) {
     for (let entry of entries) {

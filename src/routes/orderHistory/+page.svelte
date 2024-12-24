@@ -2,8 +2,88 @@
   import '@tailwind'
   import { onMount } from 'svelte'
   import {productDatabase} from '$lib/json/product.js'
-  let orders = $state([]);
+  import deliverySchedule from './deliverySchedule.js';  // Default import
 
+
+
+
+// Preprocess the schedule to create a hash table of valid schools
+const validSchools = Object.values(deliverySchedule).reduce((schools, day) => {
+    Object.keys(day).forEach((school) => {
+        schools[school] = true; // Mark school as valid
+    });
+    return schools;
+}, {});
+
+function getDayName(dateString) {
+    const date = new Date(dateString);
+    const options = { weekday: 'long' };
+    return date.toLocaleDateString('en-US', options);
+}
+
+function isTimeBeforeSlot(dateString, slotStart) {
+    const currentTime = new Date(dateString);
+
+    // Helper to parse time string
+    function parseTime(time) {
+        const [timePart, period] = time.split(" ");
+        let [hour, minute] = timePart.split(":").map(Number);
+        if (period === "PM" && hour !== 12) hour += 12;
+        if (period === "AM" && hour === 12) hour = 0;
+        return hour * 60 + minute;
+    }
+
+    const currentTimeInMinutes =
+        currentTime.getHours() * 60 + currentTime.getMinutes();
+    const slotStartInMinutes = parseTime(slotStart);
+    return currentTimeInMinutes < slotStartInMinutes - 120;
+}
+
+function availableSlots(dateString, schoolName) {
+    // Check if the school exists in the schedule
+    if (!validSchools[schoolName]) {
+        return `Error: School "${schoolName}" does not exist in the delivery schedule.`;
+    }
+
+    const dayName = getDayName(dateString);
+    const slots = deliverySchedule[dayName]?.[schoolName];
+
+    if (!slots) {
+        return nextAvailableSlot(dateString, schoolName);
+    }
+
+    if (isTimeBeforeSlot(dateString, slots.start)) {
+        return formatSlot(dayName, slots);
+    } else {
+        return nextAvailableSlot(dateString, schoolName);
+    }
+}
+
+function nextAvailableSlot(dateString, schoolName) {
+    const currentDate = new Date(dateString);
+
+    // Loop through the next 7 days to prevent infinite recursion
+    for (let i = 1; i <= 7; i++) {
+        currentDate.setDate(currentDate.getDate() + 1); // Move to the next day
+        const nextDayName = getDayName(currentDate.toISOString());
+        const nextSlots = deliverySchedule[nextDayName]?.[schoolName];
+
+        if (nextSlots) {
+            return formatSlot(nextDayName, nextSlots);
+        }
+    }
+
+    // If no slot is found after 7 days
+    return `No available slots for school "${schoolName}" in the next 7 days.`;
+}
+
+// Helper function to format the slot
+function formatSlot(dayName, slots) {
+    return `${dayName} : ${slots.start} : ${slots.end}`;
+}
+
+// original code
+let orders = $state([]);
   onMount(async () => {
       const customer_correlated = JSON.parse(localStorage.getItem('customer_correlated'))
       let i = customer_correlated.i
@@ -73,14 +153,10 @@
             {#if order.discount_amount}
             <p class="product-details my-2">discount: ₹{order.discount_amount}</p>
             {/if} 
-            <p class="product-details text-gray-500 my-2">date: {new Intl.DateTimeFormat('en-GB', {
-              day: '2-digit',
-              month: '2-digit',
-              year: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
-              hourCycle: 'h12', 
-            }).format(new Date(order.created_at))}</p>
+            {#if availableSlots(order.created_at, order.institute_name)}
+            <p>Delivery: {availableSlots(order.created_at, order.institute_name)}</p>
+            {/if} 
+    
             <p class="product-details text-gray-500 my-2">Items: {parseInt(order.items_count[1])}</p>
             <div class="card-actions ">
               <button onclick={()=>{handelCancel(order.order_id)}} class="btn btn-outline btn-error">Cancel order</button>

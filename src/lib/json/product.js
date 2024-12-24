@@ -320,6 +320,17 @@ export let productDatabase ={
         previousPrice: 150,
         id: 31,
         images: ["https://m.media-amazon.com/images/I/71455qPeS8L._SX522_.jpg"]
+    },
+
+    32:{
+        img: "https://rukminim2.flixcart.com/image/1150/1350/k4k7f680/desk-organizer/e/c/h/1727c-pen-pencil-holder-elite-clear-colour-omega-original-imafng2vftcutpht.jpeg",
+        company: "KHYATI",
+        name: "4 Compartments Plastic Pen/Pencil Holder | પેન હોલ્ડર",
+        description: "Includes a pen/pencil holder with space for pens, cards, pins/clips; weighs 245g.",
+        currentPrice: 149,
+        previousPrice: 185,
+        id: 32,
+        images: ["https://rukminim2.flixcart.com/image/1150/1350/k4k7f680/desk-organizer/e/c/h/1727c-pen-pencil-holder-elite-clear-colour-omega-original-imafng2vftcutpht.jpeg", "https://rukminim1.flixcart.com/image/776/931/koq33ww0/desk-organizer/r/7/u/elite-pen-stand-s625-1-elite-pen-stand-khyati-original-imag34k3hzykcq3n.jpeg"]
     }
 
     
