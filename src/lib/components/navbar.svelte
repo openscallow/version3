@@ -7,7 +7,6 @@
     let hasAccount =$state('');
   
     onMount(() => {
-      // Any additional setup logic can be added here
       hasAccount = localStorage.getItem('customer_correlated')|| null ;
     });
   
@@ -31,6 +30,74 @@
     }
     console.log(hasAccount)
   </script>
+  
+  
+  
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="10" height="10" x="2" y="2" rx="2" fill="#4ade80" />
+          <rect width="10" height="10" x="12" y="2" rx="2" fill="#4ade80" />
+          <rect width="10" height="10" x="2" y="12" rx="2" fill="#4ade80" />
+          <rect width="10" height="10" x="12" y="12" rx="2" fill="#4ade80" />
+        </svg>
+      </div>
+      <div class="nav-links">
+        <a href="./" class="active">Home</a>
+        {#if hasAccount}
+        <a href="./orderHistory">Orders</a>
+        <a href="./coins">Coins</a>
+        {/if}
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        {#if !hasAccount}
+        <a href="./signUp">signUp</a>
+        <a href="./login">login</a>
+        {/if}
+      </div>
+      <form class="search-form" onsubmit={handleSearchSubmit}>
+        <input
+          type="search"
+          placeholder="Search..."
+          bind:value={searchQuery}
+          onclick={blankPage}
+        />
+      </form>
+      <button class="menu-toggle" onclick={toggleSidebar}>☰</button>
+    </div>
+  </nav>
+  
+  <div class="sidebar {isSidebarOpen ? 'open' : ''}">
+    <div class="sidebar-header">
+      <div class="logo">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="10" height="10" x="2" y="2" rx="2" fill="#4ade80" />
+          <rect width="10" height="10" x="12" y="2" rx="2" fill="#4ade80" />
+          <rect width="10" height="10" x="2" y="12" rx="2" fill="#4ade80" />
+          <rect width="10" height="10" x="12" y="12" rx="2" fill="#4ade80" />
+        </svg>
+      </div>
+      <button class="sidebar-close" onclick={closeSidebar}>&times;</button>
+    </div>
+    <div class="sidebar-nav">
+      <a href="./" class="active">Home</a>
+      {#if hasAccount}
+      <a href="./orderHistory">Orders</a>
+      <a href="./coins">Coins</a>
+      {/if}
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      {#if !hasAccount}
+        <a href="./signUp">signUp</a>
+        <a href="./login">login</a>
+      {/if}
+    </div>
+  </div>
+  
+  <button class="overlay {isSidebarOpen ? 'show' : ''}" onclick={closeSidebar}></button>
   
   <style>
 
@@ -143,69 +210,3 @@
       }
     }
   </style>
-  
-  <nav class="navbar">
-    <div class="container">
-      <div class="logo">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="10" height="10" x="2" y="2" rx="2" fill="#4ade80" />
-          <rect width="10" height="10" x="12" y="2" rx="2" fill="#4ade80" />
-          <rect width="10" height="10" x="2" y="12" rx="2" fill="#4ade80" />
-          <rect width="10" height="10" x="12" y="12" rx="2" fill="#4ade80" />
-        </svg>
-      </div>
-      <div class="nav-links">
-        <a href="./" class="active">Home</a>
-        {#if hasAccount}
-        <a href="./orderHistory">Orders</a>
-        <a href="./coins">Coins</a>
-        {/if}
-        <a href="/blog">Blog</a>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
-        {#if !hasAccount}
-        <a href="./signUp">signUp</a>
-        <a href="./login">login</a>
-        {/if}
-      </div>
-      <form class="search-form" onsubmit={handleSearchSubmit}>
-        <input
-          type="search"
-          placeholder="Search..."
-          bind:value={searchQuery}
-          onclick={blankPage}
-        />
-      </form>
-      <button class="menu-toggle" onclick={toggleSidebar}>☰</button>
-    </div>
-  </nav>
-  
-  <div class="sidebar {isSidebarOpen ? 'open' : ''}">
-    <div class="sidebar-header">
-      <div class="logo">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="10" height="10" x="2" y="2" rx="2" fill="#4ade80" />
-          <rect width="10" height="10" x="12" y="2" rx="2" fill="#4ade80" />
-          <rect width="10" height="10" x="2" y="12" rx="2" fill="#4ade80" />
-          <rect width="10" height="10" x="12" y="12" rx="2" fill="#4ade80" />
-        </svg>
-      </div>
-      <button class="sidebar-close" onclick={closeSidebar}>&times;</button>
-    </div>
-    <div class="sidebar-nav">
-      <a href="./" class="active">Home</a>
-      {#if hasAccount}
-      <a href="./orderHistory">Orders</a>
-      <a href="./coins">Coins</a>
-      {/if}
-      <a href="/blog">Blog</a>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
-      {#if !hasAccount}
-        <a href="./signUp">signUp</a>
-        <a href="./login">login</a>
-      {/if}
-    </div>
-  </div>
-  
-  <button class="overlay {isSidebarOpen ? 'show' : ''}" onclick={closeSidebar}></button>
