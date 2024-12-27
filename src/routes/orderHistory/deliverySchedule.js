@@ -20,11 +20,15 @@ const deliverySchedule = {
   },
 
   Friday: {
-    // "Matrubhumi Vidhya Bhavan": {start: "11:55 AM", end: "12:05 PM"},
+    "Matrubhumi Vidhya Bhavan": {start: "11:55 AM", end: "12:05 PM"},
     "Sunrise School": { start: "8:30 AM", end: "9:00 AM" }
   },
 
   Saturday: {
+    "Matrubhumi Vidhya Bhavan": {start: "11:55 AM", end: "12:05 PM"},
+    "Sunrise School": { start: "8:30 AM", end: "9:00 AM" }
+  },
+  Sunday: {
     "Matrubhumi Vidhya Bhavan": {start: "11:55 AM", end: "12:05 PM"},
     "Sunrise School": { start: "8:30 AM", end: "9:00 AM" }
   }
