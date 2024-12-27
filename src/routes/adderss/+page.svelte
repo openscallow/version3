@@ -11,7 +11,7 @@
         address: "Shivam Apartment, Rander road, near Navyug College, Adajan, Surat, Gujarat",
         pincode: 395009,
         institute_code: 6,
-        src: "https://callowproduct.s3.ap-south-1.amazonaws.com/school/JHB+SARDAR.webp"
+        src: "https://callowproduct.s3.ap-south-1.amazonaws.com/school/DevelopmentClass.jpg"
     },
     {
         institute: "Nagar Prathamik School",
