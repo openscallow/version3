@@ -7,6 +7,13 @@
   // Data
   const institutes = [
     {
+        institute: "Development Classes",
+        address: "Shivam Apartment, Rander road, near Navyug College, Adajan, Surat, Gujarat",
+        pincode: 395009,
+        institute_code: 6,
+        src: "https://callowproduct.s3.ap-south-1.amazonaws.com/school/JHB+SARDAR.webp"
+    },
+    {
         institute: "Nagar Prathamik School",
         address: "173, Gajera circle, Near Lake Garden, Minaxi Wadi, Katargam, Surat, Gujarat",
         pincode: 395004,

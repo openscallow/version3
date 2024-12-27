@@ -331,6 +331,17 @@ export let productDatabase ={
         previousPrice: 185,
         id: 32,
         images: ["https://rukminim2.flixcart.com/image/1150/1350/k4k7f680/desk-organizer/e/c/h/1727c-pen-pencil-holder-elite-clear-colour-omega-original-imafng2vftcutpht.jpeg", "https://rukminim1.flixcart.com/image/776/931/koq33ww0/desk-organizer/r/7/u/elite-pen-stand-s625-1-elite-pen-stand-khyati-original-imag34k3hzykcq3n.jpeg"]
+    },
+
+    33:{
+        img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTU7PolyNY5VwE9oDzELax_GscFMfGBsBhvQssBczkDP4ZtwQoK1-qA8ywRaPXvnmabvnoWUSacsmmypRx_j3Bm1Xzls-MdfkUmfTm-RKFFj7noEDw5fmxe1A",
+        company: "Classmate",
+        name: "Classmate Graph Book 32 Pages | ગ્રાફ બુક",
+        description: "The Classmate Graph Book (32 pages) is a high-quality graphing notebook designed for academic and professional use",
+        currentPrice: 20,
+        previousPrice: 22,
+        id: 33,
+        images: ["https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTU7PolyNY5VwE9oDzELax_GscFMfGBsBhvQssBczkDP4ZtwQoK1-qA8ywRaPXvnmabvnoWUSacsmmypRx_j3Bm1Xzls-MdfkUmfTm-RKFFj7noEDw5fmxe1A", "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQqvpLw6Ei9-1lzxHeN30Ve82Rzlc3h0e4aFSAe1q2RhvMqpJSZgVEZg-aBeXOXByZtffpufjr6x5wWPykFfrYT26dVa9m9Mx0Nt1TT6jykBVoo6LZlBG19", "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRXKpK3YpEHhUbA-oiijfIGLdOnjFVY7pixQuBD8P_QS63O3IvgeWNM54gO56K1uk4lI6NJjChff1EjdHIGbDDPgsXaoUUiWGb8x0ZRG1HXs6pmsuvY6hxk"]
     }
 
     
