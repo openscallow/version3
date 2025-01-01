@@ -10,7 +10,8 @@
     "J.H.B Sardar High School",
     "Nagar Prathamik School",
     "Sulabh classes",
-    "V.T Choksi English Medium School"
+    "V.T Choksi English Medium School",
+    "Development Classes"
   ];
 
   const days = [
