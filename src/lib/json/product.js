@@ -342,6 +342,16 @@ export let productDatabase ={
         previousPrice: 22,
         id: 33,
         images: ["https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTU7PolyNY5VwE9oDzELax_GscFMfGBsBhvQssBczkDP4ZtwQoK1-qA8ywRaPXvnmabvnoWUSacsmmypRx_j3Bm1Xzls-MdfkUmfTm-RKFFj7noEDw5fmxe1A", "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQqvpLw6Ei9-1lzxHeN30Ve82Rzlc3h0e4aFSAe1q2RhvMqpJSZgVEZg-aBeXOXByZtffpufjr6x5wWPykFfrYT26dVa9m9Mx0Nt1TT6jykBVoo6LZlBG19", "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRXKpK3YpEHhUbA-oiijfIGLdOnjFVY7pixQuBD8P_QS63O3IvgeWNM54gO56K1uk4lI6NJjChff1EjdHIGbDDPgsXaoUUiWGb8x0ZRG1HXs6pmsuvY6hxk"]
+    },
+    34:{
+        img: "https://rukminim2.flixcart.com/image/416/416/kfvfwy80/calculator/q/u/d/deli-39231b-original-imafw8ryytmanhgt.jpeg",
+        company: "deli",
+        name: "Deli 39231B deli calulator Basic Calculator  (12 Digit)",
+        description: "The Deli Basic Calculator (Model 39231B) features a 12-digit display, dual power (solar and battery), compact design, and reliable functionality for everyday calculations.",
+        currentPrice: 300,
+        previousPrice: 395,
+        id: 34,
+        images: ["https://rukminim2.flixcart.com/image/416/416/kfvfwy80/calculator/q/u/d/deli-39231b-original-imafw8ryytmanhgt.jpeg", "https://rukminim2.flixcart.com/image/832/832/kfvfwy80/calculator/q/u/d/deli-39231b-original-imafw8ryzefmqhxq.jpeg"]
     }
 
     
