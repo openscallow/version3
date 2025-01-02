@@ -25,6 +25,7 @@
 		"dotenv": "^16.4.5",
 		"fuse.js": "^7.0.0",
 		"lucide-svelte": "^0.414.0",
+		"mongodb": "^6.12.0",
 		"mysql2": "^3.11.0",
 		"pg": "^8.13.1",
 		"svelte-vertical-timeline": "^2.0.0",
