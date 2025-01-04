@@ -5,12 +5,11 @@ dotenv.config()
 
 import { algoliasearch } from "algoliasearch";
 
-const appID = env.ALGOLIA_API_ID;
-console.log(appID)
+const appID = env.ALGOLIA_API_ID || process.env.ALGOLIA_API_ID;
 
 // API key with `addObject` and `editSettings` ACL
-const apiKey = env.ALGOLIA_API_KEY;
-console.log(apiKey)
+const apiKey = env.ALGOLIA_API_KEY || process.env.ALGOLIA_API_KEY;
+
 const indexName = "list";
 
 const client = algoliasearch(appID, apiKey);

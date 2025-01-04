@@ -1,87 +1,51 @@
 <script>
   import '@tailwind'
-  import Fuse from 'fuse.js'
   import { Search } from 'lucide-svelte'
-  import { onMount } from 'svelte'
 
   // Data
-  const institutes = [
+  let institutes = [
     {
-        institute: "Development Classes",
-        address: "Shivam Apartment, Rander road, near Navyug College, Adajan, Surat, Gujarat",
-        pincode: 395009,
-        institute_code: 6,
-        src: "https://callowproduct.s3.ap-south-1.amazonaws.com/school/DevelopmentClass.jpg"
+      School_name: "Development Classes",
+      Address: "Shivam Apartment, Rander road, near Navyug College, Adajan, Surat, Gujarat",
+      Pincode: 395009,
+      objectID: 6,
+      img: "DevelopmentClass.jpg"
     },
     {
-        institute: "Nagar Prathamik School",
-        address: "173, Gajera circle, Near Lake Garden, Minaxi Wadi, Katargam, Surat, Gujarat",
-        pincode: 395004,
-        institute_code: 1,
-        src: "https://callowproduct.s3.ap-south-1.amazonaws.com/school/govermentSchoolGajera.webp"
-    },
-    {
-        institute: "Matrubhumi Vidhya Bhavan",
-        address: "Ved Road, Navjivan Society, Katargam, Surat, Gujarat",
-        pincode: 395004,
-        institute_code: 2,
-        src: "https://callowproduct.s3.ap-south-1.amazonaws.com/school/matrubhumischool.webp"
-    },
-    {
-        institute: "Sulabh classes",
-        address: "Gurukul Road, 3rd floor, apple square, Dabholi char rasta, near Matrubhumi Vidhya Bhavan, Surat, Gujarat ",
-        pincode: 395004,
-        institute_code: 3,
-        src: "https://callowproduct.s3.ap-south-1.amazonaws.com/school/sulabha+class.webp"
-    },
-    {
-        institute: "V.T Choksi English Medium School",
-        address: "Sumul dairy road, katargam, Surat, Gujarat",
-        pincode: 395004,
-        institute_code: 4,
-        src: "https://callowproduct.s3.ap-south-1.amazonaws.com/school/VTCHOKSI.webp"
-    },
-    {
-        institute: "J.H.B Sardar High School",
-        address: "New Rander Road, sugam society, Adajan Patiya, Surat, Gujarat",
-        pincode: 395005,
-        institute_code: 5,
-        src: "https://callowproduct.s3.ap-south-1.amazonaws.com/school/JHB+SARDAR.webp"
+      School_name: "Nagar Prathamik School",
+      Address: "173, Gajera circle, Near Lake Garden, Minaxi Wadi, Katargam, Surat, Gujarat",
+      Pincode: 395004,
+      objectID: 1,
+      img: "govermentSchoolGajera.webp"
     }
+  ];
 
-];
+  let searchQuery = "";
 
-
-  // Fuse.js options
-  const options = {
-    keys: ['institute', 'pincode', 'address'], 
-    threshold: 0.3,
+  async function handleSearch() {
+    if(searchQuery.length > 5) {
+      institutes = null;
+      // Fetch data from API
+      let response = await fetch('/adderss',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({searchQuery})
+      })
+      if(response.ok) {
+        institutes = await response.json()
+      }else{
+        institutes = []
+      }
+    }
   }
 
-  let fuse
-  let searchQuery = ''
-  let results = []
-
-  onMount(() => {
-    // Initialize Fuse.js
-    fuse = new Fuse(institutes, options)
-    // Show only the first 5 results by default
-    results = institutes.slice(0, 5)
-  })
-
-  // Function to handle search input
-  const handleSearch = (event) => {
-    searchQuery = event.target.value
-    results = searchQuery
-      ? fuse.search(searchQuery).map(result => result.item)
-      : institutes.slice(0, 5) // Limit to 5 when input is empty
-  }
-
-  function handleSelect(institute, institute_code){
-    if(institute && institute_code){
-      localStorage.setItem('institute_name', institute)
-      localStorage.setItem('institute_code', institute_code)
-      window.location.href = '/checkout'
+  function handleSelect(School_name, objectID) {
+    if (School_name && objectID) {
+      localStorage.setItem('institute_name', School_name);
+      localStorage.setItem('institute_code', objectID);
+      window.location.href = '/checkout';
     }
   }
 </script>
@@ -92,34 +56,42 @@
       type="text"
       class="grow"
       placeholder="Search"
-      oninput={handleSearch}
-    />
-    <Search class="h-4 w-4 opacity-70" />
+      bind:value={searchQuery}
+      onkeydown={(e) => e.key === 'Enter' && handleSearch()} />
+    <Search 
+      class="h-4 w-4 opacity-70 cursor-pointer" 
+      onclick={handleSearch} />
   </label>
 
   <ul class="mt-4">
-    {#if results.length}
-      {#each results as result}
+    {#if institutes}     
+    {#if institutes.length}
+      {#each institutes as result}
       <div class="card bg-base-100 w-full shadow-lg rounded-md mb-4">
         <figure>
           <img
             loading="lazy"
-            src={result.src}
-            alt={result.institute} />
+            src="https://callowproduct.s3.ap-south-1.amazonaws.com/school/{result.img}"
+            alt={result.School_name} />
         </figure>
         <div class="card-body text-black bg-white rounded-b-md">
-          <h2 class="card-title">{result.institute}</h2>
-          <p><strong> Address: </strong> {result.address}</p>
-          <p><strong> Pincode: </strong> {result.pincode}</p>
+          <h2 class="card-title">{result.School_name}</h2>
+          <p><strong> Address: </strong> {result.Address}</p>
+          <p><strong> Pincode: </strong> {result.Pincode}</p>
           <div class="card-actions justify-end">
-            <button class="btn btn-neutral" onclick={()=>{handleSelect(result.institute, result.institute_code)}}>select</button>
+            <button class="btn btn-neutral" onclick={()=>{handleSelect(result.School_name, result.objectID)}}>select</button>
           </div>
         </div>
       </div>
       
       {/each}
     {:else}
-      <li class="text-gray-500">No results found</li>
+      <li class="text-gray-500">No institutes found</li>
+    {/if}
+    {:else}
+      <div class="flex justify-center">
+        <span class="loading loading-spinner loading-md"></span>
+      </div>
     {/if}
   </ul>
 </div>

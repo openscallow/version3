@@ -29,7 +29,6 @@
     console.log("hois")
     window.location.href="./search"
   }
-  console.log(hasAccount)
 </script>
 
 <style>

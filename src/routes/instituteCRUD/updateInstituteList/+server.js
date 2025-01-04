@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import { MongoClient, ServerApiVersion, ObjectId } from 'mongodb';
-const uri = env.MONGODBCLUSTER0;
+const uri = env.MONGODBCLUSTER0 || process.env.MONGODBCLUSTER0;
 
 export async function POST() {
 
