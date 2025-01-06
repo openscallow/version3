@@ -352,6 +352,26 @@ export let productDatabase ={
         previousPrice: 395,
         id: 34,
         images: ["https://rukminim2.flixcart.com/image/416/416/kfvfwy80/calculator/q/u/d/deli-39231b-original-imafw8ryytmanhgt.jpeg", "https://rukminim2.flixcart.com/image/832/832/kfvfwy80/calculator/q/u/d/deli-39231b-original-imafw8ryzefmqhxq.jpeg"]
+    },
+    35:{
+        img: "https://m.media-amazon.com/images/I/41MODP1b7FL._SY355_.jpg",
+        company: "pentonic",
+        name: "Pentonic 0.7 mm Ball Pen Blister Pack | Black Body | Blue Ink",
+        description: "Sleek black design with 0.7mm tip for smooth, no-smudge writing. Features quick-drying ink and click-off mechanism.perfect for office or personal use.",
+        currentPrice: 8,
+        previousPrice: 12,
+        id: 35,
+        images: ["https://m.media-amazon.com/images/I/41MODP1b7FL._SY355_.jpg", "https://m.media-amazon.com/images/I/716VE0kV4pL._SL1100_.jpg", "https://m.media-amazon.com/images/I/61Df29O3e0L._SY355_.jpg"]
+    },
+    36:{
+        img: "https://m.media-amazon.com/images/I/618jD5rSc4L._SX522_.jpg",
+        company: "pentonic",
+        name: "Pentonic 0.7 mm Ball Pen Blister Pack | Black Body | Blue Ink | Set of 10 Pens",
+        description: "Sleek black design with 0.7mm tip for smooth, no-smudge writing. Features quick-drying ink and click-off mechanism.perfect for office or personal use.",
+        currentPrice: 80,
+        previousPrice: 120,
+        id: 36,
+        images: ["https://m.media-amazon.com/images/I/618jD5rSc4L._SX522_.jpg", "https://m.media-amazon.com/images/I/716VE0kV4pL._SL1100_.jpg", "https://m.media-amazon.com/images/I/718GwIVi10L._SX522_.jpg"]
     }
 
     
