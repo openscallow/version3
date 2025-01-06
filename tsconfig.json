@@ -1,0 +1,11 @@
+{
+    "extends": "./.svelte-kit/tsconfig.json",
+    "compilerOptions": {
+      "strict": true,
+      "types": ["@sveltejs/kit"],
+      "allowJs": true,
+      "resolveJsonModule": true,
+      "esModuleInterop": true
+    }
+  }
+  
