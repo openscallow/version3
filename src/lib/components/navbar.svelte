@@ -46,7 +46,7 @@
 
 <!-- Navbar -->
 <nav class="navbar">
-  <div class="container">
+  <div class="containerforlinks">
     {@render svglogo()}
     <div class="nav-links">
       {@render navigationLinks()}

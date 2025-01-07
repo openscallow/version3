@@ -1,6 +1,4 @@
-
 import { env } from '$env/dynamic/private';
-
 import dotenv from 'dotenv';
 dotenv.config();
 
