@@ -1,8 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import '../../app.css';
-  import './navbar.css';
+  
   import '@tailwind';
+  import './navbar.css';
   import { House, ShoppingBag, HandCoins, LogIn, User } from 'lucide-svelte';
 
   // State variables
@@ -26,8 +27,8 @@
   <a href="/about">About</a>
   <a href="/contact">Contact</a>
   {#if !hasAccount}
-    <a href="./signUp"><User size={20}/> <span class="ml-2">Sign Up</span></a>
-    <a href="./login"><LogIn size={20}/> <span class="ml-2">login</span></a>
+    <a href="./signUp" class="flex"><User size={20}/> <span class="ml-2">Sign Up</span></a>
+    <a href="./login" class="flex"><LogIn size={20}/> <span class="ml-2">login</span></a>
   {/if}
 {/snippet}
 
