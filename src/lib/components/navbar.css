@@ -2,8 +2,7 @@
   .navbar {
     background-color: var(--primary-color);
     color: white;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding: 1rem;
   }
   .container {
     max-width: 1200px;
