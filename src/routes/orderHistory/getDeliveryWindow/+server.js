@@ -11,6 +11,7 @@ export async function POST({ request }) {
       version: ServerApiVersion.v1,
       strict: true,
       deprecationErrors: true,
+      ssl: true
     },
   });
 
