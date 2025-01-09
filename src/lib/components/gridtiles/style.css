@@ -13,7 +13,7 @@
   background-color: #f0f0f0;
   border-radius: 8px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  aspect-ratio: 1 / 1.2;  /* Slightly taller to accommodate text */
+  /* aspect-ratio: 1 / 1.2;  Slightly taller to accommodate text */
 }
 
 .tile:hover {
