@@ -59,6 +59,31 @@
             console.error('Error:', error);
         }
     }
+
+    async function insertIntoMongoDB() {
+        const contenteditableElements = document.querySelectorAll('[contenteditable]');
+        const institute = Array.from(contenteditableElements).map((element) => (
+            element.innerText.trim()
+        ));
+        institute.push(fileName);
+
+        try {
+            let response = await fetch('/instituteCRUD/insertMongoDB', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ institute }),
+            });
+            if (response.ok) {
+                alert('Data inserted successfully into MongoDB!');
+            } else {
+                alert('Failed to insert data into MongoDB!');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
 </script>
 
 <main class="p-6 bg-gray-100 min-h-screen flex justify-center items-center">
@@ -124,6 +149,11 @@
             <div class="card-actions flex justify-end">
                 <button class="btn btn-primary" onclick={insertIntoAlgolia}>
                     Save Details
+                </button>
+            </div>
+            <div class="card-actions flex justify-end">
+                <button class="btn btn-primary" onclick={insertIntoMongoDB}>
+                    Save Details on Mongodb
                 </button>
             </div>
         </div>
