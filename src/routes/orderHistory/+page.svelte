@@ -103,7 +103,7 @@
               {:then deliveryWindow}
                 {#if deliveryWindow}
                   <span>{deliveryWindow.slot[0] }</span> -
-                  <span>{(deliveryWindow.slot[1])}</span>
+                  <span>{deliveryWindow.slot[1]}</span>
                 {:else}
                   <span>No delivery window found</span>
                 {/if}
