@@ -75,6 +75,16 @@
               <img loading="lazy" src={product.img} alt={product.name} />
             </div>
             <h2>{product.name}</h2>
+            <div class="join">
+              <div class="discount">
+                ₹{product.currentPrice}
+              </div>
+              <div class="MRP">
+                <del>MRP ₹{product.previousPrice} </del>
+              </div>
+              <div class="shimmer"></div>
+            </div>
+            
           </a>
         </div>
       {/each}
