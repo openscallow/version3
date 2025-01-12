@@ -9,11 +9,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
-  background-color: #f0f0f0;
+  background-color: white;
   border-radius: 8px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   aspect-ratio: 1 / 1.2;  /* Slightly taller to accommodate text */
+  border: 1px black solid;
+  overflow: hidden;
+  padding: 4px;
 }
 
 .tile:hover {
@@ -39,8 +41,8 @@
   overflow: hidden;
   width: 100%;
   height: 0;
-  padding-bottom: 80%;  /* Reduced to leave space for text */
   position: relative;
+  background-color: white;
 }
 
 .image-container img {
@@ -66,33 +68,22 @@
 }
 .join{
   display: flex;
-  /* flex-direction: column; */
-  border: 2px solid rgba(0, 0, 0, 0.8);
   border-radius: 0.125rem;
   overflow: hidden;
-  margin-top: 0.5rem;
   position: relative;
+  border: 1px solid #1a202c;
 }
 
 .discount{
   color: white;
   background-color: rgba(255, 0, 0, 0.9);
   flex-grow: 1;
-  /* border-radius: 0.125rem; */
-  /* border-top-right-radius: 0.125rem; */
-  /* border-top-left-radius: 0.125rem; */
 }
 .MRP{
-  padding-top: 2px;
-  padding-bottom: 2px;
   color: white;
   flex-grow: 1;
   background-color: rgba(255, 255, 0, 0.9);
   color: black;
-  /* margin-top: 0.5rem; */
-  /* border-radius: 0.125rem; */
-  /* border-bottom-right-radius: 0.125rem; */
-  /* border-bottom-left-radius: 0.125rem; */
 }
 .shimmer {
   position: absolute;
