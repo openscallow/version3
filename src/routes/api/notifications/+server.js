@@ -37,3 +37,33 @@ export async function GET({ url }) {
         return new Response(JSON.stringify({ error: error.message || 'Internal server error' }), { status: 500 });
     }
 }
+
+export async function PATCH({ request }) {
+    try {
+        const { notificationIds } = await request.json();
+
+        if (!notificationIds || !Array.isArray(notificationIds) || notificationIds.length === 0) {
+            return new Response(JSON.stringify({ error: 'notificationIds is required and must be a non-empty array' }), { status: 400 });
+        }
+
+        const query = `
+            UPDATE notifications
+            SET status = 'read'
+            WHERE id = ANY($1::int[])
+            AND status = 'unread'
+            RETURNING id, status;
+        `;
+        const result = await pool.query(query, [notificationIds]);
+
+        return new Response(
+            JSON.stringify({
+                message: 'Notifications updated successfully',
+                updatedNotifications: result.rows,
+            }),
+            { status: 200 }
+        );
+    } catch (error) {
+        console.error('Error updating notifications:', error);
+        return new Response(JSON.stringify({ error: error.message || 'Internal server error' }), { status: 500 });
+    }
+}
