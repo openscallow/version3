@@ -56,7 +56,7 @@
             
             {#each notifications as notification, index}
             {#if notification.status === 'unread'}
-            <div class="indicator w-96">
+            <div class="indicator w-full">
                 <span class="indicator-item indicator-center badge badge-primary">new</span>
                 {@render Notification(notification, index)}
               </div>

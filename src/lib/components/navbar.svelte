@@ -1,18 +1,35 @@
 <script lang="ts">
+  import {fetchNotifications} from '$lib/utils/fetchNotifications'
+  import {customerId} from '$lib/utils/customerCorrelated'
   import { onMount } from 'svelte';
   import '../../app.css';
   import '@tailwind';
   import './navbar.css';
-  import { House, ShoppingBag, HandCoins, LogIn, User } from 'lucide-svelte';
+  import { House, ShoppingBag, HandCoins, LogIn, User, Bell, BellDot } from 'lucide-svelte';
 
   // State variables
   let isSidebarOpen = $state(false);
   let hasAccount = $state(false);
+  let notifications = $state([]);
 
   // Lifecycle method
-  onMount(() => {
+  onMount(async() => {
     hasAccount = Boolean(localStorage.getItem('customer_correlated'));
+    notifications = await getNotifications(customerId());
   });
+  
+  async function getNotifications(customerId: string) {
+    try {
+      const notifications = await fetchNotifications({
+        baseUrl: '/api/notifications',
+        customerId: customerId,
+        status: 'unread',
+      });
+      return notifications; 
+    } catch (error) {
+      console.error('Error:', (error as Error).message);
+    }
+  }
 </script>
 
 <!-- Navigation Links -->
@@ -21,6 +38,15 @@
   {#if hasAccount}
     <a href="./orderHistory" class="flex"><ShoppingBag size={20}/> <span class="ml-2"> Orders</span></a>
     <a href="./coins" class="flex"><HandCoins size={20}/> <span class="ml-2">Coins</span></a>
+    {#if notifications.length > 0}
+      <div class="indicator">
+        <span class="indicator-item badge bg-red-500 text-white">99+</span>
+        <a href="./notification" class="flex"><BellDot size={20} color="yellow"/> <span class="ml-2">Notification</span></a>
+      </div>
+      
+    {:else}
+      <a href="./notification" class="flex"><BellDot size={20}/> <span class="ml-2">Notification</span></a>
+    {/if}
   {/if}
   <a href="/blog">Blog</a>
   <a href="/about">About</a>
