@@ -1,14 +1,13 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import '../../app.css';
-  
   import '@tailwind';
   import './navbar.css';
   import { House, ShoppingBag, HandCoins, LogIn, User } from 'lucide-svelte';
 
   // State variables
-  let isSidebarOpen : boolean= $state(false);
-  let hasAccount : boolean = $state(false);
+  let isSidebarOpen = $state(false);
+  let hasAccount = $state(false);
 
   // Lifecycle method
   onMount(() => {
