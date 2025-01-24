@@ -1,5 +1,6 @@
 <script lang="ts">
     import {fetchNotifications} from '$lib/utils/fetchNotifications'
+    import {patchNotifications} from '$lib/utils/patchNotifications'
     import {customerId} from '$lib/utils/customerCorrelated'
     import { onMount } from 'svelte'
     import '@tailwind'
@@ -14,8 +15,7 @@
         try {
             const notifications = await fetchNotifications({
                 baseUrl: '/api/notifications',
-                customerId: customerId,
-                status: 'unread',
+                customerId: customerId
             });
             return notifications; 
         } catch (error) {
@@ -23,7 +23,7 @@
         }
     }
 
-    function showMessage(index: number) {
+    async function showMessage(index: number) {
         if (typeof window !== 'undefined' && window.localStorage) {
             console.log(index);
             document.getElementById('title').innerHTML = notifications[index].title;
@@ -33,6 +33,12 @@
                 console.log(notifications[index].metadata.link);
             }
             document.getElementById('my_modal_5').showModal();
+
+            let updateStatus = await patchNotifications({
+                baseUrl: '/api/notifications',
+                notificationIds: [notifications[index].id]
+            });
+            
         }
         
     }

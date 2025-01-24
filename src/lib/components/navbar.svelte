@@ -10,7 +10,7 @@
   // State variables
   let isSidebarOpen = $state(false);
   let hasAccount = $state(false);
-  let notifications = $state([]);
+  let notifications: any = $state([]);
 
   // Lifecycle method
   onMount(async() => {
@@ -40,7 +40,7 @@
     <a href="./coins" class="flex"><HandCoins size={20}/> <span class="ml-2">Coins</span></a>
     {#if notifications.length > 0}
       <div class="indicator">
-        <span class="indicator-item badge bg-red-500 text-white">99+</span>
+        <span class="indicator-item badge bg-red-500 text-white">{notifications.length}</span>
         <a href="./notification" class="flex"><BellDot size={20} color="yellow"/> <span class="ml-2">Notification</span></a>
       </div>
       
