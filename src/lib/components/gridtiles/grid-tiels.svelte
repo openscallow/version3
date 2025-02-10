@@ -3,6 +3,7 @@
   import { onMount } from 'svelte';
   import { getProductsWithCache } from './cacheUtils.js';
   import '$lib/components/gridtiles/style.css'
+  import RecentDrops from '$lib/components/recentDrops.svelte';
 
   let products = $state([]);
   let error = $state(null);
@@ -64,10 +65,12 @@
   }
   </script>
   
+  <RecentDrops />
   <div class="container" bind:this={container}>
     {#if error}
     <p aria-live="polite">{error ? `Error: ${error}` : 'Loading...'}</p>
     {:else}
+    
       {#each products as product (getUniqueKey(product))}
         <div class="tile">
           <a href={"/"+ product.id} rel="noopener noreferrer">
@@ -84,7 +87,6 @@
               </div>
               <div class="shimmer"></div>
             </div>
-            
           </a>
         </div>
       {/each}

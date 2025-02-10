@@ -40,24 +40,24 @@ export async function POST({ request }) {
 
     // Construct the record for insertion, converting numeric fields as needed.
     const record = {
-      "Product Name": product["Product Name"],
-      "Category": product["Category"],
-      "Brand": product["Brand"],
-      "Description": product["Description"],
-      "Color": product["Color"] || "",
-      "Size/Dimensions": product["Size/Dimensions"] || "",
-      "Material": product["Material"] || "",
-      "Weight": product["Weight"] || "",
-      "MRP": parseFloat(product["MRP"]),
-      "Current Price": parseFloat(product["Current Price"]),
-      "Stock Availability": parseInt(product["Stock Availability"], 10),
-      "Images": Array.isArray(product["Images"])
+      productName: product["Product Name"],
+      category: product["Category"],
+      brand: product["Brand"],
+      description: product["Description"],
+      color: product["Color"] || "",
+      sizeAndDimensions: product["Size/Dimensions"] || "",
+      material: product["Material"] || "",
+      weight: product["Weight"] || "",
+      MRP: parseFloat(product["MRP"]),
+      currentPrice: parseFloat(product["Current Price"]),
+      stockAvailability: parseInt(product["Stock Availability"], 10),
+      images: Array.isArray(product["Images"])
         ? product["Images"].filter((url) => url.trim() !== '')
         : [],
-      "Tags": Array.isArray(product["Tags"])
+      tags: Array.isArray(product["Tags"])
         ? product["Tags"].filter((tag) => tag.trim() !== '')
         : [],
-      "Related Products": Array.isArray(product["Related Products"])
+      relatedProducts: Array.isArray(product["Related Products"])
         ? product["Related Products"].filter((id) => id.trim() !== '')
         : []
     };
