@@ -1,6 +1,5 @@
 <script lang="ts">
     import { onMount } from 'svelte';
-    import Trending from '$lib/components/trending.svelte';
     import '@tailwind'
   
     // Define the Product type matching the new schema
@@ -27,7 +26,6 @@
   
     // Initialize products array
     let products: Product[] = $state([]);
-    let key = $state();
 
   
     // Fetch six new products from your custom endpoint
@@ -45,7 +43,6 @@
         
         // Expecting the response to be in the format: { products: [...] }
         products = data.products;
-        key = true;
       } catch (error) {
         console.error('Error fetching products:', error);
       }
@@ -54,16 +51,16 @@
     // Call fetchProducts when the component mounts
     onMount(fetchProducts);
 
-  
-   
-
-
    
   </script>
-<h2 class="text-3xl font-bold ml-4 text-gray-800">New Arrivals</h2>
+<h2 class="text-3xl font-bold ml-4 text-gray-800">Trending</h2>
 <div class="grid gap-4 p-4 grid-cols-2 md:grid-cols-[repeat(auto-fill,minmax(100px,200px))]">
     {#if products.length > 0}
-      {#each products as product}
+      {#each products as product, index}
+      {#if index === 5}
+      <span class="product_sentinel hidden"></span>
+      {/if}
+      
       <div class="flex flex-col items-center bg-white rounded-lg transition-transform duration-300 ease-in-out shadow-sm aspect-[1/1.2] border border-black overflow-hidden p-1">
         <a class="no-underline text-inherit text-center flex flex-col w-full h-full" href={"/"+ product._id} rel="noopener noreferrer">
           <div class="flex-1 flex items-center justify-center overflow-hidden w-full h-0 relative bg-white">
@@ -117,8 +114,4 @@
   }   
 </style>
 
-  <br>
-
-{#if key}
-<Trending />
-{/if}
+  
