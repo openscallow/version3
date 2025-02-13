@@ -5,10 +5,11 @@ dotenv.config();
 import { MongoClient, ServerApiVersion } from 'mongodb';
 
 const uri = env.MONGODBCLUSTER0 || process.env.MONGODBCLUSTER0;
+console.log('uri:', uri);
 
 export async function GET() {
     console.log('inside recentDrops');
-  const client = new MongoClient(uri, {
+    const client = new MongoClient(uri, {
     serverApi: {
       version: ServerApiVersion.v1,
       strict: true,

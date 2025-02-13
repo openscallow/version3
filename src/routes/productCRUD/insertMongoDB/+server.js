@@ -48,7 +48,7 @@ export async function POST({ request }) {
       sizeAndDimensions: product["Size/Dimensions"] || "",
       material: product["Material"] || "",
       weight: product["Weight"] || "",
-      MRP: parseFloat(product["MRP"]),
+      mrp: parseFloat(product["MRP"]),
       currentPrice: parseFloat(product["Current Price"]),
       stockAvailability: parseInt(product["Stock Availability"], 10),
       images: Array.isArray(product["Images"])
