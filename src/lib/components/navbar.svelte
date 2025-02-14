@@ -34,26 +34,26 @@
 
 <!-- Navigation Links -->
 {#snippet navigationLinks()}
-  <a href="./" class="flex"><House size={20}/> <span class="ml-2">Home</span></a>
+  <a href="/" class="flex"><House size={20}/> <span class="ml-2">Home</span></a>
   {#if hasAccount}
-    <a href="./orderHistory" class="flex"><ShoppingBag size={20}/> <span class="ml-2"> Orders</span></a>
-    <a href="./coins" class="flex"><HandCoins size={20}/> <span class="ml-2">Coins</span></a>
+    <a href="/orderHistory" class="flex"><ShoppingBag size={20}/> <span class="ml-2"> Orders</span></a>
+    <a href="/coins" class="flex"><HandCoins size={20}/> <span class="ml-2">Coins</span></a>
     {#if notifications.length > 0}
       <div class="indicator">
         <span class="indicator-item badge bg-red-500 text-white">{notifications.length}</span>
-        <a href="./notification" class="flex"><BellDot size={20} color="yellow"/> <span class="ml-2">Notification</span></a>
+        <a href="/notification" class="flex"><BellDot size={20} color="yellow"/> <span class="ml-2">Notification</span></a>
       </div>
       
     {:else}
-      <a href="./notification" class="flex"><BellDot size={20}/> <span class="ml-2">Notification</span></a>
+      <a href="/notification" class="flex"><BellDot size={20}/> <span class="ml-2">Notification</span></a>
     {/if}
   {/if}
   <a href="/blog">Blog</a>
   <a href="/about">About</a>
   <a href="/contact">Contact</a>
   {#if !hasAccount}
-    <a href="./signUp" class="flex"><User size={20}/> <span class="ml-2">Sign Up</span></a>
-    <a href="./login" class="flex"><LogIn size={20}/> <span class="ml-2">login</span></a>
+    <a href="/signUp" class="flex"><User size={20}/> <span class="ml-2">Sign Up</span></a>
+    <a href="/login" class="flex"><LogIn size={20}/> <span class="ml-2">login</span></a>
   {/if}
 {/snippet}
 
