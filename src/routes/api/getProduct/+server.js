@@ -5,7 +5,6 @@ dotenv.config();
 import { MongoClient, ServerApiVersion, ObjectId } from 'mongodb';
 
 const uri = env.MONGODBCLUSTER0 || process.env.MONGODBCLUSTER0;
-console.log('uri:', uri);
 
 export async function GET({ url }) {
     const productId = url.searchParams.get('productid');
