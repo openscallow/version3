@@ -28,7 +28,7 @@
   
     // Initialize products array
     let products: Product[] = $state([]);
-    let key = $state();
+    let key: Boolean = $state(false);
 
   
     // Fetch six new products from your custom endpoint
@@ -54,11 +54,6 @@
   
     // Call fetchProducts when the component mounts
     onMount(fetchProducts);
-
-  
-   
-
-
    
   </script>
 <h2 class="text-3xl font-bold ml-4 text-gray-800">New Arrivals</h2>

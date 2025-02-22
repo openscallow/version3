@@ -1,8 +1,6 @@
 <script lang="ts">
-    import '@tailwind'
     import { onMount } from 'svelte';
-    import FlashDeals from './flashDeals.svelte';
-    
+    import '@tailwind'
   
     // Define the Product type matching the new schema
     type Product = {
@@ -28,14 +26,14 @@
   
     // Initialize products array
     let products: Product[] = $state([]);
-    let key: Boolean = $state(false);
 
+  
     // Fetch six new products from your custom endpoint
     async function fetchProducts() {
         console.log("fetching products")
       try {
         // Use your custom API endpoint that retrieves new products from MongoDB
-        const response = await fetch('/api/trending');
+        const response = await fetch('/api/flashDeals');
         console.log("resquested")
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -45,7 +43,6 @@
         
         // Expecting the response to be in the format: { products: [...] }
         products = data.products;
-        key = true;
       } catch (error) {
         console.error('Error fetching products:', error);
       }
@@ -56,7 +53,7 @@
 
    
   </script>
-<h2 class="text-3xl font-bold ml-4 text-gray-800">Trending</h2>
+<h2 class="text-3xl font-bold ml-4 text-gray-800">FlashDeals</h2>
 <div class="grid gap-4 p-4 grid-cols-2 md:grid-cols-[repeat(auto-fill,minmax(100px,200px))]">
     {#if products.length > 0}
       {#each products as product, index}
@@ -116,7 +113,5 @@
     }
   }   
 </style>
-<br>
-{#if key}
-<FlashDeals />
-{/if}
+
+  

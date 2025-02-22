@@ -51,6 +51,8 @@ export async function POST({ request }) {
       mrp: parseFloat(product["MRP"]),
       currentPrice: parseFloat(product["Current Price"]),
       stockAvailability: parseInt(product["Stock Availability"], 10),
+      viewCount: 0,
+      purchaseCount: 0,
       images: Array.isArray(product["Images"])
         ? product["Images"].filter((url) => url.trim() !== '')
         : [],
