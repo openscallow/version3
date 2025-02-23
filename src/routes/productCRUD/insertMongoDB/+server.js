@@ -53,6 +53,7 @@ export async function POST({ request }) {
       stockAvailability: parseInt(product["Stock Availability"], 10),
       viewCount: 0,
       purchaseCount: 0,
+      isNew:true,
       images: Array.isArray(product["Images"])
         ? product["Images"].filter((url) => url.trim() !== '')
         : [],
