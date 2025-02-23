@@ -62,7 +62,7 @@
             <div class="swiper-slide p-0 rounded-sm my-2">
               <div class="tile mt-2">
                 <a 
-                  href="/{item.id}" 
+                  href="/{item.name.replaceAll(" ","-").replaceAll(".", "-")}/product/{item.id}" 
                   rel="noopener noreferrer"
                   class="block"
                 >
