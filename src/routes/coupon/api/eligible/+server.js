@@ -10,17 +10,16 @@ export async function POST({ request }) {
     }
 
     // SQL query to check if the coupon exists and is active
-    const query = `
-      SELECT customer_id, promo_code FROM customerOrders
-      WHERE customer_id = $1 AND promo_code = $2`;
+    const query = `SELECT * FROM can_customer_use_coupon($1, $2)`;
     
-    const { rows } = await pool.query(query, [i, coupon]);
+    const { rows } = await pool.query(query, [coupon, i]);
+    console.log(rows);
 
     // Check if a matching and active coupon was found
     if (rows.length === 0) {
-      return new Response('customer is eligible to use promo code', { status: 200 });
+      return new Response('customer is not eligible to use promo code', { status: 404 });
     }else{
-        return new Response('customer is eligible to use promo code', { status: 404 });
+        return new Response(JSON.stringify(rows[0]), { status: 200 });
     }
 
   } catch (error) {

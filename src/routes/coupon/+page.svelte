@@ -24,13 +24,20 @@ onMount(() => {
 });
 
 async function redeemCoupon() {
-    if (await isCoupon()) {
         let customer_correlated = JSON.parse(localStorage.getItem('customer_correlated') || '{}');
         let i = customer_correlated?.i;
+        coupon = document.getElementById('couponCode').value;
         if (!i) {
             resetSessionAndButtons();
             return false;
         }
+
+        if(!coupon){
+            resetSessionAndButtons();
+            return false;
+        }
+
+        sessionStorage.setItem('coupon', coupon)
 
         try {
             let response = await fetch('./coupon/api/eligible', {
@@ -40,10 +47,17 @@ async function redeemCoupon() {
             });
 
             if (response.ok) {
-                if (sessionStorage.getItem('discount_percentage')) {
-                    code_discount = `${sessionStorage.getItem('discount_percentage')}%`;
-                } else if (sessionStorage.getItem('discountamount')) {
-                    code_discount = `₹${sessionStorage.getItem('discountamount')}`;
+                let {is_eligible, discount_amount, discount_percentage} = await response.json();
+                if(is_eligible){
+                    // Used ternary operator 
+                    code_discount = discount_percentage ?  `${discount_percentage}%` : `₹${discount_amount}`;
+
+                    sessionStorage.setItem('discountamount', discount_amount)
+                    sessionStorage.setItem('discount_percentage', discount_percentage)
+
+                }
+                else{
+                    resetSessionAndButtons();
                 }
                 btnsummary.disabled = false;
                 btnApply.disabled = false;
@@ -53,40 +67,7 @@ async function redeemCoupon() {
         } catch (error) {
             console.error("Error during coupon redemption:", error);
             resetSessionAndButtons();
-        }
-    } else {
-        resetSessionAndButtons();
-    }
-}
-
-async function isCoupon() {
-    coupon = document.getElementById('couponCode')?.value;
-
-    try {
-        let response = await fetch('./coupon/api/validate-coupon', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ coupon })
-        });
-
-        if (response.ok) {
-            let { discountamount, discount_percentage } = await response.json();
-            if (discount_percentage) {
-                sessionStorage.setItem("discount_percentage", discount_percentage);
-            } else {
-                sessionStorage.setItem("discountamount", discountamount);
-            }
-            sessionStorage.setItem('coupon', coupon);
-            return true;
-        } else {
-            resetSessionAndButtons();
-            return false;
-        }
-    } catch (error) {
-        console.error("Error during coupon validation:", error);
-        resetSessionAndButtons();
-        return false;
-    }
+        }  
 }
 </script>
 <div class="m-2 flex flex-col items-center border-b bg-white/40 backdrop-blur-md shadow-sm  py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
