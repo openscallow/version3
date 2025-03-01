@@ -47,12 +47,13 @@ async function redeemCoupon() {
             });
 
             if (response.ok) {
-                let {is_eligible, discount_amount, discount_percentage} = await response.json();
+                let {is_eligible, discount_amount, discount_percentage, assignment_id} = await response.json();
                 if(is_eligible){
                     // Used ternary operator 
                     code_discount = discount_percentage ?  `${discount_percentage}%` : `₹${discount_amount}`;
 
                     sessionStorage.setItem('discountamount', discount_amount)
+                    sessionStorage.setItem('assignment_id', assignment_id)
                     sessionStorage.setItem('discount_percentage', discount_percentage)
 
                 }

@@ -18,6 +18,8 @@
     let promo_code = $state(null)
     let promo_code_val = $state(null)
     let payment_method = $state()
+    let assignment_id = $state()
+    let loading = $state(false)
 
     onMount(()=>{
       customer_correlated = JSON.parse(localStorage.getItem('customer_correlated'))
@@ -34,6 +36,7 @@
     onMount(()=>{
       if(sessionStorage.getItem('discount_percentage') || sessionStorage.getItem('discountamount')){
         promo_code = sessionStorage.getItem('coupon')
+        assignment_id = sessionStorage.getItem('assignment_id')
         if (sessionStorage.getItem('discount_percentage')){
           promo_code_val = sessionStorage.getItem('discount_percentage')
           total_amount = Math.floor(subtotal  - (subtotal * (promo_code_val/100)) - discount_amount)
@@ -51,6 +54,7 @@
     async function listOrder() {
       let btn = document.getElementById('btn')
       btn.disabled = true;
+      loading = true
       payment_method = (document.getElementById('radio_1').checked ? 1 : 2)
       try {
         let response = await fetch('./checkout/component',{
@@ -62,16 +66,38 @@
         })
 
         if(response.status === 200){
-          sessionStorage.removeItem('discountamount')
-          sessionStorage.removeItem('discount_percentage')
-          sessionStorage.removeItem('coupon')
-          window.location.href = '/'
+          if(promo_code){
+            updateCoponUsage()
+          }
+          else{
+            sessionStorage.removeItem('discountamount')
+            sessionStorage.removeItem('discount_percentage')
+            sessionStorage.removeItem('coupon')
+            window.location.href = '/'
+          }
         }
         let data = await response.text()
         console.log(data)
       } catch (error) {
         console.log("something went wrong")
       }
+    }
+
+    function updateCoponUsage(){
+      fetch('/api/couponUsageUpdate',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({assignment_id})
+      }).then(res => {
+        if(res.status === 200){
+          sessionStorage.removeItem('discountamount')
+          sessionStorage.removeItem('discount_percentage')
+          sessionStorage.removeItem('coupon')
+          window.location.href = '/'
+        }
+      })
     }
 </script>
 
@@ -186,6 +212,10 @@
           <p class="text-2xl font-semibold text-gray-900">₹{total_amount}</p>
         </div>
       </div>
-      <button id="btn" onclick={()=>{listOrder()}} class="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white">Place Order</button>
+      <button id="btn" onclick={()=>{listOrder()}} class="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white">
+        {#if loading}
+        <span class="loading loading-spinner loading-md"></span>
+        {/if}
+        Place Order</button>
     </div>
   </div>
