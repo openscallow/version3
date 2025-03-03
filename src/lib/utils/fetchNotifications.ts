@@ -49,18 +49,14 @@ export async function fetchNotifications({
             method: 'GET',
         });
 
-        // Check if the response is successful
         if (!response.ok) {
-            // Parse and throw an error with more detailed information
             const errorData = await response.json();
             throw new Error(errorData.error || 'Failed to fetch notifications');
         }
 
-        // Parse the response JSON into an array of Notification objects
         const notifications: Notification[] = await response.json();
         return notifications;
     } catch (error) {
-        // Log and rethrow any errors that occur during the fetch process
         console.error('Error fetching notifications:', error);
         throw error;
     }

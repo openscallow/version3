@@ -25,18 +25,14 @@ export async function patchNotifications({
             body: JSON.stringify({ notificationIds }),
         });
 
-        // Check if the response is successful
         if (!response.ok) {
-            // Parse and throw an error with more detailed information
             const errorData = await response.json();
             throw new Error(errorData.error || 'Failed to update notifications');
         }
 
-        // Parse the response JSON into an array of updated notification objects
         const updatedNotifications: { id: number; status: 'read' }[] = await response.json();
         return updatedNotifications;
     } catch (error) {
-        // Log and rethrow any errors that occur during the patch process
         console.error('Error updating notifications:', error);
         throw error;
     }
