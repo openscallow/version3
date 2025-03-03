@@ -24,7 +24,8 @@
   {#if results.length > 0}
     {#each results as result}
       <div class="tile">
-        <a href={"/" + result.id} rel="noopener noreferrer">
+        {result.id}
+        <a href={"/"+ result.name.replaceAll(" ","-").replaceAll(".", "-") + "/product/" + result.id} rel="noopener noreferrer">
           <div class="image-container">
             <img src={result.img} alt={result.name} />
           </div>

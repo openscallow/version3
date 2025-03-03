@@ -76,7 +76,7 @@
     {#if searchResults.length > 0}
       <ul class="results-list">
         {#each searchResults as result}
-          <a href={result.item.id}>
+          <a href={"/"+ result.item.name.replaceAll(" ","-").replaceAll(".", "-") + "/product/" + result.item.id}>
             <li class="result-item">
               <span class="product-name">{result.item.name}</span>
               <span class="company-name">{result.item.company}</span>
