@@ -1,16 +1,26 @@
 <script lang="ts">
-    import {fetchNotifications} from '$lib/utils/fetchNotifications'
+    import '@tailwind';
+    import type { Snippet } from 'svelte';
+    import {fetchNotifications, type FetchNotificationsParams, type Notification} from '$lib/utils/fetchNotifications'
     import {patchNotifications} from '$lib/utils/patchNotifications'
     import {customerId} from '$lib/utils/customerCorrelated'
     import { onMount } from 'svelte'
-    import '@tailwind'
-    let notifications = $state();
     
+    let notifications: Notification[] = $state([]);
+    let isLoading: boolean = $state(true);
+    let error: string = $state('');
+
+    // Fetch notifications for customer and handle loading state
     onMount(async ()=>{
-        notifications = await getNotifications(customerId());
-        console.log(notifications);
+        try {
+            notifications = await getNotifications(customerId()) ?? [];
+        } catch (error) {
+            error = (error as Error).message;
+        } finally {
+            isLoading = false;
+        }
     })
-    
+
     async function getNotifications(customerId: string) {
         try {
             const notifications = await fetchNotifications({
@@ -25,26 +35,33 @@
 
     async function showMessage(index: number) {
         if (typeof window !== 'undefined' && window.localStorage) {
-            console.log(index);
-            document.getElementById('title').innerHTML = notifications[index].title;
-            document.getElementById('message').innerHTML = notifications[index].message;
-            
-            if(notifications[index].metadata){
-                console.log(notifications[index].metadata.link);
+
+            const titleElement = document.getElementById('title');
+            if(titleElement){
+                titleElement.innerHTML = notifications[index].title;
             }
-            document.getElementById('my_modal_5').showModal();
+            
+            const messageElement = document.getElementById('message');
+            if(messageElement){
+                messageElement.innerHTML = notifications[index].message;
+            }
+
+            const dialog = document.getElementById('my_modal_5') as HTMLDialogElement;
+            if(dialog){
+                dialog.showModal();
+            }
 
             let updateStatus = await patchNotifications({
                 baseUrl: '/api/notifications',
                 notificationIds: [notifications[index].id]
             });
-            
+
         }
-        
+
     }
 </script>
-{#snippet Notification(notification, index)}
-<div class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-md transition-shadow duration-300 hover:shadow-lg" onclick={()=>showMessage(index)}>
+{#snippet Notification(notification: Notification, index: number)}
+<button type="button" class="flex w-full items-start gap-4 rounded-lg bg-white p-6 shadow-md transition-shadow duration-300 hover:shadow-lg" onclick={()=>showMessage(index)}>
     <img 
         src="https://png.pngtree.com/png-clipart/20220603/original/pngtree-50-discount-speed-style-shape-png-image-png-image_7886991.png" 
         class="h-12 w-12 rounded-full" 
@@ -52,14 +69,13 @@
     >
     <div>
         <p class=" line-clamp-2">{@html notification.title}</p>
-        <!-- <p class="mt-1 text-gray-600 line-clamp-2">{@html notification.message}</p> -->
     </div>
-</div>
+</button>
 {/snippet}
 <div class="mx-auto max-w-2xl p-4">
     {#if notifications}
         <div class="space-y-4">
-            
+
             {#each notifications as notification, index}
             {#if notification.status === 'unread'}
             <div class="indicator w-full">
@@ -69,10 +85,9 @@
             {:else}
                 {@render Notification(notification, index)}
             {/if}
-              
+
             {/each}
-                
-        
+
         </div>
     {:else}
         <div class="rounded-lg bg-gray-50 py-12 text-center">
@@ -89,9 +104,9 @@
     <p class="py-4" id="message">Press ESC key or click the button below to close</p>
     <div class="modal-action">
       <form method="dialog">
-        <!-- if there is a button in form, it will close the modal -->
         <button class="btn">Close</button>
       </form>
     </div>
   </div>
 </dialog>
+

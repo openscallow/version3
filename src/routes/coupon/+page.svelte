@@ -37,6 +37,12 @@ async function redeemCoupon() {
             return false;
         }
 
+        if (document.cookie.split(';').some(item => item.trim().startsWith('WELCOME50='))) {
+            console.log('The cookie "WELCOME50" is already set');
+            resetSessionAndButtons();
+            return false;
+        }
+
         sessionStorage.setItem('coupon', coupon)
 
         try {

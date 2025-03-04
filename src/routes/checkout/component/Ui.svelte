@@ -66,10 +66,14 @@
         })
 
         if(response.status === 200){
-          if(promo_code){
+          if(promo_code && promo_code !== 'WELCOME50'){
             updateCoponUsage()
           }
           else{
+            if(promo_code === 'WELCOME50'){
+              document.cookie = "WELCOME50=true; max-age=3600; path=/";
+              console.log('The cookie "WELCOME50" is set');
+            }
             sessionStorage.removeItem('discountamount')
             sessionStorage.removeItem('discount_percentage')
             sessionStorage.removeItem('coupon')
