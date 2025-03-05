@@ -72,7 +72,7 @@
     modules: [Navigation, FreeMode, Mousewheel],
     loop: false,
     slidesPerView: 2.3,
-    spaceBetween: 3,
+    spaceBetween: 10,
     freeMode: {
       enabled: true,
       sticky: false,
