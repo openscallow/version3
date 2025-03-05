@@ -96,7 +96,7 @@
       <a class="no-underline text-inherit" href=${"/"+ data.productName.replaceAll(" ","-").replaceAll(".", "-") + "/product/" + data._id} target="_blank">
         <div class="flex w-52 flex-col gap-4">
           <img src=${data.images[0]} alt="Product Image" class="w-full h-32 object-contain rounded-sm" />
-          <p class="text-sm font-semibold leading-3 whitespace-normal">${data.productName}</p>
+          <p class="text-sm font-semibold whitespace-normal">${data.productName}</p>
           <div class="flex items-center gap-1">
             <p class="text-sm leading-3 border-r-2 pr-1 border-indigo-500">&#8377;${data.currentPrice}</p>
             <del class="text-xs leading-3">M.R.P: &#8377;${data.mrp}</del>
