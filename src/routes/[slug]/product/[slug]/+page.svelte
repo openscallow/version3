@@ -9,8 +9,11 @@
   import plus from '$lib/images/icon-plus.svg';
   import Slider from '$lib/components/productSlider/slider.svelte';
   import '@tailwind'
+  import Swiper from 'swiper/bundle';
+  import { Navigation, FreeMode, Mousewheel } from 'swiper/modules';
 
   let { data } = $props();
+  console.log(data)
   
   // Map new data structure to existing variable names
   let productName = data.productName;
@@ -57,9 +60,74 @@
       image: images[0], // Using first image as thumbnail
       price: currentPrice,
     });
+
+    const swiper = new Swiper('.swiper', swiperConfig);
   });
 
   let thumbImage = images[0]; // Using first image as thumbnail
+
+  //swiper 
+
+  const swiperConfig = {
+    modules: [Navigation, FreeMode, Mousewheel],
+    loop: false,
+    slidesPerView: 2.3,
+    spaceBetween: 3,
+    freeMode: {
+      enabled: true,
+      sticky: false,
+      momentumRatio: 0.25,
+      momentumVelocityRatio: 0.5,
+    },
+    grabCursor: true,
+    mousewheel: true,
+    breakpoints: {
+      1024: {
+        slidesPerView: 6,
+        spaceBetween: 10,
+      },
+    },
+  };
+
+  function updateRelativeProduct(id : number, data: any){
+    let product = document.querySelector(`.productId${id}`);
+    if(product){
+      product.innerHTML = `
+      <a href=${"/"+ data.productName.replaceAll(" ","-").replaceAll(".", "-") + "/product/" + data._id} target="_blank">
+        <div class="flex w-52 flex-col gap-4">
+          <img src=${data.images[0]} alt="Product Image" class="w-full h-32 object-contain rounded-sm" />
+          <p class="text-sm font-semibold leading-3">${data.productName}</p>
+          <div class="flex items-center gap-1">
+            <p class="text-sm leading-3 border-r-2 pr-1 border-indigo-500">&#8377;${data.currentPrice}</p>
+            <del class="text-xs leading-3">M.R.P: &#8377;${data.mrp}</del>
+          </div>
+          <div class="text-xs p-1 rounded-full border w-fit border-black"> ${data.brand} </div>
+        </div>
+      </a>
+      `;
+    }
+  }
+
+
+  async function fetchRelativeProduct(productId : any){
+    try {
+            const response = await fetch(`/api/getProduct?productid=${productId}`);
+            if (!response.ok) throw new Error('Failed to fetch product');
+            
+            const data = await response.json();
+            updateRelativeProduct(productId, data.product);
+         
+        } catch (error) {
+            console.error('Error fetching product:', error);
+            
+        }
+  }
+
+  onMount(() => {
+    data.relatedProducts.forEach((productId: any) => {
+      fetchRelativeProduct(productId)
+    });
+  });
 </script>
 
 <main class="main">
@@ -114,3 +182,30 @@
   </div>
 </section>
 </main>
+
+<h1 class="text-left text-lg">Related Products</h1>
+<div class="swiper bg-white">
+  <div class="swiper-wrapper">
+    {#each data.relatedProducts as productId}
+    <div class="swiper-slide productId{productId}">
+      <div class="flex w-52 flex-col gap-4">
+        <div class="skeleton h-32 w-full"></div>
+        <div class="skeleton h-4 w-28"></div>
+        <div class="skeleton h-4 w-full"></div>
+        <div class="skeleton h-4 w-full"></div>
+      </div>
+    </div>
+    {/each}
+  </div>
+</div>
+
+<br>
+<br>
+
+
+  <!--swiper is changing style via js so we have to implement here  -->
+<style>
+  .swiper{
+    padding:10px;
+  }
+</style>
