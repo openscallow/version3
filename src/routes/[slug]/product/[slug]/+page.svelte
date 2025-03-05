@@ -210,6 +210,7 @@
   }
 
   .swiper-slide{
-    margin-right: 10px;
+    padding-right: 10px;
+    
   }
 </style>
