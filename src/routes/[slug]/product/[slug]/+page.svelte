@@ -208,4 +208,8 @@
   .swiper{
     padding:10px;
   }
+
+  .swiper-slide{
+    margin-right: 10px;
+  }
 </style>
