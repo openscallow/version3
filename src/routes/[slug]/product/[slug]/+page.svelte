@@ -182,8 +182,7 @@
   </div>
 </section>
 </main>
-
-<h1 class="text-left text-lg">Related Products</h1>
+<h1 class="text-left text-lg font-bold mb-4 mt-8 pl-4">Related Products</h1>
 <div class="swiper bg-white">
   <div class="swiper-wrapper">
     {#each data.relatedProducts as productId}
