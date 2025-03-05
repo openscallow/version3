@@ -71,7 +71,7 @@
   const swiperConfig = {
     modules: [Navigation, FreeMode, Mousewheel],
     loop: false,
-    slidesPerView: 2.3,
+    slidesPerView: 2,
     spaceBetween: 10,
     freeMode: {
       enabled: true,
@@ -187,7 +187,7 @@
 <div class="swiper bg-white">
   <div class="swiper-wrapper">
     {#each data.relatedProducts as productId}
-    <div class="swiper-slide productId{productId}">
+    <div class="swiper-slide productId{productId} ">
       <div class="flex w-52 flex-col gap-4">
         <div class="skeleton h-32 w-full"></div>
         <div class="skeleton h-4 w-28"></div>
