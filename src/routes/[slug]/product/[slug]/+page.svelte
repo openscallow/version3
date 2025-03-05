@@ -71,8 +71,8 @@
   const swiperConfig = {
     modules: [Navigation, FreeMode, Mousewheel],
     loop: false,
-    slidesPerView: 2,
-    spaceBetween: 10,
+    slidesPerView: 1.8,
+    spaceBetween: 2,
     freeMode: {
       enabled: true,
       sticky: false,
