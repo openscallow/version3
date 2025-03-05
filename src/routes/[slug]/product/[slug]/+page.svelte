@@ -93,7 +93,7 @@
     let product = document.querySelector(`.productId${id}`);
     if(product){
       product.innerHTML = `
-      <a href=${"/"+ data.productName.replaceAll(" ","-").replaceAll(".", "-") + "/product/" + data._id} target="_blank">
+      <a class="no-underline text-inherit" href=${"/"+ data.productName.replaceAll(" ","-").replaceAll(".", "-") + "/product/" + data._id} target="_blank">
         <div class="flex w-52 flex-col gap-4">
           <img src=${data.images[0]} alt="Product Image" class="w-full h-32 object-contain rounded-sm" />
           <p class="text-sm font-semibold leading-3 whitespace-normal">${data.productName}</p>
