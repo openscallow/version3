@@ -11,7 +11,7 @@ export async function POST({ request }) {
         client = await pool.connect();
         console.log("Connection connected successfully");
 
-        const query = `SELECT transaction_type, status, source, created_at FROM coin_transactions WHERE customer_id = $1`;
+        const query = `SELECT  coin_balance, transaction_type, status, source, created_at FROM coin_transactions WHERE customer_id = $1`;
 
       
 

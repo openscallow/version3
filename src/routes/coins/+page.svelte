@@ -8,10 +8,11 @@
     let customer_referral_link = $state()
     onMount(async ()=>{
       if (localStorage.getItem('customer_correlated')) { 
-      
-        let customer_id = JSON.parse(localStorage.getItem('customer_correlated')).i
-        let customer_referral_code = JSON.parse(localStorage.getItem('customer_correlated')).r
-        customer_referral_link = `callow.in/signUp?ref=`+JSON.parse(localStorage.getItem('customer_correlated')).r
+
+        let customer_correlated = JSON.parse(localStorage.getItem('customer_correlated'))
+        let customer_id = customer_correlated.i
+        let customer_referral_code = customer_correlated.r
+        customer_referral_link = `callow.in/signUp?ref=`+customer_referral_code
    
         
         try {
@@ -23,6 +24,8 @@
 
             let data  = await response.json()
             coin_balance = Math.round(data.total_coin_balance)
+            console.log("we are upto the update")
+            setCoinBalance(customer_correlated, coin_balance)
         }catch(error){
         console.log(error)
         }
@@ -41,6 +44,29 @@
         }
       }
     })
+
+    /**
+     * Updates the coin balance in local storage with timestamp validation
+     * @param {number} coin_balance - The new coin balance to be stored
+     * @description Checks if coin balance exists and was updated within last hour (3600000ms)
+     * If balance exists but hasn't been updated in last hour, or if no balance exists,
+     * updates storage with new balance and current timestamp
+     */
+    function setCoinBalance(customer_correlated, coin_balance){
+      if(customer_correlated.cc){
+        let lastUpdated = customer_correlated.cc.U - Date.now()
+        if(lastUpdated > 3600000 ){
+          customer_correlated.cc.U = Date.now()
+          customer_correlated.cc.B = coin_balance
+          localStorage.setItem('customer_correlated', JSON.stringify(customer_correlated))
+        }else{
+          return
+        }
+      }else{
+        customer_correlated.cc = {B: coin_balance, U: Date.now()}
+        localStorage.setItem('customer_correlated', JSON.stringify(customer_correlated))
+      }
+    }
 
     onMount(()=>{
       
@@ -85,14 +111,15 @@
   
   <div class="history px-4">
     {#if referrals}
-      {#each referrals as referral }
-      <div class="collapse collapse-arrow bg-base-200 my-4 rounded-md text-blue-600/75 p-4 " style="background-color: rgb(219 234 254 );">
+      {#each referrals as transaction }
+      <div class="collapse collapse-arrow bg-base-200 my-4 rounded-md text-blue-600/75 p-4" style:background-color={transaction.transaction_type === "EARN" ? "rgb(219 234 254)" : "rgba(255, 0, 0, 0.5)"} 
+      style:color={transaction.transaction_type === "EARN" ? "inherited" : "black"}>
         <input type="radio" name="my-accordion-2" checked="checked" />
-        <div class="collapse-title text-xl font-medium flex gap-3"><UserCheck size={29}/><p><u>{referral.customer_name}</u> joined via your referral </p></div>
+        <div class="collapse-title text-xl font-medium flex gap-3"><UserCheck size={29}/><p><u>{transaction.customer_name}</u> {#if transaction.source === "REFERRAL"} Referral {:else if transaction.source === "PROFILE_UPDATE"} Profile update {:else} Purchase {/if} </p></div>
         <div class="collapse-content">
-          <p>Date: {referral.created_at.split('T')[0]}</p>
-          <p>Earn: 10 coins</p>
-          <p>Status: {referral.status}</p>
+          <p>Date: {transaction.created_at.split('T')[0]}</p>
+          <p>{transaction.transaction_type}: {transaction.coin_balance}</p>
+          <p>Status: {transaction.status}</p>
         </div>
       </div>
       {/each}

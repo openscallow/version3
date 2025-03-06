@@ -19,6 +19,8 @@
     let promo_code_val = $state(null)
     let payment_method = $state()
     let assignment_id = $state()
+    let used_coin = $state()
+    let coin_balance = $state()
     let loading = $state(false)
 
     onMount(()=>{
@@ -51,6 +53,31 @@
       }
     })
 
+    function withoutCoin(){
+      console.log("I am here")
+      
+      if(sessionStorage.getItem('discount_percentage') || sessionStorage.getItem('discountamount')){
+        console.log("I am here 2")
+        promo_code = sessionStorage.getItem('coupon')
+        assignment_id = sessionStorage.getItem('assignment_id')
+        if (sessionStorage.getItem('discount_percentage')){
+          promo_code_val = sessionStorage.getItem('discount_percentage')
+          total_amount = Math.floor(subtotal  - (subtotal * (promo_code_val/100)) - discount_amount)
+          promo_code_val = `${Math.floor(promo_code_val)}%`
+          console.log(customer_id,institute_name,items_count,discount_amount,promo_code,total_amount, payment_method)
+        }else{
+          promo_code_val = sessionStorage.getItem('discountamount')
+          total_amount = Math.floor(total_amount - promo_code_val - discount_amount)
+          console.log(customer_id,institute_name,items_count,discount_amount,promo_code_val,total_amount, payment_method)
+          promo_code_val = `₹${promo_code_val}`
+        }
+      }else{
+        promo_code = null
+        promo_code_val = null
+        total_amount = subtotal - discount_amount
+      }
+    }
+
     async function listOrder() {
       let btn = document.getElementById('btn')
       btn.disabled = true;
@@ -62,10 +89,15 @@
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({customer_id,institute_name,items_count,discount_amount,promo_code,total_amount, payment_method})
+          body: JSON.stringify({customer_id,institute_name,items_count,discount_amount,promo_code,total_amount, payment_method, used_coin})
         })
 
         if(response.status === 200){
+          let newBalance  = customer_correlated.cc.B - used_coin
+          customer_correlated.cc.B = newBalance
+          customer_correlated.cc.U = Date.now()
+          localStorage.setItem('customer_correlated', JSON.stringify(customer_correlated))
+          sessionStorage.removeItem('product')
           if(promo_code && promo_code !== 'WELCOME50'){
             updateCoponUsage()
           }
@@ -102,6 +134,31 @@
           window.location.href = '/'
         }
       })
+    }
+
+    function prepareDeduction(){
+      let radio_1 = document.getElementById('radio_1')
+      let radio_2 = document.getElementById('radio_2')
+      console.log("why I checked this")
+      if(radio_2.checked){
+        if(customer_correlated.cc){
+          coin_balance = customer_correlated.cc.B
+          if(coin_balance > total_amount){
+            used_coin = coin_balance - (coin_balance - total_amount)
+            coin_balance =  coin_balance - used_coin
+            total_amount = 0  
+          }else{
+            used_coin = customer_correlated.cc.B
+            total_amount = total_amount - used_coin
+          }
+        }
+      }
+      else{
+        used_coin = null
+        coin_balance = null
+        withoutCoin()
+
+      }
     }
 </script>
 
@@ -155,7 +212,7 @@
       <p class="mt-8 text-lg font-medium">Payment Methods</p>
       <form class="mt-5 grid gap-6">
         <div class="relative">
-          <input class="peer hidden" id="radio_1" type="radio" name="radio" checked/>
+          <input class="peer hidden" id="radio_1" type="radio" name="radio" checked onchange={prepareDeduction}/>
           <span class="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
           <label class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4" for="radio_1">
             <div class="ml-5">
@@ -165,7 +222,7 @@
           </label>
         </div>
         <div class="relative">
-          <input class="peer hidden" id="radio_2" type="radio" name="radio"/>
+          <input class="peer hidden" id="radio_2" type="radio" name="radio" onchange={prepareDeduction}/>
           <span class="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
           <label class="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4" for="radio_2">
             <div class="ml-5">
@@ -211,6 +268,12 @@
             <p class="font-semibold text-green-700">Free</p>
           </div>
         </div>
+        {#if used_coin}
+        <div class="flex items-center justify-between">
+          <p class="text-sm font-medium text-gray-900">Used Coin</p>
+          <p class="font-semibold text-green-700">- CC {used_coin}</p>
+        </div>
+        {/if}
         <div class="mt-6 flex items-center justify-between">
           <p class="text-sm font-medium text-gray-900">Total</p>
           <p class="text-2xl font-semibold text-gray-900">₹{total_amount}</p>
