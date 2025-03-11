@@ -1,14 +1,16 @@
 <script>
   import '@tailwind';
-  import { page } from '$app/stores';
-  import { productDatabase } from '$lib/json/product.js';
   import { onMount } from 'svelte';
+  import { page } from '$app/stores';
+  import { fetchProductById } from '$lib/utils/fetchProductById';
+  
 
   const url = $page.url.href;
   let updatedUrl = url.replace(/%20/g, ' ');
   let institute_name = updatedUrl.split('/').pop();
   let complete_order = $state([]);
   let orders = $state();
+  let productInfo = $state();
 
   async function retrievePending(institute_name) {
       try {
@@ -23,7 +25,7 @@
           if (response.ok) {
               let data = await response.json();
               orders = data.data;
-              console.log(orders);
+              productInfo = await fetchProductById(orders.map(order => order.items_count[0])); // argument is extracting productIds 
           } else {
               console.error(response);
           }
@@ -72,7 +74,7 @@
   }
 </script>
 
-{#if orders}
+{#if orders && productInfo}
 <div class="overflow-x-auto">
   <table class="table">
       <!-- head -->
@@ -107,7 +109,10 @@
                   </div>
               </td>
               <td>
-                  {productDatabase[order.items_count[0]].name}
+                {#if productInfo[order.items_count[0]]}
+                {productInfo[order.items_count[0]].productName}
+                {/if}
+                  
                   <br />
                   <span class="badge badge-ghost badge-sm">items : {order.items_count[1]}</span>
               </td>

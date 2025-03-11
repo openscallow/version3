@@ -28,9 +28,25 @@
 	let selectedRoute = $state()
 
 	$effect(()=>{
-		console.log(selectedRoute)
-		options = routes[selectedRoute]
+		obtainRouteInfo(selectedRoute)
+		// console.log(selectedRoute)
+		// options = routes[selectedRoute]
 	})
+
+	async function obtainRouteInfo(route) {
+		if (route) {
+			console.log('route', route)
+			const response = await fetch(`/associate?route=${route}`)
+
+			console.log('response', response)
+			const data = await response.json()
+			console.log('data', data)
+			options = data.routes
+
+
+		}
+		
+	}
 </script>
 {#if !selectedRoute}
 	<div class="flex justify-center">
@@ -40,7 +56,7 @@
 			</div>
 			<select bind:value={selectedRoute} class="select select-bordered">
 				<option disabled selected hidden></option>
-			  	<option>one</option>
+			  	<option>0</option>
 			  	<option>two</option>
 			  	<option>three</option>
 			  	<option>four</option>
@@ -53,7 +69,7 @@
 		{#each options as option}
 			<TimelineItem>
 				<TimelineOppositeContent slot="opposite-content">
-					<p>{option.time}</p>
+					<p>{option.slot[0]}</p>
 				</TimelineOppositeContent>
 				<TimelineSeparator>
 					<TimelineDot />
@@ -62,9 +78,9 @@
 				<TimelineContent>
 					<div class="collapse bg-base-200">
 						<input type="radio" name="my-accordion-2"  />
-                    	<div class="collapse-title text-xl font-medium">{option.school}</div>
+                    	<div class="collapse-title text-xl font-medium">{option.School_name}</div>
                     	<div class="collapse-content">
-							<a href="associate/{option.school}" rel="noopener noreferrer">
+							<a href="associate/{option.School_name}" rel="noopener noreferrer">
 								<p><MoveRight /></p>
                         	</a>
 						</div>
