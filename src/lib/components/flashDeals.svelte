@@ -1,6 +1,7 @@
 <script lang="ts">
+    import '@tailwind';
     import { onMount } from 'svelte';
-    import '@tailwind'
+    import UnderXRupee from './underXRupee.svelte';
   
     // Define the Product type matching the new schema
     type Product = {
@@ -26,7 +27,7 @@
   
     // Initialize products array
     let products: Product[] = $state([]);
-
+    let key: Boolean = $state(false);
   
     // Fetch six new products from your custom endpoint
     async function fetchProducts() {
@@ -43,6 +44,7 @@
         
         // Expecting the response to be in the format: { products: [...] }
         products = data.products;
+        key = true;
       } catch (error) {
         console.error('Error fetching products:', error);
       }
@@ -113,5 +115,7 @@
     }
   }   
 </style>
-
-  
+<br>
+{#if key}
+<UnderXRupee />
+{/if}
