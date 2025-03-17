@@ -30,7 +30,7 @@
   
   <div class="login-page">
     <div class="form">
-      <form class="login-form" on:submit={handleSubmit}>
+      <form class="login-form" onsubmit={handleSubmit}>
         <h2>VERIFY MOBILE NUMBER</h2>
         <input
           type="Mobile" 

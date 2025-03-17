@@ -1,7 +1,7 @@
 <script>
   import { preventDefault } from 'svelte/legacy';
   import '@tailwind'
-  import '../../app.css';
+  import '../../../app.css';
   import { Eye, EyeOff } from 'lucide-svelte';
   import './style.css'
   import { page } from '$app/stores';

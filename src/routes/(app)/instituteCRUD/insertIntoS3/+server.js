@@ -1,5 +1,5 @@
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
-import { awsConfig } from '../../../aws-config';
+import { awsConfig } from '../../../../aws-config';
 
 export async function POST({ request }) {
     const s3Client = new S3Client(awsConfig);
