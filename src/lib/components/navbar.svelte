@@ -80,7 +80,7 @@
       <input
         type="search"
         placeholder="Search..."
-        onclick={()=> window.location.href = "./search" }
+        onclick={()=> window.location.href = "/search" }
       />
     </form>
     <button class="menu-toggle" onclick={()=> {isSidebarOpen = !isSidebarOpen}}>☰</button>

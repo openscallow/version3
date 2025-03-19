@@ -1,0 +1,76 @@
+<script lang="ts">
+    import '@tailwind' 
+    import type { PageProps } from './$types';
+    import { onMount } from 'svelte'
+
+    let k : string = $state('')
+
+    onMount(()=>{
+        const params = new URLSearchParams(window.location.search);
+        k = params.get("k") || '';
+    })
+    
+    
+    let { data }: PageProps = $props(); 
+    console.log(data)
+    let products = Object.values(data)
+    console.log(products)
+   
+</script>
+<h3 class="text-xl font-bold ml-4 text-gray-800">Search result: {k}</h3>
+<div class="grid gap-4 p-4 grid-cols-2 md:grid-cols-[repeat(auto-fill,minmax(100px,200px))]">
+    {#if products.length > 0}
+      {#each products as product}
+      <div class="flex flex-col items-center bg-white rounded-lg transition-transform duration-300 ease-in-out shadow-sm aspect-[1/1.2] border border-black overflow-hidden p-1">
+        <a class="no-underline text-inherit text-center flex flex-col w-full h-full" href={"/"+ product.productName.replaceAll(" ","-").replaceAll(".", "-") + "/product/" + product._id.$oid} rel="noopener noreferrer">
+          <div class="flex-1 flex items-center justify-center overflow-hidden w-full h-0 relative bg-white">
+            <img class="absolute top-0 left-0 w-full h-full object-contain" loading="lazy" src={product.images[0]} alt={product.productName} />
+          </div>
+          <h2 class="text-base my-2 max-w-full overflow-hidden text-ellipsis line-clamp-2 leading-[1.2em] h-[2.4em]">{product.productName}</h2>
+          <div class="flex rounded-sm overflow-hidden relative border border-gray-900">
+            <div class="py-[2px] text-white bg-red-500 flex-grow">
+              ₹{product.currentPrice}
+            </div>
+            <div class="py-[2px] text-black bg-yellow-400 flex-grow">
+              <del>MRP ₹{product.mrp} </del>
+            </div>
+            <div class="shimmer"></div>
+          </div>
+        </a>
+      </div>
+      {/each}
+    {:else}
+      <p>Loading...</p>
+    {/if}
+</div>
+
+<style>
+  .shimmer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.6) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-20deg);
+    animation: shimmer 2.5s infinite ease-in-out;
+  } 
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-150%) skewX(-20deg);
+    }
+    50% {
+      transform: translateX(150%) skewX(-20deg);
+    }
+    100% {
+      transform: translateX(150%) skewX(-20deg);
+    }
+  }   
+</style>
+
