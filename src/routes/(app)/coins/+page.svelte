@@ -3,7 +3,7 @@
     import { UserCheck, ClipboardCopy } from 'lucide-svelte'
     import { onMount } from 'svelte';
 
-    let coin_balance = $state()
+    let coin_balance = $state(0)
     let referrals = $state()
     let customer_referral_link = $state()
     onMount(async ()=>{
@@ -54,7 +54,7 @@
      */
     function setCoinBalance(customer_correlated, coin_balance){
       if(customer_correlated.cc){
-        let lastUpdated = customer_correlated.cc.U - Date.now()
+        let lastUpdated = Date.now() - customer_correlated.cc.U;
         if(lastUpdated > 3600000 ){
           customer_correlated.cc.U = Date.now()
           customer_correlated.cc.B = coin_balance
