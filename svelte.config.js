@@ -12,7 +12,9 @@ const config = {
 			handleHttpError: 'ignore',
 			entries: [
 			  '/login',
-			  '/password_reset/resetOtp'
+			  '/password_reset/resetOtp',
+			  '/(app)', 
+			  '/(app)/about'
 			]
 		  }
 	},
