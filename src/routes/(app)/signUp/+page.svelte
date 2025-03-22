@@ -87,7 +87,15 @@
   
   })
 </script>
-
+<svelte:head>
+  <title>Coins</title>
+  <meta name="description" content="Students can Earn up to 400 rupee on callow" />
+  <meta property="og:title" content="Join Callow Now" />
+  <meta property="og:description" content="Students can Earn up to 400 rupee on callow" />
+  <meta property="og:image" content="/bagilluestration.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Callow.in" />
+</svelte:head>
 <div class="px-2 mt-10 w-full flex items-center justify-center">
   <div class="form relative drop-shadow-[0.5px_0.5px_1px_var(--primary-color)] rounded-md w-90 bg-white p-10">
     <form class="signup-form" onsubmit={preventDefault(handleSubmit)}>
