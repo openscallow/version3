@@ -81,6 +81,16 @@
     });
     })
 </script>
+
+<svelte:head>
+  <title>Coins</title>
+  <meta name="description" content="Students can Earn up to 400 rupee on callow" />
+  <meta property="og:title" content="Join Callow Now" />
+  <meta property="og:description" content="Students can Earn up to 400 rupee on callow" />
+  <meta property="og:image" content="/bagilluestration.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Callow.in" />
+</svelte:head>
   
   <div class="p-4">
     <div class="relative aspect-video w-full max-w-lg mx-auto rounded-lg overflow-hidden">
