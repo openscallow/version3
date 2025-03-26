@@ -9,7 +9,7 @@ export const load: PageServerLoad = async ({ url, fetch }) => {
         let response = await fetch(`/search/result?query=${query}`);
         let data = await response.json();
         // let { product } = data;
-        // console.log(data);
+        console.log(data);
         return {...data};
         
     } catch (error) {

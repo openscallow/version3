@@ -19,7 +19,7 @@
 <div class="category">
     <h2>Popular</h2>
     <div class="category_list">
-        <div class="category_item"><a href="/blank/result?k=Cello gripper pens">Cello gripper pens</a></div>
+        <div class="category_item"><a href="/search/result?k=Cello gripper pens">Cello gripper pens</a></div>
         <div class="category_item">Category 2</div>
         <div class="category_item">Category 3</div>
         <div class="category_item">Category 4</div>
