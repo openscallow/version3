@@ -23,10 +23,6 @@
         <div class="category_item"><a class="outline-none" href="/search/result?k=STD 12 SCIENCE">STD 12 SCIENCE</a></div>
         <div class="category_item"><a class="outline-none" href="/search/result?k=STD 12 COMMERCE">STD 12 COMMERCE</a></div>
         <div class="category_item"><a class="outline-none" href="/search/result?k=STD 12 ARTS">STD 12 ARTS</a></div>
-        <div class="category_item">Category 2</div>
-        <div class="category_item">Category 3</div>
-        <div class="category_item">Category 4</div>
-        <div class="category_item">Category 5</div>
     </div>
 </div>
 
