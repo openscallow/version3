@@ -11,7 +11,14 @@
 }
 
 body{
-    background-color: hsl(209, 36%, 86%);
+    min-width: 100vw;
+    min-height: 100vh;
+    background-image: radial-gradient(
+			50% 50% at 50% 50%,
+			rgba(255, 255, 255, 0.75) 0%,
+			rgba(255, 255, 255, 0) 100%
+		),
+		linear-gradient(180deg, rgb(202, 216, 228) 0%, hsl(209, 36%, 86%) 15%, hsl(224, 44%, 95%) 50%);
 }
 
 .wrapper {
@@ -48,10 +55,10 @@ body{
     flex-wrap: wrap;
     gap: 10px;
 }
-/* 
-.category_list .category_item{
-    border-bottom: 2px solid aqua;
-} */
+
+.std{
+    
+}
 
 /* mobile */
 @media only screen and (max-width: 600px) {
