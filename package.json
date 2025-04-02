@@ -24,6 +24,8 @@
 	"type": "module",
 	"dependencies": {
 		"@aws-sdk/client-s3": "^3.633.0",
+		"@logtail/browser": "^0.5.2",
+		"@logtail/js": "^0.5.2",
 		"algoliasearch": "^5.18.0",
 		"dotenv": "^16.4.5",
 		"fuse.js": "^7.0.0",
