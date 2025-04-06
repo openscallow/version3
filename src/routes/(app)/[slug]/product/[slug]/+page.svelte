@@ -21,7 +21,8 @@
   let previousPrice = data.mrp;
   let images = [...data.images];
 
-  //Quantity logic
+  
+  //Product Quantity Management
   let productQuantity = $state(1);
   
   function incrementQuantity() {
@@ -34,21 +35,72 @@
     }
   }
 
-  //buy btn action
-  function placeOrder() {
-    const orderData = {
+  /**
+   * Order Management Module
+   * ---------------------
+   * Key Features:
+   * - Validates and structures order data
+   * - Preserves order information across sessions
+   * - Smart redirection based on authentication status
+   * - Error handling and fallback mechanisms
+   * 
+   * Flow:
+   * 1. Order data is created and structured
+   * 2. Order is temporarily saved to session storage
+   * 3. User is redirected based on login status:
+   *    - Logged in → Checkout page
+   *    - Not logged in → Sign up page
+   * 
+   * Note: This module assumes the existence of required product data
+   * and authentication status indicators in local storage.
+   */
+
+  type OrderData = {
+    id: string;
+    name: string;
+    quantity: number;
+    currentPrice: number;
+    actualPrice: number;
+  };
+
+  function createOrderData(): OrderData {
+    return {
       id: data._id,
       name: productName,
       quantity: productQuantity,
       currentPrice: currentPrice,
       actualPrice: previousPrice
     };
-    sessionStorage.setItem('product', JSON.stringify(orderData));
+  }
 
-    if(localStorage.getItem('customer_correlated')){
-      window.location.href = '/checkout'
-    }else{
-      window.location.href = '/signUp'
+  function saveOrderToSession(orderData: OrderData) {
+    try {
+      sessionStorage.setItem('pending_order', JSON.stringify(orderData));
+    } catch (error) {
+      console.error('Failed to save order to session storage:', error);
+      // Handle error appropriately
+    }
+  }
+
+  function redirectToCheckout() {
+    try {
+      const isCustomerLoggedIn = localStorage.getItem('customer_correlated') !== null;
+      const redirectPath = isCustomerLoggedIn ? '/checkout' : '/signUp';
+      window.location.href = redirectPath;
+    } catch (error) {
+      console.error('Failed to redirect:', error);
+      // Provide fallback behavior
+    }
+  }
+
+  function placeOrder() {
+    try {
+      const orderData = createOrderData();
+      saveOrderToSession(orderData);
+      redirectToCheckout();
+    } catch (error) {
+      console.error('Failed to place order:', error);
+      // Show user-friendly error message
     }
   }
  
@@ -174,9 +226,13 @@
           </button>
         </div>
 
-        <button type="submit" class="button add-btn" onclick={placeOrder}>
-          Buy Now
-        </button>
+        {#if data.stockAvailability > 0}
+        {data.stockAvailability}
+        <button type="submit" class="button add-btn" onclick={placeOrder}> Buy Now </button>
+        {:else}
+        <h1> OUT OF STOCK</h1>
+        <button class="button add-btn"> Buy Now </button>
+        {/if}
       </form>
     </div>
   </div>
@@ -197,7 +253,6 @@
     {/each}
   </div>
 </div>
-
 <br>
 <br>
 

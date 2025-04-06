@@ -63,7 +63,7 @@
       <span class="product_sentinel hidden"></span>
       {/if}
       
-      <div class="flex flex-col items-center bg-white rounded-lg transition-transform duration-300 ease-in-out shadow-sm aspect-[1/1.2] border border-black overflow-hidden p-1">
+      <div class="relative flex flex-col items-center bg-white rounded-lg transition-transform duration-300 ease-in-out shadow-sm aspect-[1/1.2] border border-black overflow-hidden p-1">
         <a class="no-underline text-inherit text-center flex flex-col w-full h-full" href={"/"+ product.productName.replaceAll(" ","-").replaceAll(".", "-") + "/product/" + product._id} rel="noopener noreferrer">
           <div class="flex-1 flex items-center justify-center overflow-hidden w-full h-0 relative bg-white">
             <img class="absolute top-0 left-0 w-full h-full object-contain" loading="lazy" src={product.images[0]} alt={product.productName} />
@@ -78,6 +78,9 @@
             </div>
             <div class="shimmer"></div>
           </div>
+          {#if product.stockAvailability < 1}
+              <div class="absolute top-1 w-3/4 left-1/2 -translate-x-1/2 fit-content text-white  rounded-full px-2 bg-black">Sold Out</div>
+          {/if}
         </a>
       </div>
       {/each}
