@@ -13,6 +13,17 @@ export async function POST({ request }) {
             used_coin
         } = await request.json();
 
+        console.log('Received data:', {
+            customer_id,
+            institute_name,
+            items_count,
+            discount_amount,
+            promo_code,
+            total_amount,
+            payment_method,
+            used_coin
+        });
+
         let query = `INSERT INTO customerorders (
             customer_id,
             institute_name,

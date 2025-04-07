@@ -14,9 +14,9 @@
   let coin_balance = $state(null);
   let loading = $state(false);
   
-  // Customer and product data
+  // Customer and pending_order data
   let customer_correlated;
-  let product;
+  let pending_order;
   let customer_id;
   let institute_name = $state('');
   let items_count;
@@ -31,19 +31,23 @@
   
   function initializeCheckoutData() {
       customer_correlated = JSON.parse(localStorage.getItem('customer_correlated') || '{}');
-      product = JSON.parse(sessionStorage.getItem('product') || '{}');
+      pending_order = JSON.parse(sessionStorage.getItem('pending_order') || '{}');
       
-      if (product && product.actualPrice && product.quantity) {
-          subtotal = parseInt(product.actualPrice) * parseInt(product.quantity);
-          discount_amount = (parseInt(product.actualPrice) - parseInt(product.currentPrice)) * parseInt(product.quantity);
+      if (pending_order && pending_order.actualPrice && pending_order.quantity) {
+          subtotal = parseInt(pending_order.actualPrice) * parseInt(pending_order.quantity);
+          discount_amount = (parseInt(pending_order.actualPrice) - parseInt(pending_order.currentPrice)) * parseInt(pending_order.quantity);
           total_amount = subtotal - discount_amount;
       }
       
       customer_id = customer_correlated?.i;
       institute_name = localStorage.getItem('institute_name') || '';
-      
-      if (product?.id && product?.quantity) {
-          items_count = [product.id, product.quantity];
+      console.log(institute_name);
+      console.log(pending_order)
+      if (pending_order?.id && pending_order?.quantity) {
+        console.log("pending_order ID:", pending_order.id);
+        console.log("pending_order Quantity:", pending_order.quantity);
+          items_count = [pending_order.id, pending_order.quantity];
+          console.log("Items count:", items_count);
       }
   }
   
@@ -107,7 +111,16 @@
       const orderButton = document.getElementById('order-button');
       orderButton.disabled = true;
       loading = true;
-      
+      console.log("Placing order with the following details:", {
+          customer_id,
+          institute_name,
+          items_count,
+          discount_amount,
+          promo_code,
+          total_amount,
+          payment_method,
+          used_coin
+      });
       try {
           const response = await fetch('./checkout/component', {
               method: 'POST',
@@ -145,8 +158,8 @@
           localStorage.setItem('customer_correlated', JSON.stringify(customer_correlated));
       }
       
-      // Clear product from session
-      sessionStorage.removeItem('product');
+      // Clear pending_order from session
+      sessionStorage.removeItem('pending_order');
       
       // Handle promo code usage
       if (promo_code && promo_code !== 'WELCOME50') {
