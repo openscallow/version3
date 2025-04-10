@@ -54,6 +54,7 @@ export async function POST({ request }) {
       viewCount: 0,
       purchaseCount: 0,
       isNew:true,
+      algoliaSyncStatus: 'pending',
       images: Array.isArray(product["Images"])
         ? product["Images"].filter((url) => url.trim() !== '')
         : [],
