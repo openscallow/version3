@@ -1,7 +1,5 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { page } from '$app/stores';
-  import { goto } from '$app/navigation';
   import { addToRecentlyViewed } from '$lib/components/recentlyViewed/recentView.js';
   import '../../../../../app.css';
   import './product.css';
@@ -175,6 +173,17 @@
         }
   }
 
+  async function generateInquiry() {
+    try {
+      const isCustomerLoggedIn = localStorage.getItem('customer_correlated') !== null;
+      const redirectPath = isCustomerLoggedIn ? `./${data._id}/notify` : '/signUp';
+      window.location.href = redirectPath;
+    } catch (error) {
+      console.error('Failed to redirect:', error);
+      // Provide fallback behavior
+    }
+  }
+
   onMount(() => {
     data.relatedProducts.forEach((productId: any) => {
       fetchRelativeProduct(productId)
@@ -216,6 +225,7 @@
       </div>
 
       <form class="add-to-cart-form">
+        {#if data.stockAvailability > 0}
         <div class="product-quantity">
           <button type="button" class="button minus" onclick={decrementQuantity}>
             <img src={minus} alt="Minus Icon" />
@@ -225,13 +235,15 @@
             <img src={plus} alt="Plus Icon" />
           </button>
         </div>
+        {:else}
+        <h1 style="font-size: 2rem"> OUT OF STOCK</h1>
+        {/if}
+        
 
         {#if data.stockAvailability > 0}
-        {data.stockAvailability}
         <button type="submit" class="button add-btn" onclick={placeOrder}> Buy Now </button>
         {:else}
-        <h1> OUT OF STOCK</h1>
-        <button class="button add-btn"> Buy Now </button>
+        <button class="button add-btn" onclick={generateInquiry}> Notify Me  </button>
         {/if}
       </form>
     </div>
