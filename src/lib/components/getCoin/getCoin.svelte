@@ -31,7 +31,7 @@
     
 </script>
 {#if coin > 0}
-    <div>Get {coin} callow coins</div>
+    <div>Get <span id="potentialCoin">{coin}</span> callow coins</div>
 {/if}
 <style>
 div {

@@ -12,7 +12,6 @@
   import GetCoin from '$lib/components/getCoin/getCoin.svelte';
 
   let { data } = $props();
-  console.log(data)
   
   // Map new data structure to existing variable names
   let productName = data.productName;
@@ -57,13 +56,14 @@
    * Note: This module assumes the existence of required product data
    * and authentication status indicators in local storage.
    */
-
+  let potentialCoin = $state(0);
   type OrderData = {
     id: string;
     name: string;
     quantity: number;
     currentPrice: number;
     actualPrice: number;
+    coins_earned: number | 0;
   };
 
   function createOrderData(): OrderData {
@@ -72,7 +72,8 @@
       name: productName,
       quantity: productQuantity,
       currentPrice: currentPrice,
-      actualPrice: previousPrice
+      actualPrice: previousPrice,
+      coins_earned: potentialCoin,
     };
   }
 
@@ -97,6 +98,8 @@
   }
 
   function placeOrder() {
+    const potentialCoinElement = document.getElementById('potentialCoin');
+    potentialCoin = potentialCoinElement ? parseInt(potentialCoinElement.innerText) || 0 : 0;
     try {
       const orderData = createOrderData();
       saveOrderToSession(orderData);

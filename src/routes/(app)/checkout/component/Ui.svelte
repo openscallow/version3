@@ -21,6 +21,7 @@
   let institute_name = $state('');
   let items_count;
   let assignment_id = $state(null);
+  let coins_earned = $state(0);
   
   // Initialize data on component mount
   onMount(() => {
@@ -41,13 +42,11 @@
       
       customer_id = customer_correlated?.i;
       institute_name = localStorage.getItem('institute_name') || '';
-      console.log(institute_name);
-      console.log(pending_order)
+      
       if (pending_order?.id && pending_order?.quantity) {
-        console.log("pending_order ID:", pending_order.id);
-        console.log("pending_order Quantity:", pending_order.quantity);
-          items_count = [pending_order.id, pending_order.quantity];
-          console.log("Items count:", items_count);
+        coins_earned = pending_order.coins_earned || 0;
+        console.log("Coins earned:", typeof(coins_earned));
+        items_count = [pending_order.id, pending_order.quantity];
       }
   }
   
@@ -119,7 +118,8 @@
           promo_code,
           total_amount,
           payment_method,
-          used_coin
+          used_coin,
+          coins_earned
       });
       try {
           const response = await fetch('./checkout/component', {
@@ -135,7 +135,8 @@
                   promo_code,
                   total_amount,
                   payment_method,
-                  used_coin
+                  used_coin,
+                  coins_earned
               })
           });
           
