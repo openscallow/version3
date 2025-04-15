@@ -223,7 +223,7 @@ a {
   
   .product-details-wrapper .add-to-cart-form {
     position: relative;
-    margin-top: 40px;
+    /* margin-top: 10px; */
   }
   
   @media (min-width: 40em) {

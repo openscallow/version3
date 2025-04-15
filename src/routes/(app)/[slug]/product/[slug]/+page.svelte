@@ -9,6 +9,7 @@
   import '@tailwind'
   import Swiper from 'swiper/bundle';
   import { Navigation, FreeMode, Mousewheel } from 'swiper/modules';
+  import GetCoin from '$lib/components/getCoin/getCoin.svelte';
 
   let { data } = $props();
   console.log(data)
@@ -24,6 +25,10 @@
   let productQuantity = $state(1);
   
   function incrementQuantity() {
+    if(productQuantity >= 10) {
+      productQuantity = 10; // Limit to a maximum of 10
+      return;
+    }
     productQuantity += 1;
   }
  
@@ -207,13 +212,13 @@
           <img src={thumbImage} alt="Product Thumb" />
         </div>
       </div>
-
     </div>
     <div class="product-details-wrapper">
       <p class="product-brand">{data.Brand}</p>
       <h1 class="product-title">{productName}</h1>
       <p class="product-description">{data.description}</p>
 
+      
       <div class="product-price">
         <div class="current-price-wrapper">
           <h2 class="current-price">&#8377;{currentPrice}</h2>
@@ -223,9 +228,11 @@
           <span class="previous-price">&#8377;{previousPrice}</span>
         </div>
       </div>
-
+      
+      
       <form class="add-to-cart-form">
         {#if data.stockAvailability > 0}
+        <GetCoin coin_rewards={data.coin_rewards} prouctQuantity={productQuantity}/>
         <div class="product-quantity">
           <button type="button" class="button minus" onclick={decrementQuantity}>
             <img src={minus} alt="Minus Icon" />
