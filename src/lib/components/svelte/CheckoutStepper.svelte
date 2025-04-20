@@ -9,7 +9,7 @@
 <div class="stepper">
     <ul class="stepper-list">
         <li class="stepper-item">
-            <a href="#blank">
+            <a href="/adderss" aria-label="change your current dilivery address">
                 <Check class="icon" size={18} strokeWidth={2.5} />
                 <span>Address</span>
             </a>
@@ -18,7 +18,7 @@
             <ChevronsRight size={16} />
         </li>
         <li class="stepper-item">
-            <a href="#blank">
+            <a href="/coupon" aria-label="Insert promo code">
                 <Check class="icon" size={18} strokeWidth={2.5} />
                 <span>Promo code</span>
             </a>
@@ -27,7 +27,7 @@
             <ChevronsRight size={16} />
         </li>
         <li class="stepper-item">
-            <a href="#blank">
+            <a href="/checkout" aria-label="Continue to payment">
                 <Check class="icon inactive" size={18} strokeWidth={2.5} />
                 <span>Order Summary</span>
             </a>
