@@ -2,7 +2,9 @@
   import '@tailwind';
   import { onMount } from 'svelte';
   import userRedirect from '../utility/userRedirect';
-  
+  import PaymentMethods from '$lib/components/svelte/PaymentMethods.svelte';
+
+
   // State management
   let subtotal = $state(100);
   let total_amount = $state(0);
@@ -29,7 +31,7 @@
       initializeCheckoutData();
       applyPromoCodeIfAvailable();
   });
-  
+
   function initializeCheckoutData() {
       customer_correlated = JSON.parse(localStorage.getItem('customer_correlated') || '{}');
       pending_order = JSON.parse(sessionStorage.getItem('pending_order') || '{}');
@@ -74,7 +76,7 @@
   
   function handlePaymentMethodChange() {
       const isCashAndCoins = document.getElementById('radio_2').checked;
-      
+      console.log(customer_correlated)
       if (isCashAndCoins && customer_correlated?.cc) {
           coin_balance = customer_correlated.cc.B;
           

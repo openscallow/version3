@@ -1,11 +1,15 @@
 <script lang='ts'>
+    import { 
+        get_total_amount,
+        handlePaymentMethodChange 
+    } from '$lib/components/ts/checkoutStateVariables.svelte';
+   
 
 </script>
-
 <div class="paymentOpt-section">
     <h2 class="section-title">Payment Methods</h2>
     <div class="payment-option one">
-        <input type="radio" name="payment" id="cash" value="cash" checked> 
+        <input type="radio" name="payment" id="cash" value="cash" checked onchange={()=>handlePaymentMethodChange(false)}> 
         <label for="cash">
             <div class="option-content">
               <span class="option-content-title">Cash</span>
@@ -15,7 +19,7 @@
     </div>
 
     <div class="payment-option two">
-        <input type="radio" name="payment" id="cash-coins" value="cash-coins" checked>
+        <input type="radio" name="payment" id="cash-coins" value="cash-coins" onchange={()=>handlePaymentMethodChange(true)}>
         <label for="cash-coins">
             <div class="option-content">
               <span class="option-content-title">Cash + coins</span>
@@ -39,13 +43,20 @@
         margin: 0.5rem 0rem;
         padding: 0.5rem;
         flex-direction: row-reverse;
+        justify-content: start;
     }
 
     .payment-option input{
         display: none;
     }
 
-    .option-content{
+    .payment-option input, .payment-option label{
+        cursor: pointer;
+    }
+
+    .payment-option:has(input) {
+        border: 1px solid grey;
+        border-radius: 3px;
     }
 
     .payment-option:has(input:checked) {
@@ -56,7 +67,7 @@
 
     .option-content-title{
         font-size: 1.2rem;
-        font-weight: 600;
+        
     }
 
     .option-content-description{
@@ -65,17 +76,9 @@
     }
 
     /* Responsive styles */
-    /* @media (max-width: 768px) {
-        .payment-section {
-            width: 100%;
-        }
-    } */
-
     @media (max-width: 480px) {
         .paymentOpt-section .section-title {
             font-size:1.1rem;
         }
     }
 </style>
-
-<!-- component is currently not used -->
