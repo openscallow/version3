@@ -1,14 +1,72 @@
 <script lang="ts">
     import '@tailwind' 
     import type { PageProps } from './$types';
-    import { onMount } from 'svelte'
+    import { onMount } from 'svelte';
+    import { customerId } from '$lib/components/ts/customer_correlated.svelte'
 
     let k : string = $state('')
 
     onMount(()=>{
         const params = new URLSearchParams(window.location.search);
         k = params.get("k") || '';
+        const customer_id = customerId()
+        const timestamp = new Date().toISOString();
+        let moreInfo = getBrowserInfo()
+
+        
+        console.log({searchQuery: k, customer_id, timestamp, ...moreInfo})
+
+        insertLog({searchQuery: k, customer_id, timestamp, ...moreInfo})
     })
+
+    async function insertLog(logInfo){
+      try {
+        let response = await fetch('/api/searchLog',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(logInfo)
+            }
+        );
+        if(response.ok){
+          console.log('work')
+        }
+      } catch (error) {
+        console.log(`error from result ${error}`)
+      }
+    }
+
+    function getBrowserInfo() {
+  const userAgent = navigator.userAgent;
+  const platform = navigator.platform;
+
+  let browserName = "Unknown";
+  let fullVersion = "Unknown";
+
+  if (/edg/i.test(userAgent)) {
+    browserName = "Microsoft Edge";
+    fullVersion = userAgent.match(/edg\/([\d.]+)/i)?.[1];
+  } else if (/chrome/i.test(userAgent)) {
+    browserName = "Google Chrome";
+    fullVersion = userAgent.match(/chrome\/([\d.]+)/i)?.[1];
+  } else if (/safari/i.test(userAgent)) {
+    browserName = "Safari";
+    fullVersion = userAgent.match(/version\/([\d.]+)/i)?.[1];
+  } else if (/firefox/i.test(userAgent)) {
+    browserName = "Mozilla Firefox";
+    fullVersion = userAgent.match(/firefox\/([\d.]+)/i)?.[1];
+  } else if (/msie|trident/i.test(userAgent)) {
+    browserName = "Internet Explorer";
+    fullVersion = userAgent.match(/(msie\s|rv:)([\d.]+)/i)?.[2];
+  }
+
+  return {
+    platform: platform,
+    browser: browserName,
+    version: fullVersion
+  };
+}
     
     
     let { data }: PageProps = $props(); 
