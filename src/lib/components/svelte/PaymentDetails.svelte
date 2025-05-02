@@ -8,6 +8,8 @@
         placeOrder
     } from '$lib/components/ts/checkoutStateVariables.svelte';
 
+    let {disabled = true} = $props()
+
     
 </script>
 
@@ -31,7 +33,7 @@
         <span>₹{get_total_amount()} </span>
     </div>
 
-    <button onclick={(event)=> placeOrder(event)}>Place Order</button>
+    <button onclick={(event)=> placeOrder(event)} disabled={disabled}>Place Order</button>
 </div>
 
 <style>

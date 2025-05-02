@@ -2,16 +2,29 @@
     // import Ui from './component/Ui.svelte'
     import CheckoutStepper from '$lib/components/svelte/CheckoutStepper.svelte';
     import PaymentMethods from '$lib/components/svelte/PaymentMethods.svelte';
-    import PaymentDetails from '$lib/components/svelte/PaymentDetails.svelte'
+    import PaymentDetails from '$lib/components/svelte/PaymentDetails.svelte';
+    import userRedirct from './utility/userRedirect'
     import { 
         customerId, 
         customerReferralCode, 
         customerCallowCoins 
     } from '$lib/components/ts/customer_correlated.svelte.ts'; 
     
-    import { initializeCheckoutData, applyPromoCodeIfAvailable } from '$lib/components/ts/checkoutStateVariables.svelte';
+    import { 
+        initializeCheckoutData, 
+        applyPromoCodeIfAvailable 
+    } from '$lib/components/ts/checkoutStateVariables.svelte';
     import { onMount } from 'svelte';
+
+    let disabled = true;
     onMount(()=>{
+        userRedirct()
+
+        // active placeOrder button after 2 second
+        setTimeout(()=>{
+            disabled = false
+        }, 2000)
+
         initializeCheckoutData()
         applyPromoCodeIfAvailable()
     })
@@ -24,7 +37,7 @@
 
         <div class="container">
             <PaymentMethods />
-            <PaymentDetails />
+            <PaymentDetails {disabled}/>
         </div>
 
     </div>
