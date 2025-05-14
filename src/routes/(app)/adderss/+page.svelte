@@ -52,6 +52,7 @@
       searchQuery,
       customer_id,
       timestamp,
+      isProcessed: false,
       ...moreInfo
     }
 

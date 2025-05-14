@@ -16,7 +16,7 @@
         
         console.log({searchQuery: k, customer_id, timestamp, ...moreInfo})
 
-        insertLog({searchQuery: k, customer_id, timestamp, ...moreInfo})
+        insertLog({searchQuery: k, customer_id, timestamp,isProcessed: false, ...moreInfo})
     })
 
     async function insertLog(logInfo){
