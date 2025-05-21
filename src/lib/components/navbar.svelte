@@ -5,7 +5,7 @@
   import '../../app.css';
   import '@tailwind';
   import './navbar.css';
-  import { House, ShoppingBag, HandCoins, LogIn, User, Bell, BellDot } from 'lucide-svelte';
+  import { House, ShoppingBag, HandCoins, LogIn, User, BellDot, ShoppingCart } from 'lucide-svelte';
 
   // State variables
   let isSidebarOpen = $state(false);
@@ -75,6 +75,10 @@
     {@render svglogo()}
     <div class="nav-links">
       {@render navigationLinks()}
+      <div class="indicator">
+        <span class="indicator-item badge bg-red-500 text-white">{notifications.length}</span>
+        <a href="/notification" class="flex"><ShoppingCart size={20} color="yellow"/> <span class="ml-2">Kart</span></a>
+      </div>
     </div>
     <form class="search-form">
       <input
