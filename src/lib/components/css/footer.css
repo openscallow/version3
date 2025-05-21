@@ -1,0 +1,29 @@
+footer nav {
+		position: fixed;
+		bottom: 0;
+		z-index: 100;
+		padding: 1rem 0.5rem;
+		width: 100%;
+		background-color: white;
+	}
+
+	footer nav ul {
+		display: flex;
+		justify-content: space-around;
+	}
+
+	footer nav ul li {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+	}
+
+	footer nav ul li span {
+		font-size: 0.7rem;
+	}
+
+	@media (min-width: 768px) {
+		footer nav {
+			display: none;
+		}
+	}
