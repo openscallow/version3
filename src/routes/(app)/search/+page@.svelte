@@ -41,6 +41,7 @@
         <div class="tag-container">
           <a href="/search/result?k=Cello gripper pens" class="tag">Cello gripper pens</a>
           <a href="/search/result?k=pencil" class="tag">Pencil</a>
+          <a href="/search/result?k=sport" class="tag">Sport</a>
         </div>
       </section>
       
