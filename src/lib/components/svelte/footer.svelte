@@ -2,6 +2,7 @@
     import '@tailwind';
 	import { House, User, ShoppingCart } from 'lucide-svelte';
     import '$lib/components/css/footer.css'
+	
 </script>
 
 <footer>
