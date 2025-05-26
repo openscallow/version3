@@ -36,3 +36,40 @@ function updatedCart(i: number, u: string): void {
     const lastUpdateMilli = new Date(u).getTime();
     localStorage.setItem('cart', JSON.stringify({i, u: lastUpdateMilli}))
 }
+
+export async function totalCartItems(){
+    if (typeof window !== 'undefined') {
+        // check locally first 
+        if (hasCart()) {
+            let cart = JSON.parse(localStorage.getItem('cart'));
+            return await getCartItemsById(cart.i)
+        }else{
+            let cart = getUserCart()
+            console.log(cart.i)
+            return await getCartItemsById(cart.i)
+        }
+    }
+}
+
+
+async function getCartItemsById(cartId: any) {
+    try {
+        let response = await fetch('/api/cart/totalCartItems', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ cart_id: cartId })
+            })
+
+            if (response.ok) {
+                let { totalCartItems } = await response.json()
+                return totalCartItems;
+            } else {
+                // use telemetry 
+            }
+    } catch (error) {
+        // use telemetry
+        console.log(error)
+    }
+}
