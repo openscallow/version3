@@ -1,0 +1,357 @@
+<script>
+    let products = [
+        {
+            name: "4 Compartments Plastic Pen, Pencil Holder | પેન હોલ્ડર",
+            mrp: 186,
+            currentPrice: 120,
+            quantity: 2,
+            img: "https://rukminim2.flixcart.com/image/1150/1350/k4k7f680/desk-organizer/e/c/h/1727c-pen-pencil-holder-elite-clear-colour-omega-original-imafng2vftcutpht.jpeg"
+        },
+        {
+            name: "4 Compartments Plastic Pen, Pencil Holder | પેન હોલ્ડર",
+            mrp: 186,
+            currentPrice: 120,
+            quantity: 2,
+            img: "https://rukminim2.flixcart.com/image/1150/1350/k4k7f680/desk-organizer/e/c/h/1727c-pen-pencil-holder-elite-clear-colour-omega-original-imafng2vftcutpht.jpeg"
+        },
+        {
+            name: "4 Compartments Plastic Pen, Pencil Holder | પેન હોલ્ડર",
+            mrp: 186,
+            currentPrice: 120,
+            quantity: 2,
+            img: "https://rukminim2.flixcart.com/image/1150/1350/k4k7f680/desk-organizer/e/c/h/1727c-pen-pencil-holder-elite-clear-colour-omega-original-imafng2vftcutpht.jpeg"
+        }
+    ];
+
+    // Calculate totals
+    $: totalItems = products.reduce((sum, product) => sum + product.quantity, 0);
+    $: subtotal = products.reduce((sum, product) => sum + (product.currentPrice * product.quantity), 0);
+
+    // Calculate discount percentage
+    function getDiscountPercentage(mrp, currentPrice) {
+        return Math.round(((mrp - currentPrice) / mrp) * 100);
+    }
+
+    // Handle quantity changes and actions
+    function incrementQuantity(index) {
+        products[index].quantity += 1;
+        products = [...products]; // Trigger reactivity
+    }
+
+    function decrementQuantity(index) {
+        if (products[index].quantity > 1) {
+            products[index].quantity -= 1;
+            products = [...products]; // Trigger reactivity
+        }
+    }
+
+    function deleteItem(index) {
+        products = products.filter((_, i) => i !== index);
+    }
+
+    function proceedToBuy() {
+        alert(`Proceeding to checkout with ${totalItems} items worth ₹${subtotal}`);
+    }
+</script>
+
+<div class="cart-container">
+    <div class="wrapper">
+        <div class="cart-header">
+            <h1>Subtotal: ₹{subtotal}</h1>
+            <button class="proceed-btn" on:click={proceedToBuy}>
+                Proceed to buy ({totalItems} items)
+            </button>
+        </div>
+
+        <div class="items-wrapper">
+            {#each products as product, index}
+                <div class="item">
+                    <div class="descriptive-info">
+                        <div class="image-container">
+                            <img src={product.img} alt="Product Image">
+                        </div>
+                        <div class="text-container">
+                            <h3>{product.name}</h3>
+                            <div class="price-info">
+                                <span class="discount">-{getDiscountPercentage(product.mrp, product.currentPrice)}%</span>
+                                <span class="current-price">₹{product.currentPrice}</span>
+                                <span class="mrp">M.R.P: ₹{product.mrp}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="action">
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" on:click={() => decrementQuantity(index)}>−</button>
+                            <input type="number" class="quantity-input" bind:value={product.quantity} readonly>
+                            <button class="quantity-btn" on:click={() => incrementQuantity(index)}>+</button>
+                        </div>
+                        <button class="delete-btn" on:click={() => deleteItem(index)}>Delete</button>
+                    </div>
+                </div>
+            {/each}
+        </div>
+    </div>
+</div>
+
+<style>
+    :global(*) {
+        box-sizing: border-box;
+    }
+
+    .cart-container {
+        width: 100%;
+        min-height: 100vh;
+        padding: 2rem 1rem;
+        display: flex;
+        justify-content: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    .wrapper {
+        width: 100%;
+        max-width: 800px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .cart-header {
+        padding: 1.5rem 2rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .cart-header h1 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .proceed-btn {
+        width: 100%;
+        padding: 0.875rem 1.5rem;
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 10px rgba(40, 167, 69, 0.3);
+    }
+
+    .proceed-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+    }
+
+    .items-wrapper {
+        padding: 1.5rem 2rem;
+    }
+
+    .item {
+        display: flex;
+        gap: 1.5rem;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        background-color: #fafafa;
+        border-radius: 12px;
+        border: 1px solid #e9ecef;
+        transition: all 0.3s ease;
+    }
+
+    .item:hover {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        transform: translateY(-2px);
+    }
+
+    .item:last-child {
+        margin-bottom: 0;
+    }
+
+    .descriptive-info {
+        display: flex;
+        gap: 1rem;
+        flex: 1;
+    }
+
+    .image-container {
+        flex-shrink: 0;
+        width: 80px;
+        height: 80px;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid #e9ecef;
+    }
+
+    .image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .text-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .text-container h3 {
+        font-size: 0.95rem;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        line-height: 1.4;
+        color: #2c3e50;
+    }
+
+    .price-info {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
+
+    .current-price {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #28a745;
+    }
+
+    .discount {
+        background-color: #28a745;
+        color: white;
+        padding: 0.125rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    .mrp {
+        color: #6c757d;
+        text-decoration: line-through;
+        font-size: 0.9rem;
+    }
+
+    .action {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+        min-width: 120px;
+    }
+
+    .quantity-controls {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: white;
+    }
+
+    .quantity-btn {
+        width: 32px;
+        height: 32px;
+        border: none;
+        background-color: #f8f9fa;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        transition: background-color 0.2s ease;
+    }
+
+    .quantity-btn:hover {
+        background-color: #e9ecef;
+    }
+
+    .quantity-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .quantity-input {
+        width: 40px;
+        height: 32px;
+        border: none;
+        text-align: center;
+        font-weight: 600;
+        background-color: white;
+    }
+
+    .delete-btn {
+        padding: 0.5rem 1rem;
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .delete-btn:hover {
+        background-color: #c82333;
+        transform: translateY(-1px);
+    }
+
+    @media (max-width: 768px) {
+        .cart-container {
+            padding: 1rem 0.5rem;
+        }
+
+        .wrapper {
+            border-radius: 8px;
+        }
+
+        .cart-header {
+            padding: 1rem 1.5rem;
+        }
+
+        .items-wrapper {
+            padding: 1rem 1.5rem;
+        }
+
+        .item {
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .action {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            min-width: auto;
+        }
+
+        .text-container h3 {
+            font-size: 0.9rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .descriptive-info {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .image-container {
+            width: 100px;
+            height: 100px;
+        }
+
+        .price-info {
+            justify-content: center;
+        }
+    }
+</style>
