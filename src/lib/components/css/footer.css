@@ -1,5 +1,5 @@
 footer nav {
-		position: fixed;
+		position: sticky;
 		bottom: 0;
 		z-index: 100;
 		padding: 1rem 0.5rem;
@@ -10,6 +10,10 @@ footer nav {
 	footer nav ul {
 		display: flex;
 		justify-content: space-around;
+	}
+
+	footer nav ul a{
+		text-decoration: none;
 	}
 
 	footer nav ul li {

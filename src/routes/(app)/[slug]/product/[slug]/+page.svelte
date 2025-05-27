@@ -220,7 +220,17 @@
       <p class="product-brand">{data.Brand}</p>
       <h1 class="product-title">{productName}</h1>
       <p class="product-description">{data.description}</p>
-
+      {#if data.sizeRadio}
+        <h2>select size</h2>
+        <div class="radio-group">
+          {#each data.sizeRadio as size}
+            <div class="radio-button">
+              <input type="radio" id={size} name="price" value={size} onchange={e => productName = `${data.productName}  size=${e.target.value}`}>
+              <label for={size}>{size}</label>
+            </div>
+          {/each}
+        </div>
+      {/if}
       
       <div class="product-price">
         <div class="current-price-wrapper">
@@ -231,6 +241,8 @@
           <span class="previous-price">&#8377;{previousPrice}</span>
         </div>
       </div>
+
+      
       
       
       <form class="add-to-cart-form">
