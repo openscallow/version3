@@ -12,7 +12,8 @@ export async function POST({ request }) {
             total_amount,
             payment_method,
             used_coin,
-            coins_earned
+            coins_earned,
+            productName
         } = await request.json();
 
         console.log('Received data:', {
@@ -24,7 +25,8 @@ export async function POST({ request }) {
             total_amount,
             payment_method,
             used_coin,
-            coins_earned
+            coins_earned,
+            productName
         });
 
         let query = `INSERT INTO customerorders (
@@ -36,8 +38,9 @@ export async function POST({ request }) {
             total_amount,
             payment_method,
             used_coin,
-            coins_earned
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);`;
+            coins_earned,
+            "productName"
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`;
         
         await pool.query(query, [
             customer_id,
@@ -48,7 +51,8 @@ export async function POST({ request }) {
             total_amount,
             payment_method,
             used_coin, 
-            coins_earned
+            coins_earned,
+            productName
         ]);
 
         return new Response(JSON.stringify({ message: 'Order created successfully' }), { status: 200 });

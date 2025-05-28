@@ -32,6 +32,7 @@ let institute_name: string | null = $state(null);
 let coins_earned: number = $state(0);
 let items_count: [string, number] | null = $state(null);
 let assignment_id: string | null = $state(null);
+let productName: string | null = $state(null)
 
 export function get_total_amount(): number {
   return total_amount;
@@ -63,6 +64,8 @@ export function initializeCheckoutData(): void {
     subtotal = Number(pending_order.actualPrice) * Number(pending_order.quantity);
     discount_amount = (Number(pending_order.actualPrice) - Number(pending_order.currentPrice)) * Number(pending_order.quantity);
     total_amount = subtotal - discount_amount;
+
+	productName = pending_order.name;
   }
 
 
@@ -158,7 +161,8 @@ export async function placeOrder(event : any) {
 				total_amount,
 				payment_method,
 				used_coin,
-				coins_earned
+				coins_earned,
+				productName
 			})
 		});
 		
