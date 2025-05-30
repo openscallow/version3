@@ -13,7 +13,9 @@
 </script>
 <Navbar />
 
+<div style="padding-bottom: 5rem;">
 {@render children?.()}
+</div>
 
 <Footer />
 
