@@ -10,8 +10,11 @@
   import Swiper from 'swiper/bundle';
   import { Navigation, FreeMode, Mousewheel } from 'swiper/modules';
   import GetCoin from '$lib/components/getCoin/getCoin.svelte';
+  import { handleCartInsert } from './handleCartInsert';
+  // import Dialog from '$lib/components/svelte/dialog.svelte';
 
   let { data } = $props();
+ 
   
   // Map new data structure to existing variable names
   let productName = data.productName;
@@ -244,10 +247,9 @@
 
       
       
-      
+      <GetCoin coin_rewards={data.coin_rewards} prouctQuantity={productQuantity}/>
       <form class="add-to-cart-form">
         {#if data.stockAvailability > 0}
-        <GetCoin coin_rewards={data.coin_rewards} prouctQuantity={productQuantity}/>
         <div class="product-quantity">
           <button type="button" class="button minus" onclick={decrementQuantity}>
             <img src={minus} alt="Minus Icon" />
@@ -263,6 +265,7 @@
         
 
         {#if data.stockAvailability > 0}
+        <button type="submit" class="button cart-btn" onclick={()=>handleCartInsert(data._id, productQuantity, currentPrice)}> Add to Cart </button>
         <button type="submit" class="button add-btn" onclick={placeOrder}> Buy Now </button>
         {:else}
         <button class="button add-btn" onclick={generateInquiry}> Notify Me  </button>
@@ -277,6 +280,7 @@
   <div class="swiper-wrapper">
     {#each data.relatedProducts as productId}
     <div class="swiper-slide productId{productId}  ">
+      <!-- daisy ui's skelton  -->
       <div class="flex w-52 flex-col gap-4">
         <div class="skeleton h-32 w-full"></div>
         <div class="skeleton h-4 w-28"></div>

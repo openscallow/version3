@@ -307,6 +307,16 @@ a {
     background-color: #ff7d1a;
     box-shadow: 0 15px 15px #ffeadb;
   }
+
+  .product-details-wrapper .add-to-cart-form .cart-btn {
+    width: 100%;
+    margin-top: 15px;
+    padding: 15px 20px;
+    background-color: yellow;
+
+  }
+
+  
   
   @media (min-width: 40em) {
     .product-details-wrapper .add-to-cart-form .add-btn {
