@@ -8,7 +8,7 @@
 
     onMount(async ()=>{
         let customerTierValue = await customerTier();
-        // console.log(typeof(customerTierValue));
+        console.log(customerTierValue);
 
         switch(customerTierValue) {
             case "1":
