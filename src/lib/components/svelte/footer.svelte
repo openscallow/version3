@@ -11,7 +11,7 @@
 	<nav>
 		<ul>
 			<a href="#"><li><House size={20}/><span>Home</span></li></a>
-			<a href="http://" target="_blank" rel="noopener noreferrer">
+			<a href="/cart">
 				<li>
 					<div class="indicator">
 						<span class="indicator-item badge bg-red-500 text-white">
