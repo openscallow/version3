@@ -4,7 +4,7 @@ import { cartId } from '$lib/components/ts/cart';
 export async function  getCartItems() {
     if(hasCart()){
         let cart_id = cartId()
-        console.log(cart_id)
+        // console.log(cart_id)
 
         try {
            let response = await fetch('/api/cart/getCartItems', {
@@ -17,14 +17,14 @@ export async function  getCartItems() {
 
            if(response.ok){
             let {cart_items} = await response.json()
-            console.log(cart_items, "cart items")
+            // console.log(cart_items, "cart items")
             let setOfProducts = new Set()
             cart_items.forEach(cart_item => {
                 setOfProducts.add(cart_item.product_id)
             });
 
             return await getProductsInfoFromMongoDB(Array.from(setOfProducts), cart_items)
-            console.log(productInfo)
+            // console.log(productInfo)
 
             return cart_items;
            }

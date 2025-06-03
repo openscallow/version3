@@ -1,41 +1,23 @@
 <script>
     import { onMount } from 'svelte';
     import { getCartItems } from './getCartItems';
+    import { deleteItem } from './deleteItem'
     import './cart.css';
 
     let products = $state()
+    let subtotal = $state()
+    let callowCoins = $state()
+    let totalItems = $state()
+
+    let isLoading = $state(true)
 
     onMount(async()=>{
         products = await getCartItems()
+        subtotal = products.reduce((accumulator, currentObj) => accumulator + currentObj.currentPrice, 0)
+        callowCoins = products.reduce((accumulator, currentObj) => accumulator + currentObj.coin_rewards.tier1, 0)
+        totalItems = products.reduce((accumulator, currentObj) => accumulator + currentObj.quantity, 0)
         console.log('page svelte', products)
     })
-    //  products = [
-    //     {
-    //         name: "4 Compartments Plastic Pen, Pencil Holder | પેન હોલ્ડર",
-    //         mrp: 186,
-    //         currentPrice: 120,
-    //         quantity: 2,
-    //         img: "https://rukminim2.flixcart.com/image/1150/1350/k4k7f680/desk-organizer/e/c/h/1727c-pen-pencil-holder-elite-clear-colour-omega-original-imafng2vftcutpht.jpeg"
-    //     },
-    //     {
-    //         name: "4 Compartments Plastic Pen, Pencil Holder | પેન હોલ્ડર",
-    //         mrp: 186,
-    //         currentPrice: 120,
-    //         quantity: 2,
-    //         img: "https://rukminim2.flixcart.com/image/1150/1350/k4k7f680/desk-organizer/e/c/h/1727c-pen-pencil-holder-elite-clear-colour-omega-original-imafng2vftcutpht.jpeg"
-    //     },
-    //     {
-    //         name: "4 Compartments Plastic Pen, Pencil Holder | પેન હોલ્ડર",
-    //         mrp: 186,
-    //         currentPrice: 120,
-    //         quantity: 2,
-    //         img: "https://rukminim2.flixcart.com/image/1150/1350/k4k7f680/desk-organizer/e/c/h/1727c-pen-pencil-holder-elite-clear-colour-omega-original-imafng2vftcutpht.jpeg"
-    //     }
-    // ];
-
-    // Calculate totals
-    let totalItems = 5 //products.reduce((sum, product) => sum + product.quantity, 0);
-    let subtotal = 0  // products.reduce((sum, product) => sum + (product.currentPrice * product.quantity), 0);
 
     // Calculate discount percentage
     function getDiscountPercentage(mrp, currentPrice) {
@@ -43,19 +25,25 @@
     }
 
 
-    function deleteItem(index) {
-        products = products.filter((_, i) => i !== index);
-    }
+    // function deleteItem(index) {
+    //     products = products.filter((_, i) => i !== index);
+    // }
 
     function proceedToBuy() {
         alert(`Proceeding to checkout with ${totalItems} items worth ₹${subtotal}`);
     }
 </script>
+<!-- {#if isLoading} -->
+    <div class="overlay">
+        <div class="spinner">dfddfdfgdfdfgdfgd</div>
+    </div>
+<!-- {/if} -->
 
 <div class="cart-container">
     <div class="wrapper">
         <div class="cart-header">
             <h1>Subtotal: ₹{subtotal}</h1>
+            <h1 style="font-size: 1rem;">Earn callow coins: ₹{callowCoins}</h1>
             <button class="proceed-btn" onclick={proceedToBuy}>
                 Proceed to buy ({totalItems} items)
             </button>
@@ -69,7 +57,7 @@
                             <img src={product.images[0]} alt="Product">
                         </div>
                         <div class="text-container">
-                            <h3>{product.productName}</h3>
+                            <h3>{product.productName}</h3> 
                             <div class="price-info">
                                 <span class="discount">-{getDiscountPercentage(product.mrp, product.currentPrice)}%</span>
                                 <span class="current-price">₹{product.currentPrice}</span>
@@ -83,7 +71,7 @@
                             <input type="number" class="quantity-input" bind:value={product.quantity} readonly>
                             <button class="quantity-btn" readonly>+</button>
                         </div>
-                        <button class="delete-btn" onclick={() => deleteItem(index)}>Delete</button>
+                        <button class="delete-btn" onclick={() => deleteItem(product.cart_item_id, product.cart_id, products, index)}>Delete</button>
                     </div>
                 </div>
             {/each}
@@ -91,10 +79,10 @@
     </div>
 </div>
 
+
+
 <style>
     :global(*) {
         box-sizing: border-box;
     }
-
-    
 </style>
