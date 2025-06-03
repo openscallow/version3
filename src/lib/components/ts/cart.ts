@@ -1,7 +1,14 @@
 import { customerId } from '$lib/components/ts/customer_correlated.svelte';
 
 export function hasCart(): boolean{
-    return localStorage.getItem('cart') !== null;
+    if (typeof window !== 'undefined' && typeof document !== 'undefined'){
+        return localStorage.getItem('cart') !== null; 
+    }
+    return false;
+}
+
+export function cartId(){
+    return JSON.parse(localStorage.getItem('cart')).i
 }
 
 export async function getUserCart(id: string | null = customerId()): Promise<{ i: number; u: string } | undefined> {
