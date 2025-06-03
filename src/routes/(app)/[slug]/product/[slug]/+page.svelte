@@ -11,6 +11,7 @@
   import { Navigation, FreeMode, Mousewheel } from 'swiper/modules';
   import GetCoin from '$lib/components/getCoin/getCoin.svelte';
   import { handleCartInsert } from './handleCartInsert';
+  import { updateViewCount } from './updateViewCount'
   // import Dialog from '$lib/components/svelte/dialog.svelte';
 
   let { data } = $props();
@@ -121,6 +122,14 @@
       image: images[0], // Using first image as thumbnail
       price: currentPrice,
     });
+
+    try {
+      updateViewCount(data._id)
+    } catch (error) {
+      console.log("updating product does not work")
+    }
+
+    
 
     const swiper = new Swiper('.swiper', swiperConfig);
   });
