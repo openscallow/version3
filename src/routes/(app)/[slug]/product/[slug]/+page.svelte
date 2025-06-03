@@ -13,6 +13,8 @@
   import { handleCartInsert } from './handleCartInsert';
   import { updateViewCount } from './updateViewCount'
   // import Dialog from '$lib/components/svelte/dialog.svelte';
+  import { customerId } from '$lib/components/ts/customer_correlated.svelte'
+  import { browsingHistory } from './browsingHistory';
 
   let { data } = $props();
  
@@ -127,6 +129,10 @@
       updateViewCount(data._id)
     } catch (error) {
       console.log("updating product does not work")
+    }
+
+    if(customerId()){
+      browsingHistory(data._id)
     }
 
     

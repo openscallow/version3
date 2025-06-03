@@ -10,7 +10,7 @@ export async function updateViewCount(productId) {
         console.log(response)
 
         if(response.ok){
-            alert(`updated product count`)
+            return
         }
     } catch (error) {
         console.log(error)
