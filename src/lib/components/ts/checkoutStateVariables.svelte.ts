@@ -14,6 +14,7 @@ export interface PendingOrder {
   actualPrice: number;
   currentPrice: number;
   coins_earned: number;
+  cart_id: number | null;
 }
 
 // Initial state
@@ -33,6 +34,7 @@ let coins_earned: number = $state(0);
 let items_count: [string, number] | null = $state(null);
 let assignment_id: string | null = $state(null);
 let productName: string | null = $state(null)
+let cart_id: number | null = $state(null)
 
 export function get_total_amount(): number {
   return total_amount;
@@ -66,6 +68,10 @@ export function initializeCheckoutData(): void {
     total_amount = subtotal - discount_amount;
 
 	productName = pending_order.name;
+  }
+
+  if(pending_order && pending_order.cart_id){
+	cart_id =  Number(pending_order?.cart_id);
   }
 
 
@@ -144,7 +150,9 @@ export async function placeOrder(event : any) {
 		total_amount,
 		payment_method,
 		used_coin,
-		coins_earned
+		coins_earned,
+		productName,
+		cart_id
 	});
 	try {
 		const response = await fetch('/checkout', {
@@ -162,7 +170,8 @@ export async function placeOrder(event : any) {
 				payment_method,
 				used_coin,
 				coins_earned,
-				productName
+				productName,
+				cart_id
 			})
 		});
 		
@@ -180,6 +189,12 @@ function handleSuccessfulOrder() {
 	// Update coin balance if coins were used
 	if (used_coin) {
 		updateCustomerCoins(coin_balance - used_coin)
+	}
+
+	// handle cart
+	if(cart_id){
+		localStorage.removeItem('cart')
+		markCartAsConverted(cart_id)
 	}
 	
 	// Clear pending_order from session
@@ -225,5 +240,25 @@ async function updateCouponUsage() {
 		}
 	} catch (error) {
 		console.error("Failed to update coupon usage:", error);
+	}
+}
+
+async function markCartAsConverted(cart_id: any){
+	try {
+		const response = await fetch('/api/cart/markCartAsConverted', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ cart_id })
+		});
+
+		if(response.ok) {
+			console.log("cart status change")
+			return
+		}
+	
+	} catch (error) {
+		console.log(error)
 	}
 }

@@ -36,7 +36,7 @@ export async function  getCartItems() {
 }
 
 async function getProductsInfoFromMongoDB(productIds, cart_items) {
-    console.log(JSON.stringify(productIds), "from product")
+    // console.log(JSON.stringify(productIds), "from product")
 
     try {
         let response = await fetch('/api/cart/getProductsInfoFromMongoDB', {
@@ -50,7 +50,7 @@ async function getProductsInfoFromMongoDB(productIds, cart_items) {
             let products = await response.json()
             let finalProducts = cart_items.map(item => {
                 const id = item.product_id;
-                console.log(id)
+                // console.log(id)
                 // Find the corresponding item in cart_items
                 const matchingCartItem = products.find(product => product._id === id);
 

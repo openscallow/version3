@@ -13,7 +13,8 @@ export async function POST({ request }) {
             payment_method,
             used_coin,
             coins_earned,
-            productName
+            productName,
+            cart_id
         } = await request.json();
 
         console.log('Received data:', {
@@ -39,8 +40,9 @@ export async function POST({ request }) {
             payment_method,
             used_coin,
             coins_earned,
-            "productName"
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`;
+            "productName",
+            cart_id
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`;
         
         await pool.query(query, [
             customer_id,
@@ -52,7 +54,8 @@ export async function POST({ request }) {
             payment_method,
             used_coin, 
             coins_earned,
-            productName
+            productName,
+            cart_id
         ]);
 
         return new Response(JSON.stringify({ message: 'Order created successfully' }), { status: 200 });

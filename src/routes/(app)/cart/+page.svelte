@@ -2,12 +2,14 @@
     import { onMount } from 'svelte';
     import { getCartItems } from './getCartItems';
     import { deleteItem } from './deleteItem'
+    import { proceedToBuyWithCart } from './proceedToBuyWithCart'
     import './cart.css';
 
     let products = $state()
     let subtotal = $state()
     let callowCoins = $state()
     let totalItems = $state()
+    let mrp = $state()
 
     let isLoading = $state(true)
 
@@ -16,7 +18,8 @@
         subtotal = products.reduce((accumulator, currentObj) => accumulator + currentObj.currentPrice, 0)
         callowCoins = products.reduce((accumulator, currentObj) => accumulator + currentObj.coin_rewards.tier1, 0)
         totalItems = products.reduce((accumulator, currentObj) => accumulator + currentObj.quantity, 0)
-        console.log('page svelte', products)
+        mrp = products.reduce((accumulator, currentObj) => accumulator + currentObj.mrp, 0)
+        // console.log('page svelte', products)
     })
 
     // Calculate discount percentage
@@ -29,22 +32,15 @@
     //     products = products.filter((_, i) => i !== index);
     // }
 
-    function proceedToBuy() {
-        alert(`Proceeding to checkout with ${totalItems} items worth ₹${subtotal}`);
-    }
+    
 </script>
-<!-- {#if isLoading} -->
-    <div class="overlay">
-        <div class="spinner">dfddfdfgdfdfgdfgd</div>
-    </div>
-<!-- {/if} -->
 
 <div class="cart-container">
     <div class="wrapper">
         <div class="cart-header">
             <h1>Subtotal: ₹{subtotal}</h1>
             <h1 style="font-size: 1rem;">Earn callow coins: ₹{callowCoins}</h1>
-            <button class="proceed-btn" onclick={proceedToBuy}>
+            <button class="proceed-btn" onclick={()=> proceedToBuyWithCart(totalItems, subtotal, callowCoins, mrp)}>
                 Proceed to buy ({totalItems} items)
             </button>
         </div>
