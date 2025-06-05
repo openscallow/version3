@@ -119,7 +119,7 @@
         </button>
 
             <h2 class="card-title text-lg font-semibold">
-                School Name: <span contenteditable class="border-b border-gray-300 focus:outline-none"></span>
+                School Name: <br/> <p contenteditable class="border-b border-gray-300 focus:outline-none"></p>
             </h2>
             <div>
                 <label class="block text-sm font-medium text-gray-700">
@@ -161,3 +161,5 @@
 
    
 </main>
+
+
