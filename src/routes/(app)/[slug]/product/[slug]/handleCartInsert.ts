@@ -3,7 +3,8 @@ import { insertProductIntoCart } from '$lib/components/ts/insertProductIntoCart'
 export async function handleCartInsert(
     product_id: string, 
     Quantity: number, 
-    currentPrice: number): Promise<void> {
+    currentPrice: number,
+    productName: string): Promise<void> {
 
     let cart: { i: number; u: number } | null = null;
 
@@ -34,7 +35,7 @@ export async function handleCartInsert(
 
     if(cart !== null) {
         try {
-           await insertProductIntoCart({cart_id: cart.i, product_id, quantity: Quantity, price_at_addition: currentPrice}) 
+           await insertProductIntoCart({cart_id: cart.i, product_id, quantity: Quantity, price_at_addition: currentPrice, productName}) 
            console.log('fuck product inserted into cart')
         } catch (error) {
             // use telemetry

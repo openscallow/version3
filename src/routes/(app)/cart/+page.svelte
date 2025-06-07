@@ -53,7 +53,7 @@
                             <img src={product.images[0]} alt="Product">
                         </div>
                         <div class="text-container">
-                            <h3>{product.productName}</h3> 
+                            <h3>{product.productname}</h3> 
                             <div class="price-info">
                                 <span class="discount">-{getDiscountPercentage(product.mrp, product.currentPrice)}%</span>
                                 <span class="current-price">₹{product.currentPrice}</span>

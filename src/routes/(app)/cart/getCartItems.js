@@ -62,8 +62,9 @@ async function getProductsInfoFromMongoDB(productIds, cart_items) {
                     };
                 }
             });
+              console.log(finalProducts, 'final product')
             return finalProducts
-            console.log(finalProducts, 'final product')
+          
         }
 
 

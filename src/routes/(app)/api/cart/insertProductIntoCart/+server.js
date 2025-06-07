@@ -1,13 +1,13 @@
 import { pool } from '$lib/db/config.js';
 
 export async function POST({ request }) {
-    const { cart_id, product_id, quantity, price_at_addition } = await request.json();
+    const { cart_id, product_id, quantity, price_at_addition, productName } = await request.json();
 
     try {
         const query = `
-            INSERT INTO cart_items(cart_id, product_id, quantity, price_at_addition)
-            VALUES ($1, $2, $3, $4);`;
-        await pool.query(query, [cart_id, product_id, quantity, price_at_addition]);
+            INSERT INTO cart_items(cart_id, product_id, quantity, price_at_addition, productName)
+            VALUES ($1, $2, $3, $4, $5);`;
+        await pool.query(query, [cart_id, product_id, quantity, price_at_addition, productName]);
 
         return new Response(JSON.stringify({ message: 'Item added to cart'}), {
             status: 201,

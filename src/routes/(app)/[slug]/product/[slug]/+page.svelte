@@ -280,7 +280,7 @@
         
 
         {#if data.stockAvailability > 0}
-        <button type="submit" class="button cart-btn" onclick={()=>handleCartInsert(data._id, productQuantity, currentPrice)}> Add to Cart </button>
+        <button type="submit" class="button cart-btn" onclick={()=>handleCartInsert(data._id, productQuantity, currentPrice, productName)}> Add to Cart </button>
         <button type="submit" class="button add-btn" onclick={placeOrder}> Buy Now </button>
         {:else}
         <button class="button add-btn" onclick={generateInquiry}> Notify Me  </button>

@@ -3,20 +3,23 @@
     product_id: string;
     quantity: number;
     price_at_addition: number;
+    productName: string;
 }
 
-export async function insertProductIntoCart({ cart_id, product_id, quantity, price_at_addition }: CartProduct): Promise<void> {
+export async function insertProductIntoCart({ cart_id, product_id, quantity, price_at_addition, productName }: CartProduct): Promise<void> {
     try {
         const response = await fetch('/api/cart/insertProductIntoCart', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ cart_id, product_id, quantity, price_at_addition })
+            body: JSON.stringify({ cart_id, product_id, quantity, price_at_addition, productName })
         });
 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
+        }else{
+            alert('product add into cart')
         }
 
         const result = await response.json();
