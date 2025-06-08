@@ -1,17 +1,23 @@
 <script>
+    import { onMount } from 'svelte';
     import { getProductImageSrc } from '$lib/components/ts/getProductImageSrc';
+    import { getCartItems } from '$lib/components/ts/getCartItems';
     import { handelCancel } from './handelCancel';
     import { getDeliveryWindow } from './getDeliveryWindow';
 
     let {
-        productId,
-        productName,  
+        cart_id,
         total, 
         instituteName, 
         discount, 
-        qunatity,
         order_id
     } = $props()
+
+    let products = $state()
+
+    onMount(async ()=> {
+        products = await getCartItems(cart_id)
+    })
 
     let unOrderList; //ul
     let collapsible; //button
@@ -32,27 +38,28 @@
 </script>
 
 <div class="product-card">
-    <div class="product-summary">
-        <figure>
-            {#await getProductImageSrc(productId)}
-                <p>fetching product imag...</p>
-            {:then value}
-                <img src={value} alt="product short description">
-            {:catch error}
-                <p>Something went wrong: {error.message}</p>
-            {/await} 
-        </figure>
-        <div class="info">
-            <h2>{productName}</h2>
-            <p><b>total: ₹{total}</b></p>   
-        </div>
-    </div>
+    {#each products as product}
+        <div class="product-summary"> 
+            <figure>
+                {#await getProductImageSrc(product.product_id)}
+                    <p>fetching product imag...</p>
+                {:then value}
+                    <img src={value} alt="product short description">
+                {:catch error}
+                    <p>Something went wrong: {error.message}</p>
+                {/await} 
+            </figure>
+            <div class="info">
+                <h2>{product.productname}</h2>
+                <p><b>quantity: {product.quantity}</b></p>   
+            </div> 
+        </div>  
+    {/each}
     <div class="product-actions">
         <ul bind:this={unOrderList}>
             <li>school: {instituteName}</li>
             <li>mrp: ₹{Number(discount) + Number(total)}.00</li>
             <li>discount: ₹{discount}</li>
-            <li>quantity: {qunatity}</li>
             <li>delivery: 
                 {#await getDeliveryWindow(instituteName)}
                     <span>Loading...</span>
@@ -75,12 +82,19 @@
         border-radius: 3px;
         border-color: black;
         background-color: white;
+        border-top-width: 5px;
+        border-top-color: goldenrod;
     }
 
     .product-summary{
         padding: 1rem;
         display: flex;
         gap: 1rem;
+        border-bottom: 1px grey dashed;
+    }
+    
+    .product-card > :nth-last-child(2) {
+        border: none;
     }
 
     .product-summary figure{
@@ -126,11 +140,11 @@
         margin-top: 1rem;
     }
 
-    ul li:nth-child(5) {
+    ul li:nth-child(4) {
         margin-bottom: 1rem;
     }
 
-    ul li:nth-child(6) {
+    ul li:nth-child(5) {
         padding-top: 0.5rem;
         padding-bottom: 0.5rem;
         border-top-style: dashed;

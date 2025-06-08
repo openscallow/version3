@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import OrderCard from './OrderCard.svelte';
+  import OrderCart from './OrderCart.svelte';
   import { customerId } from '$lib/components/ts/customer_correlated.svelte';
   import { getCustomerOrders } from '$lib/components/ts/getCustomerOrders';
   
@@ -19,15 +20,23 @@
 </script>
 <main>
   {#each orders as order}
-    <OrderCard 
-          productId={order.items_count[0]}
-          productName={order.productName} 
-          total={order.total_amount} 
-          instituteName={order.institute_name} 
-          discount={order.discount_amount}
-          qunatity={order.items_count[1]}
-          order_id={order.order_id}
-          />
+    {#if order.cart_id}
+      <OrderCart 
+      cart_id={order.cart_id}
+      total={order.total_amount} 
+      instituteName={order.institute_name} 
+      discount={order.discount_amount}
+      order_id={order.order_id}/>
+    {:else}
+      <OrderCard 
+      productId={order.items_count[0]}
+      productName={order.productName} 
+      total={order.total_amount} 
+      instituteName={order.institute_name} 
+      discount={order.discount_amount}
+      qunatity={order.items_count[1]}
+      order_id={order.order_id}/>
+    {/if}
   {/each}
 </main>
 
