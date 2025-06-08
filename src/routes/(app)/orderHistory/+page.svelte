@@ -1,6 +1,7 @@
 <script>
   import '@tailwind';
   import { onMount } from 'svelte';
+  import OrderCard from './OrderCard.svelte';
 
   let isLoading = $state(true);
   let orders = $state([]);
@@ -134,6 +135,15 @@
     }
   }
 </script>
+<div class="main">
+  <OrderCard />
+</div>
+
+<style>
+  .main{
+    padding: 1rem;
+  }
+</style>
 
 <main>
   {#if isLoading}
@@ -148,7 +158,7 @@
           <figure class="aspect-[3/4] w-[200px] object-scale-down">
             <img 
               src={product.images?.[0] || '/placeholder-image.jpg'}
-              alt={product.productName || 'Product image'} />
+              alt={product.productName || 'Product'} />
           </figure>
           <div class="card-body">
             <h2 class="card-title">
