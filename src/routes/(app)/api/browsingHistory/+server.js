@@ -1,5 +1,11 @@
-import { env } from '$env/dynamic/private';
+import path from 'path';
 import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
+import { env } from '$env/dynamic/private';
+import logtail from '$config/logtail.server';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 dotenv.config();
 
 import { MongoClient, ServerApiVersion, ObjectId } from 'mongodb';
@@ -34,13 +40,18 @@ export async function POST({ request }) {
             );
         }
 
-        console.log('Product updated successfully');
-
         return new Response(
             JSON.stringify({ message: "Product updated successfully" }),
             { status: 200, headers: { 'Content-Type': 'application/json' } }
         );
     } catch (error) {
+        logtail.error(error, {
+            file: path.basename(__filename),
+            directory: __dirname,
+            productVisitInfo,
+        })
+        logtail.flush()
+        
         console.error('Error updating product:', error);
         return new Response(
             JSON.stringify({ error: 'An error occurred while updating the product' }),

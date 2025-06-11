@@ -8,7 +8,8 @@ export default defineConfig({
 	  },
 	resolve:{
 		alias:{
-			'@tailwind':path.resolve('./src/tailwind.css')
+			'@tailwind':path.resolve('./src/tailwind.css'),
+			'$config':path.resolve('./src/config')
 		}
 	}
 });
