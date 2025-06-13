@@ -2,6 +2,7 @@
   import '@tailwind'
   import './style.css'
   import uuid from '$lib/utils/uuid.js'
+  import logtail from '$config/logtail.client';
 
     let otpInputs = $state(['', '', '', '']);
   
@@ -50,6 +51,10 @@
 
         if(response.ok){
           if(typeof window !== 'undefined' && window.sessionStorage){
+            logtail.info('New Customer created', {
+              customer_name,
+            })
+            logtail.flush()
             localStorage.setItem('customer_correlated', JSON.stringify({i:customer_id, r:customer_referral_code}))
             sessionStorage.getItem('userData') ?  window.location.href = '/order' : window.location.href = '/'
             
@@ -57,6 +62,11 @@
         }
         
       } catch (error) {
+        logtail.info(error, {
+          customer_name,
+          customer_mobile
+        })
+        logtail.flush()
         console.log(error)
       }
     }

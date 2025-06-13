@@ -7,6 +7,10 @@
   import { page } from '$app/stores';
   import { onMount } from 'svelte';
   import  checkUserAccount  from './accounts/user_exists_check';
+  import logtail from '$config/logtail.client';
+    import { customerId } from '$lib/utils/customerCorrelated';
+
+
   let isLoading = $state(false)
   let loadingButton
   let username = $state('')
@@ -60,6 +64,11 @@
       let userPresent = await checkUserAccount()
       console.log(userPresent)
       if(!userPresent){
+        logtail.info('New signup initiated.', {
+          username,
+          mobileNumber,
+        })
+        logtail.flush()
         window.location.href = `./MVCFOROTP?${mobileNumber}`;
       }else{
         isLoading = false
