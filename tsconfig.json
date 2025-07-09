@@ -5,7 +5,11 @@
       "types": ["@sveltejs/kit"],
       "allowJs": true,
       "resolveJsonModule": true,
-      "esModuleInterop": true
+      "esModuleInterop": true,
+      "paths": {
+        "$config/*": ["./src/config/*"],
+        "$lib/*": ["./src/lib/*"],
+      }
     }
   }
   

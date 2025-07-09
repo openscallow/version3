@@ -94,7 +94,7 @@ export function applyPromoCodeIfAvailable() {
 		promo_code = sessionStorage.getItem('coupon');
 		assignment_id = sessionStorage.getItem('assignment_id');
 		
-		if (hasDiscountPercentage) {
+		if (hasDiscountPercentage !== 'null') {
 			const percentageDiscount = sessionStorage.getItem('discount_percentage');
 			promo_code_val = percentageDiscount;
 			total_amount = Math.floor(subtotal - (subtotal * (promo_code_val / 100)) - discount_amount);
@@ -102,7 +102,8 @@ export function applyPromoCodeIfAvailable() {
 		} else {
 			const amountDiscount = sessionStorage.getItem('discountamount');
 			promo_code_val = amountDiscount;
-			total_amount = Math.floor(subtotal - parseInt(promo_code_val) - discount_amount);
+			// used ternary operator 
+			total_amount = Math.floor(subtotal - parseInt(promo_code_val) - discount_amount) > 0 ? Math.floor(subtotal - parseInt(promo_code_val) - discount_amount) : 0;
 			promo_code_val = `₹${promo_code_val}`;
 		}
 	}
