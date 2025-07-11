@@ -3,12 +3,9 @@
     import CheckoutStepper from '$lib/components/svelte/CheckoutStepper.svelte';
     import PaymentMethods from '$lib/components/svelte/PaymentMethods.svelte';
     import PaymentDetails from '$lib/components/svelte/PaymentDetails.svelte';
-    import userRedirct from './utility/userRedirect'
-    import { 
-        customerId, 
-        customerReferralCode, 
-        customerCallowCoins 
-    } from '$lib/components/ts/customer_correlated.svelte.ts'; 
+    import userRedirct from './utility/userRedirect';
+    import addPotentialCustomer from './utility/addPotentialCustomer'
+    
     
     import { 
         initializeCheckoutData, 
@@ -24,6 +21,9 @@
         setTimeout(()=>{
             disabled = false
         }, 2000)
+
+        addPotentialCustomer()
+
 
         initializeCheckoutData()
         applyPromoCodeIfAvailable()
