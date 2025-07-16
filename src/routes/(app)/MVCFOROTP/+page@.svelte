@@ -2,9 +2,7 @@
     import { onMount } from 'svelte';
     import { page } from '$app/stores';
     import LoadingState from "$lib/components/loadingState.svelte";
-    // import { Browser as Logtail } from "@logtail/js";
-    // import { Node as Logtail } from "@logtail/js";
-    import { Logtail } from "@logtail/browser";
+    import logtail from '$config/logtail.client';
 
     // Constants
     const API_KEY = 'Y3f8PIlhmNXutAwTs2yqvKbCEcO4G50SMoWiVek6j7ZHUadF1Ru0GpFV7SvHtWsw5nZzDYIxB3MCRKXL';
@@ -72,11 +70,21 @@
      */
     async function handleApiResponse(response) {
         if (!response.ok) {
+            
             const errorDetails = await response.text();
+            logtail.error("Failed to send OTP", {
+                mobile,
+                http_status: response.status,
+                response_body: response.statusText,
+                errorDetails
+            });
+            logtail.flush();
             throw new Error(`Network response was not ok: ${response.status} - ${response.statusText} - ${errorDetails}`);
         }
         
         const data = await response.json();
+        logtail.info('OTP sent successfully')
+        logtail.flush()
         message = 'OTP sent successfully';
         console.log('OTP sent successfully:', data);
         window.location.href = '../otp';
@@ -87,9 +95,6 @@
      * @param {Error} error - The error object
      */
     function handleError(error) {
-        const logtail = new Logtail("m4G2kr8ETWJuK7fVDaaBjEtf", {
-            endpoint: 'https://s1242138.eu-nbg-2.betterstackdata.com',
-        });
 
         logtail.error("Error sending OTP:", error, {
             mobile: mobile,

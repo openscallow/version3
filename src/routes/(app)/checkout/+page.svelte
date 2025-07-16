@@ -17,7 +17,7 @@
     onMount(()=>{
         userRedirct()
 
-        // active placeOrder button after 2 second
+        // active placeOrder button after 2 seconds
         setTimeout(()=>{
             disabled = false
         }, 2000)
