@@ -1,0 +1,140 @@
+*, *::before, *::after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.section-hero {
+    width: 100%;
+    height: 40vh;
+    position: relative;
+}
+
+.section-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(90%) contrast(90%);
+}
+.section-hero .content{
+    width: 100%;
+    height: 40vh;
+    color:white;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top:0;
+}
+
+/* ROOT VARIABLES FOR EASY CUSTOMIZATION */
+:root {
+  --card-bg: #fff;
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --card-hover-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  --text-primary: #1a202c;
+  --text-secondary: #5a677d;
+  --border-radius-md: 10px;
+  --transition-fast: 0.2s ease-in-out;
+}
+
+/* BASIC BODY STYLES */
+/* body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+} */
+
+/* SECTION WRAPPER */
+.section-blog {
+  display: grid;
+  /* Adjust minmax to prevent cards from becoming too wide on tablets */
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* MODERN BLOG CARD */
+.blog-card {
+  background: var(--card-bg);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--card-shadow);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  overflow: hidden; /* Clips the image corners */
+  display: flex;
+  flex-direction: column;
+  position: relative; /* Required for the stretched link */
+}
+
+.blog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-hover-shadow);
+}
+
+/* CARD IMAGE */
+.blog-card .img {
+  /* Set a fixed aspect ratio for uniform image heights */
+  aspect-ratio: 16 / 9;
+}
+
+.blog-card .img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Prevents image distortion */
+}
+
+/* CARD CONTENT & TYPOGRAPHY */
+.blog-card .content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Pushes meta-data to the bottom */
+}
+
+/* Reset default margins for precise spacing */
+.blog-card h2, .blog-card p {
+  margin: 0;
+}
+
+.blog-card .title h2 {
+  font-size: 1.25rem;
+  line-height: 1.3;
+  margin-bottom: 0.75rem;
+}
+
+/* The title link should be visually distinct and above the stretched link */
+.blog-card .title a {
+  color: var(--text-primary);
+  text-decoration: none;
+  position: relative; /* Allow z-index to work */
+  z-index: 1;
+}
+
+.blog-card .title a:hover {
+  text-decoration: underline;
+}
+
+.blog-card .description p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* CARD METADATA */
+.blog-card .meta-data {
+  padding: 1rem 1.5rem;
+  margin-top: auto; /* Pushes itself to the bottom */
+  padding-top: 1rem;
+  border-top: 1px solid #eef2f7;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+/* STRETCHED LINK FOR FULLY CLICKABLE CARD */
+.blog-card .card-link::after {
+  content: '';
+  position: absolute;
+  inset: 0; /* A shorthand for top, right, bottom, left = 0 */
+  z-index: 0; /* Sits below the title link */
+}
