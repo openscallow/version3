@@ -50,10 +50,10 @@
   display: grid;
   /* Adjust minmax to prevent cards from becoming too wide on tablets */
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 2rem;
-  padding: 2rem;
-  max-width: 1280px;
-  /* margin: 0 auto; */
+  /* gap: 2rem; */
+  padding: 1rem;
+  /* max-width: 1280px; */
+  /* margin: 0 auto;it */
 }
 
 /* MODERN BLOG CARD */
