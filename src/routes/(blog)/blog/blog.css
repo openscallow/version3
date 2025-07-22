@@ -13,7 +13,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: brightness(90%) contrast(90%);
+    filter: brightness(70%) contrast(90%);
 }
 .section-hero .content{
     width: 100%;
@@ -45,27 +45,79 @@
   margin: 0;
 } */
 
-/* SECTION WRAPPER */
+/* FIXED BLOG SECTION */
 .section-blog {
   display: grid;
-  /* Adjust minmax to prevent cards from becoming too wide on tablets */
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 2rem;
+  /* More flexible grid that works better on mobile */
+  grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
+  gap: 1.5rem; /* Slightly reduced gap for mobile */
   padding: 1rem;
-  /* max-width: 1280px; */
-  /* margin: 0 auto;it */
+  /* Prevent horizontal overflow */
+  width: 100%;
+  box-sizing: border-box;
+  
+  /* Add responsive breakpoints */
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr; /* Single column on small screens */
+    gap: 1rem;
+    padding: 0.75rem;
+  }
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  
+  @media (min-width: 1025px) {
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    max-width: 1280px;
+    margin: 0 auto;
+  }
 }
 
-/* MODERN BLOG CARD */
+/* FIXED BLOG CARD */
 .blog-card {
   background: var(--card-bg);
   border-radius: var(--border-radius-md);
   box-shadow: var(--card-shadow);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-  overflow: hidden; /* Clips the image corners */
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  position: relative; /* Required for the stretched link */
+  position: relative;
+  
+  /* Key fixes for mobile issues */
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  
+  /* Ensure minimum height and proper spacing */
+  min-height: 300px;
+  
+  /* Fix potential border issues */
+  border: 1px solid transparent; /* Fallback border */
+  
+  /* Prevent content overflow */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  
+  /* Mobile-specific fixes */
+  @media (max-width: 768px) {
+    margin: 0;
+    border-radius: 8px; /* Smaller radius on mobile */
+    /* Ensure proper spacing from viewport edges */
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+/* Additional helper class if cards still have issues */
+.blog-card * {
+  box-sizing: border-box;
+}
+
+/* If you're still having border visibility issues, add this */
+.blog-card-debug {
+  border: 2px solid #ff0000 !important; /* Temporary red border for debugging */
 }
 
 .blog-card:hover {
