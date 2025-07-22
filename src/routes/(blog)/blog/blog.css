@@ -50,7 +50,7 @@
   display: grid;
   /* Adjust minmax to prevent cards from becoming too wide on tablets */
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  /* gap: 2rem; */
+  gap: 2rem;
   padding: 1rem;
   /* max-width: 1280px; */
   /* margin: 0 auto;it */
@@ -69,7 +69,7 @@
 }
 
 .blog-card:hover {
-  transform: translateY(-4px);
+  /* transform: translateY(-4px); */
   box-shadow: var(--card-hover-shadow);
 }
 
