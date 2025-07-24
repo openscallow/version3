@@ -11,6 +11,23 @@
 <div class="section-blog">
   <div class="blog-card">
     <div class="img">
+        <img src="/resingCoaching.webp" alt="A student reading a book."> 
+    </div>
+    <div class="content">
+      <div class="title">
+        <h2><a href="/blog/indias-coaching-industry-and-education-spending-divide">The Price of Aspiration: Decoding India's ₹31,000 Crore Coaching Bill and the Great Education Divide</a></h2>
+      </div>
+      <div class="description">
+        <p>A deep dive into India's education landscape, from the booming ₹31,000 crore coaching industry to the persistent spending divide between urban and rural families. Understand the true cost of aspiration in modern India.</p>
+      </div>
+    </div>
+    <div class="meta-data">
+        <span>📅 July 19, 2025</span>
+    </div>
+    <a href="/blog/indias-coaching-industry-and-education-spending-divide" class="card-link" aria-label="Read more about the new curriculum"></a>
+  </div>
+  <div class="blog-card">
+    <div class="img">
       <img src="/ncertbook.webp" alt="Students collaborating in a classroom.">
     </div>
     <div class="content">
@@ -22,28 +39,12 @@
       </div>
     </div>
     <div class="meta-data">
-      <span>📅 July 21, 2025</span>
+      <span>📅 Jun 20, 2025</span>
     </div>
     <a href="/blog/ncert-new-textbooks-nep-2020-education-policy" class="card-link" aria-label="Read more about NCERT's new books"></a>
   </div>
 
-  <div class="blog-card">
-    <div class="img">
-        <img src="https://media.istockphoto.com/id/814423752/photo/eye-of-model-with-colorful-art-make-up-close-up.jpg?s=612x612&w=0&k=20&c=l15OdMWjgCKycMMShP8UK94ELVlEGvt7GmB_esHWPYE=" alt="A student reading a book."> 
-    </div>
-    <div class="content">
-      <div class="title">
-        <h2><a href="#">New Curriculum Focuses on Skills</a></h2>
-      </div>
-      <div class="description">
-        <p>The latest curriculum update emphasizes practical skills and critical thinking over rote memorization.</p>
-      </div>
-    </div>
-    <div class="meta-data">
-        <span>✍️ By Jane Doe</span>
-    </div>
-    <a href="#" class="card-link" aria-label="Read more about the new curriculum"></a>
-  </div>
+  
 
   <div class="blog-card">
     <div class="img">
