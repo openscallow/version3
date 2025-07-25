@@ -1,0 +1,102 @@
+
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    .core-details-container {
+        margin-bottom: 10px;
+    }
+
+    .core-details-header {
+        margin-bottom: 8px;
+        display:  flex;
+        justify-content: space-between;
+    }
+
+    .core-details-body {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border-top: 1px solid rgba(128, 128, 128, 0.379);
+        border-left: 1px solid rgba(128, 128, 128, 0.379);
+        border-right: 1px solid rgba(128, 128, 128, 0.379);
+        border-radius: 3px;
+        background-color: rgba(255, 255, 255, 0.612); 
+       
+    }
+
+    .core-details-body div {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.379);
+    }
+
+    .core-details-body div .label{
+        width: 70%;
+        padding: 0.7rem;
+        background-color: #eaeaea74;
+    }
+
+    .core-details-body div .value{
+        width: 100%;
+        padding: 0.5rem;
+    }
+
+    .dialog-container {
+        width: 100%;
+        height: fit-content;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        overflow: hidden;
+        z-index: 100;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        display: none;
+    }
+
+    .dialog-box {
+        width: 100%;
+        height: 100%;
+        padding: 1rem;
+        /* position: relative; */
+        background-color: white;
+    }
+
+    .dialog-box button {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        color: white;
+        padding: 10px;
+        border-radius: 50%;
+        background-color: rgb(22, 22, 24);
+    }
+
+    @media (max-width: 720px) {
+       .core-details-body div {
+        display: flex;
+        flex-direction: column;
+       } 
+
+       .core-details-body {
+        border: none;
+       }
+
+       .core-details-body div {
+        border-bottom: none;
+       }
+
+       .core-details-body div:nth-child(even){
+        /* background-color: pink; */
+        border-left: 1px solid rgba(128, 128, 128, 0.379);
+       }
+
+       .core-details-body div .label {
+        background-color: transparent;
+        /* background-color: yellow; */
+       }
+
+    }

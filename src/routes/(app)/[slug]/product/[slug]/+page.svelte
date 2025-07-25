@@ -15,6 +15,7 @@
   // import Dialog from '$lib/components/svelte/dialog.svelte';
   import { customerId } from '$lib/components/ts/customer_correlated.svelte'
   import { browsingHistory } from './browsingHistory';
+  import CoreDetails from './components/CoreDetails.svelte';
 
   let { data } = $props();
  
@@ -238,6 +239,8 @@
       <p class="product-brand">{data.Brand}</p>
       <h1 class="product-title">{productName}</h1>
       <p class="product-description">{data.description}</p>
+
+      <CoreDetails />
       {#if data.sizeRadio}
         <h2>select size</h2>
         <div class="radio-group">
