@@ -28,7 +28,7 @@
 
         <main class="main-content">
             <header class="blog-header">
-                <h1 class="blog-title">NCERT Releases New Textbooks Based On New Education Policy 2020</h1>
+                <h1 class="blog-title">The Price of Aspiration: Decoding India's ₹31,000 Crore Coaching Bill and the Great Education Divide</h1>
                 <div class="blog-meta">
                     <div class="meta-item">
                         <svg class="meta-icon" viewBox="0 0 24 24">
