@@ -76,27 +76,34 @@
     }
 
     @media (max-width: 720px) {
+       
        .core-details-body div {
         display: flex;
         flex-direction: column;
+         border-bottom: none;
+         margin: 10px 0px 10px 0px;
        } 
 
        .core-details-body {
         border: none;
        }
 
-       .core-details-body div {
-        border-bottom: none;
-       }
 
        .core-details-body div:nth-child(even){
-        /* background-color: pink; */
         border-left: 1px solid rgba(128, 128, 128, 0.379);
        }
 
        .core-details-body div .label {
         background-color: transparent;
-        /* background-color: yellow; */
+        padding: 1rem 0 0 1rem;
+        font-size: 1rem;
+       }
+
+       .core-details-body div .value {
+        background-color: transparent;
+        padding: 0 0 0 1rem;
+        font-size: 0.8rem;
+        font-weight: 400;
        }
 
     }

@@ -10,7 +10,6 @@
 
     function openDialog() {
         dialogBox.style.display = 'block'
-        // dialogBox.style.minWidth = '50%'
     }
 </script>
 
@@ -25,12 +24,12 @@
             <span class="value">Doms</span>
         </div>
         <div>
-            <span class="label">Brand</span>
-            <span class="value">Doms</span>
+            <span class="label">Pack</span>
+            <span class="value">1 pcs</span>
         </div>
         <div>
-            <span class="label">Brand</span>
-            <span class="value">Doms</span>
+            <span class="label">Extra item</span>
+            <span class="value">sharpener</span>
         </div>
         <div>
             <span class="label">Brand</span>
