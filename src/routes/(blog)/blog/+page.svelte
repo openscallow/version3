@@ -11,7 +11,7 @@
 <div class="section-blog">
   <div class="blog-card">
     <div class="img">
-        <img src="NcertBookCover" alt="Class 8 new book cover"> 
+        <img src="/NcertBookCover.webp" alt="Class 8 new book cover"> 
     </div>
     <div class="content">cond Volume
       <div class="title">
