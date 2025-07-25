@@ -15,8 +15,8 @@
 
 <div class="core-details-container">
     <div class="core-details-header">
-        <h2>core details</h2>
-        <ChevronRight style="cursor: pointer; " onclick={()=> openDialog()}/>
+        <h2 style="color: black;">core details</h2>
+        <ChevronRight style="cursor: pointer; color: black;" onclick={()=> openDialog()}/>
     </div>
     <div class="core-details-body">
         <div>

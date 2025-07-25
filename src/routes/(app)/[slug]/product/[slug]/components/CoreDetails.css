@@ -76,7 +76,10 @@
     }
 
     @media (max-width: 720px) {
-       
+       .dialog-container{
+        z-index: 100000;
+       }
+
        .core-details-body div {
         display: flex;
         flex-direction: column;
@@ -97,6 +100,7 @@
         background-color: transparent;
         padding: 1rem 0 0 1rem;
         font-size: 1rem;
+        color: black;
        }
 
        .core-details-body div .value {
