@@ -10,7 +10,7 @@
   // State variables
   let isSidebarOpen = $state(false);
   let hasAccount = $state(false);
-  let notifications: any = $state([]);
+  let notifications: any = $state([0]); // temporary placing signle element so Ui can't throw errors such as reading 'length'
 
   // Lifecycle method
   onMount(async() => {
@@ -19,6 +19,7 @@
   });
   
   async function getNotifications(customerId: string) {
+    if (!customerId) return [0] // temporary placing signle element so Ui can't throw errors such as reading 'length'
     try {
       const notifications = await fetchNotifications({
         baseUrl: '/api/notifications',
