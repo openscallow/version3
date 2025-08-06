@@ -240,7 +240,9 @@
       <h1 class="product-title">{productName}</h1>
       <p class="product-description">{data.description}</p>
 
-      <CoreDetails />
+      {#if data.core_details}
+        <CoreDetails attributes={data.core_details}/>
+      {/if}
       {#if data.sizeRadio}
         <h2>select size</h2>
         <div class="radio-group">

@@ -1,6 +1,8 @@
 <script>
     import {ChevronRight, X} from 'lucide-svelte';
-    import './CoreDetails.css'
+    import './CoreDetails.css';
+
+    let { attributes } = $props()
 
     let dialogBox;
 
@@ -19,62 +21,24 @@
         <ChevronRight style="cursor: pointer; color: black;" onclick={()=> openDialog()}/>
     </div>
     <div class="core-details-body">
-        <div>
-            <span class="label">Brand</span>
-            <span class="value">Doms</span>
-        </div>
-        <div>
-            <span class="label">Pack</span>
-            <span class="value">1 pcs</span>
-        </div>
-        <div>
-            <span class="label">Extra item</span>
-            <span class="value">sharpener</span>
-        </div>
-        <div>
-            <span class="label">Brand</span>
-            <span class="value">Doms</span>
-        </div>
+        {#each attributes.slice(0, 4) as attribute}
+            <div>
+                <span class="label">{attribute[0]}</span>
+                <span class="value">{attribute[1]}</span>
+            </div>
+        {/each}
     </div>
 </div>
 
 <div class="dialog-container" bind:this={dialogBox}>
     <div class="dialog-box">
         <div class="core-details-body">
-            <div>
-                <span class="label">Brand</span>
-                <span class="value">Doms</span>
-            </div>
-            <div>
-                <span class="label">Brand</span>
-                <span class="value">Doms</span>
-            </div>
-            <div>
-                <span class="label">Brand</span>
-                <span class="value">Doms</span>
-            </div>
-            <div>
-                <span class="label">Brand</span>
-                <span class="value">Doms</span>
-            </div>
-
-            <div>
-                <span class="label">Brand</span>
-                <span class="value">Doms</span>
-            </div>
-            <div>
-                <span class="label">Brand</span>
-                <span class="value">Doms</span>
-            </div>
-
-            <div>
-                <span class="label">Brand</span>
-                <span class="value">Doms</span>
-            </div>
-            <div>
-                <span class="label">Brand</span>
-                <span class="value">Doms</span>
-            </div>
+            {#each attributes as attribute}
+                <div>
+                    <span class="label">{attribute[0]}</span>
+                    <span class="value">{attribute[1]}</span>
+                </div>
+            {/each}
         </div>
         
         <button onclick={()=> closeDialog()}><X /></button>
