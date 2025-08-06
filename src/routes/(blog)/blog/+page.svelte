@@ -5,17 +5,35 @@
 <div class="section-hero">
     <img src="heroimage.jpg" alt="mount fuju cover hero">
     <div class="content">
-        <h1>UPI Just Got an Update: Here's What Changed on August 1st, 2025</h1>
+        <h1>All about education and Students</h1>
     </div>
 </div>
 <div class="section-blog">
+  <div class="blog-card">
+    <div class="img">
+        <img src="/competitionguajaratLogo.png" alt="thumbanil about gujarat logo competition"> 
+    </div>
+    <div class="content">
+      <div class="title">
+        <h2><a href="/blog/gujarat-75-logo-design-competition-guide">Gujarat@75: Design the Logo, Define a Legacy</a></h2>
+      </div>
+      <div class="description">
+        <p>The Gujarat Government has announced an exciting logo design competition, offering a grand prize of ₹3,00,000 to the winning entry. This initiative invites creative minds to contribute to the state's identity while earning national recognition and a substantial reward.</p>
+      </div>
+    </div>
+    <div class="meta-data">
+      <span>📅 August 03, 2025</span>
+    </div>
+    <a href="/blog/gujarat-75-logo-design-competition-guide" class="card-link" aria-label="Read more about changes"></a>
+  </div>
+
   <div class="blog-card">
     <div class="img">
         <img src="/FourUpiChnages.png" alt="Four Upi changes that effective on augst 1st"> 
     </div>
     <div class="content">
       <div class="title">
-        <h2><a href="/blog/ncert-class-8-textbook-clarification-regional-movements-2025">NCERT Clarifies New Class 8 Textbook: Regional Histories to be Included in Se</a></h2>
+        <h2><a href="/blog/ncert-class-8-textbook-clarification-regional-movements-2025">UPI Just Got an Update: Here's What Changed on August 1st, 2025</a></h2>
       </div>
       <div class="description">
         <p>Your UPI habits might need an update. As of August 1st, NPCI has new rules to keep the system fast, including limits on balance checks and Autopay. Here's what you need to know about these crucial changes.</p>
