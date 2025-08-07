@@ -59,6 +59,7 @@
 
             <section id="introduction" class="section">
                 <h2>Introduction</h2>
+                <p> <a href="https://amzn.to/3UWfoPH">https://amzn.to/3UWfoPH</a>
                 <p>The Unified Payments Interface (UPI) is a marvel of financial technology, processing billions of transactions every month. This incredible volume puts immense pressure on the backend servers of banks and the NPCI. To ensure the system remains fast, stable, and reliable for every user, the NPCI has implemented four technical but crucial changes effective August 1st, 2025. These new rules are designed to optimize traffic and reduce unnecessary load on the system. Here’s what you need to know about these performance-focused updates.</p>
             </section>
 
