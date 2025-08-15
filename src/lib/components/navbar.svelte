@@ -52,6 +52,7 @@
   <a href="/blog">Blog</a>
   <a href="/about">About</a>
   <a href="/contact">Contact</a>
+  <a href="/privacy">Privacy</a>
   {#if !hasAccount}
     <a href="/signUp" class="flex"><User size={20}/> <span class="ml-2">Sign Up</span></a>
     <a href="/login" class="flex"><LogIn size={20}/> <span class="ml-2">login</span></a>
