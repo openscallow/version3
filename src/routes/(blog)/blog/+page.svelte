@@ -11,6 +11,24 @@
 <div class="section-blog">
   <div class="blog-card">
     <div class="img">
+        <img src="/stationerydistribution.jpg" alt="A person is distributing stationery item to kids"> 
+    </div>
+    <div class="content">
+      <div class="title">
+        <h2><a href="/blog/surat-bjp-photos-school-notebooks-controversy">Political Row Erupts Over BJP Leaders' Photos on School Notebooks in Surat</a></h2>
+      </div>
+      <div class="description">
+        <p>Uncover the political firestorm in Surat over BJP leaders' photos appearing on notebooks for nearly 2 lakh schoolchildren</p>
+      </div>
+    </div>
+    <div class="meta-data">
+      <span>📅 August 05, 2025</span>
+    </div>
+    <a href="/blog/gujarat-75-logo-design-competition-guide" class="card-link" aria-label="Read more about changes"></a>
+  </div>
+  
+  <div class="blog-card">
+    <div class="img">
         <img src="/competitionguajaratLogo.png" alt="thumbanil about gujarat logo competition"> 
     </div>
     <div class="content">
