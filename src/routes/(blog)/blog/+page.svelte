@@ -11,6 +11,24 @@
 <div class="section-blog">
   <div class="blog-card">
     <div class="img">
+        <img src="/AiGeneratedMap.png" alt="based on Ncert book Ai generated map"> 
+    </div>
+    <div class="content">
+      <div class="title">
+        <h2><a href="/blog/ncert-textbook-map-depicting-rajasthan-under-maratha-rule-sparks-controversy">NCERT Textbook Sparks Controversy Over Rajasthan's Depiction in Maratha Empire</a></h2>
+      </div>
+      <div class="description">
+        <p>NCERT faces backlash over a Class 8 textbook map showing Rajasthan under Maratha rule in 1759, with royal families and leaders demanding corrections for historical inaccuracy.</p>
+      </div>
+    </div>
+    <div class="meta-data">
+      <span>📅 August 06, 2025</span>
+    </div>
+    <a href="/blog/ncert-textbook-map-depicting-rajasthan-under-maratha-rule-sparks-controversy" class="card-link" aria-label="Read more about changes"></a>
+  </div>
+
+  <div class="blog-card">
+    <div class="img">
         <img src="/stationerydistribution.jpg" alt="A person is distributing stationery item to kids"> 
     </div>
     <div class="content">
@@ -24,7 +42,7 @@
     <div class="meta-data">
       <span>📅 August 05, 2025</span>
     </div>
-    <a href="/blog/gujarat-75-logo-design-competition-guide" class="card-link" aria-label="Read more about changes"></a>
+    <a href="/blog/surat-bjp-photos-school-notebooks-controversy" class="card-link" aria-label="Read more about changes"></a>
   </div>
   
   <div class="blog-card">
