@@ -11,6 +11,24 @@
 <div class="section-blog">
   <div class="blog-card">
     <div class="img">
+        <img src="/cbseHead.jpg" alt="cbse head quater"> 
+    </div>
+    <div class="content">
+      <div class="title">
+        <h2><a href="/blog/cbse-approves-open-book-exams-class-9-2026">CBSE Approves Open-Book Exams for Class 9 from 2026-27</a></h2>
+      </div>
+      <div class="description">
+        <p>CBSE has approved open-book exams for Class 9 starting 2026-27, aiming to reduce rote learning and promote critical thinking among students.</p>
+      </div>
+    </div>
+    <div class="meta-data">
+      <span>📅 August 13, 2025</span>
+    </div>
+    <a href="/blog/cbse-approves-open-book-exams-class-9-2026" class="card-link" aria-label="Read more about changes"></a>
+  </div>
+
+  <div class="blog-card">
+    <div class="img">
         <img src="/AiGeneratedMap.png" alt="based on Ncert book Ai generated map"> 
     </div>
     <div class="content">
