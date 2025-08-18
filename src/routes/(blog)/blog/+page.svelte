@@ -29,7 +29,7 @@
 
   <div class="blog-card">
     <div class="img">
-        <img src="/cbseHead.jpg" alt="cbse head quater"> 
+        <img src="/bhagavadGita.png" alt="student reading bhagvad git in classroom"> 
     </div>
     <div class="content">
       <div class="title">
@@ -47,7 +47,7 @@
 
   <div class="blog-card">
     <div class="img">
-        <img src="/cbseHead.jpg" alt="cbse head quater"> 
+        <img src="/stationeryBuying.png" alt="parents buying stationery with his child"> 
     </div>
     <div class="content">
       <div class="title">
