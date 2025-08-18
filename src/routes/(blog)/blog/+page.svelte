@@ -29,6 +29,44 @@
 
   <div class="blog-card">
     <div class="img">
+        <img src="/cbseHead.jpg" alt="cbse head quater"> 
+    </div>
+    <div class="content">
+      <div class="title">
+        <h2><a href="/blog/gujarat-education-adds-bhagavad-gita-to-curriculum">Bhagavad Gita Now a Mandatory Part of Gujarat's School Curriculum</a></h2>
+      </div>
+      <div class="description">
+        <p>The Gujarat government has made the Bhagavad Gita a mandatory part of the school curriculum for Classes 9-12. Learn how this policy aligns with the NEP 2020 to integrate ancient wisdom into modern education.</p>
+      </div>
+    </div>
+    <div class="meta-data">
+      <span>📅 August 11, 2025</span>
+    </div>
+    <a href="/blog/gujarat-education-adds-bhagavad-gita-to-curriculum" class="card-link" aria-label="Read more about changes"></a>
+  </div>
+
+  <div class="blog-card">
+    <div class="img">
+        <img src="/cbseHead.jpg" alt="cbse head quater"> 
+    </div>
+    <div class="content">
+      <div class="title">
+        <h2><a href="/blog/why-school-uniforms-and-stationery-are-getting-expensive">Why School Uniforms and Stationery Have Become Unaffordable for Parents</a></h2>
+      </div>
+      <div class="description">
+        <p>Rising costs of uniforms and stationery burden parents, driven by school monopolies and weak oversight. Calls grow for fairer, affordable practices.</p>
+      </div>
+    </div>
+    <div class="meta-data">
+      <span>📅 August 8, 2025</span>
+    </div>
+    <a href="/blog/why-school-uniforms-and-stationery-are-getting-expensive" class="card-link" aria-label="Read more about changes"></a>
+  </div>
+
+  
+
+  <div class="blog-card">
+    <div class="img">
         <img src="/AiGeneratedMap.png" alt="based on Ncert book Ai generated map"> 
     </div>
     <div class="content">
