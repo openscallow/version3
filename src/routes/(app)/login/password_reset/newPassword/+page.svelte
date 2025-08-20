@@ -3,7 +3,7 @@
     import './style.css';
   
     let isLoading = $state(false)
-    let newPassword = $state(''); // Reactive state for mobile number
+    let newPassword = $state(''); 
     let validationMessage = $state(''); // Reactive state for validation messages
   
     // Validate mobile number (assuming minimum length requirement)
@@ -23,7 +23,7 @@
       if (formvalid()) {
         isLoading = true
         let mobile = sessionStorage.getItem('mobile')
-        let response = await fetch('./login/password_reset/newPassword', {
+        let response = await fetch('/login/password_reset/newPassword', {
           method:'POST',
           headers: {
                 'Content-Type': 'application/json',
@@ -45,12 +45,12 @@
           modal.showModal()
 
           setTimeout(()=>{
-            window.location.href = `./`
+            window.location.href = `/`
           }, 2000)
           
         }else{
           alert("something went wrong please try again")
-          window.location.href = `./`
+          window.location.href = `/`
         }
         
      
