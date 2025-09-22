@@ -179,6 +179,16 @@
     }
 </style>
 
+<script>
+    import { visit } from '$lib/analytics/core/visits';
+    import { onMount } from 'svelte';
+
+    onMount(()=>{
+        visit()
+    })
+    
+</script>
+
 <div class="container">
     <div class="header">
         <h1>Privacy Policy</h1>

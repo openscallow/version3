@@ -1,4 +1,4 @@
-// File: $lib/components/ts/customer_correlated.ts
+// File: $lib/components/ts/customer_correlated.svelte
 import { browser } from '$app/environment';
 
 interface CustomerCoins {
