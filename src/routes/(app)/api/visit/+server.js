@@ -5,7 +5,7 @@
  * Created at: 21/09/2025
  * 
  * Last edit by: Gautam mer (CEO)
- * Edited at: 21/09/2025
+ * Edited at: 23/09/2025
  * 
 */
 
@@ -41,9 +41,8 @@ export async function POST({ request }) {
             {
                 $inc: {
                     "visit_analytics.total_visits": 1,
-                    [`daily_visits.daily_visits.${formattedDate}`]: 1
+                    [`visit_analytics.daily_visits.${formattedDate}`]: 1  // Fixed path
                 },
-                
                 $set: {
                     "visit_analytics.last_visit": new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })
                 }

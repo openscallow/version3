@@ -179,15 +179,7 @@
     }
 </style>
 
-<script>
-    import { visit } from '$lib/analytics/core/visits';
-    import { onMount } from 'svelte';
 
-    onMount(()=>{
-        visit()
-    })
-    
-</script>
 
 <div class="container">
     <div class="header">
