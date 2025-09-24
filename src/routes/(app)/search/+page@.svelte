@@ -1,6 +1,23 @@
 <script lang="ts">
+/**
+ * @File_Meta_data
+ * 
+ * Created by: Gautam mer (CEO)
+ * Created at: initial file
+ * 
+ * Last edit by: Gautam mer (CEO)
+ * Edited at: 24/09/2025
+ * Last change: added a visit function because the layout on the search page was not fully covered.
+ * 
+*/
     import './style.css';
     import { Search } from "lucide-svelte";
+    import { visit } from '$lib/analytics/core/visits';
+    import { onMount } from 'svelte';
+
+    onMount(()=>{
+        visit()
+    })
     
     let query = $state('');
     
