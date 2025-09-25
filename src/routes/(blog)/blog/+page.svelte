@@ -11,6 +11,24 @@
 <div class="section-blog">
   <div class="blog-card">
     <div class="img">
+        <img src="/bookstack.png" alt="stack of journal book"> 
+    </div>
+    <div class="content">
+      <div class="title">
+        <h2><a href="/blog/why-notebooks-may-cost-more-even-after-gst-slashed-to-zero">Why notebooks may cost more, even after GST is slashed to zero</a></h2>
+      </div>
+      <div class="description">
+        <p>A government move to make notebooks cheaper by cutting GST to zero is set to backfire, increasing costs for consumers due to a tax credit issue.</p>
+      </div>
+    </div>
+    <div class="meta-data">
+      <span>📅 September 23, 2025</span>
+    </div>
+    <a href="/blog/why-notebooks-may-cost-more-even-after-gst-slashed-to-zero" class="card-link" aria-label="Read more about changes"></a>
+  </div>
+
+  <div class="blog-card">
+    <div class="img">
         <img src="/cbseHead.jpg" alt="cbse head quater"> 
     </div>
     <div class="content">
@@ -62,8 +80,6 @@
     </div>
     <a href="/blog/why-school-uniforms-and-stationery-are-getting-expensive" class="card-link" aria-label="Read more about changes"></a>
   </div>
-
-  
 
   <div class="blog-card">
     <div class="img">
