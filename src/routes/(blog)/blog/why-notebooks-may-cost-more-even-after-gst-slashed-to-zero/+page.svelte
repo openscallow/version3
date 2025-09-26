@@ -2,7 +2,7 @@
     import '../global.css';
 </script>
 <svelte:head>
-    <title>Notebooks to Cost More Even as GST is Reduced to Zero</title>
+    <title>Why notebooks may cost more, even after GST is slashed to zero</title>
 </svelte:head>
     <div class="progress-bar" id="progressBar"></div>
     
