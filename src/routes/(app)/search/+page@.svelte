@@ -6,8 +6,8 @@
  * Created at: initial file
  * 
  * Last edit by: Gautam mer (CEO)
- * Edited at: 24/09/2025
- * Last change: added a visit function because the layout on the search page was not fully covered.
+ * Edited at: 01/10/2025
+ * Last change: Add guard clause for empty query at line 25 .
  * 
 */
     import './style.css';
@@ -22,6 +22,7 @@
     let query = $state('');
     
     function fireQuery() {
+      if(query === '') return;
       window.location.href = `/search/result?k=${encodeURIComponent(query.trim())}`;
     }
     
