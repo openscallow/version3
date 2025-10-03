@@ -100,7 +100,7 @@
   <title>Coins</title>
   <meta name="description" content="Students can Earn up to 400 rupee on callow" />
   <meta property="og:title" content="Join Callow Now" />
-  <meta property="og:description" content="Students can Earn up to 400 rupee on callow" />
+  <meta property="og:description" content="Discover a wide range of stationery items at Callow – from notebooks and pens to office essentials, all in one place." />
   <meta property="og:image" content="https://callow.in/stationerywhatsapp.jpg" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Callow.in" />
