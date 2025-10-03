@@ -101,7 +101,7 @@
   <meta name="description" content="Students can Earn up to 400 rupee on callow" />
   <meta property="og:title" content="Join Callow Now" />
   <meta property="og:description" content="Students can Earn up to 400 rupee on callow" />
-  <meta property="og:image" content="/stationerywhatsapp.jpg" />
+  <meta property="og:image" content="https://callow.in/stationerywhatsapp.jpg" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Callow.in" />
 </svelte:head>
