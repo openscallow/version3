@@ -104,6 +104,7 @@
   <meta property="og:image" content="https://callow.in/stationerywhatsapp.jpg" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Callow.in" />
+  <meta property="og:url" content="https://www.callow.in/signUp" />
 </svelte:head>
 <div class="px-2 mt-10 w-full flex items-center justify-center">
   <div class="form relative drop-shadow-[0.5px_0.5px_1px_var(--primary-color)] rounded-md w-90 bg-white p-10">
