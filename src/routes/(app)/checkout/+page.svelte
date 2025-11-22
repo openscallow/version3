@@ -1,49 +1,40 @@
 <script>
-    // import Ui from './component/Ui.svelte'
-    import CheckoutStepper from '$lib/components/svelte/CheckoutStepper.svelte';
-    import PaymentMethods from '$lib/components/svelte/PaymentMethods.svelte';
-    import PaymentDetails from '$lib/components/svelte/PaymentDetails.svelte';
-    import userRedirct from './utility/userRedirect';
-    import addPotentialCustomer from './utility/addPotentialCustomer'
-    
-    
-    import { 
-        initializeCheckoutData, 
-        applyPromoCodeIfAvailable 
-    } from '$lib/components/ts/checkoutStateVariables.svelte';
-    import { onMount } from 'svelte';
+/**
+ * @File_Meta_data
+ * 
+ * Created by: Gautam mer (CEO)
+ * Created at: initial file
+ * 
+ * Last edit by: Gautam mer (CEO)
+ * Edited at: 24/10/2025
+ * Last change: initializeTotalAmount() incorporated on onMount and remove old redundant code
+ * 
+*/
 
-    let disabled = true;
-    onMount(()=>{
-        userRedirct()
+import { onMount } from 'svelte';
+import CheckoutStepper from '$lib/components/svelte/CheckoutStepper.svelte';
+import PaymentMethods from './view/PaymentMethods.svelte';
+import PaymentDetails from './view/PaymentDetails.svelte';
+import userRedirct from './utility/userRedirect';
+import addPotentialCustomer from './utility/addPotentialCustomer'
 
-        // active placeOrder button after 2 seconds
-        setTimeout(()=>{
-            disabled = false
-        }, 2000)
-
-        addPotentialCustomer()
-
-
-        initializeCheckoutData()
-        applyPromoCodeIfAvailable()
+onMount(()=>{
+    userRedirct()
+    addPotentialCustomer()
     })
 </script>
+
 <div class="wrapper">
     <CheckoutStepper />
     <div class="Order-section">
         <h1 class="section-title">Order Summary</h1>
         <p class="section-subtitle">Check your items. And select a suitable payment method.</p>
-
         <div class="container">
             <PaymentMethods />
-            <PaymentDetails {disabled}/>
+            <PaymentDetails />
         </div>
-
     </div>
 </div>
-
-<!-- <Ui/> -->
 
 <style>
     .wrapper {
@@ -94,5 +85,3 @@
     }
 
 </style>
-
-

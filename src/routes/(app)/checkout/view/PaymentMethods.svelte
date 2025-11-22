@@ -1,15 +1,48 @@
 <script lang='ts'>
-    import { 
-        get_total_amount,
-        handlePaymentMethodChange 
-    } from '$lib/components/ts/checkoutStateVariables.svelte';
-   
+/**
+ * @File_Meta_data
+ * 
+ * Created by: Gautam mer (CEO)
+ * Created at: initial
+ * 
+ * Last edit by: Gautam mer (CEO)
+ * Edited at: 22/11/2025
+ * Last change: file locatin $lib/components/svelte/ -> checkout/view and handlePaymentMethodChange() incorporedted
+ * 
+*/
+import { customerCallowCoins } from '$lib/components/ts/customer_correlated.svelte';
+import { updatePledgeCoins } from '../model/pledgeCoins.svelte';
+import { updatePaymentMethod } from '../model/paymentMethod.svelte';
+import { getTotalAmount, updateTotalAmount, computeUnpledgedTotal } from '../model/totalAmount.svelte';
 
+let totalAmount = $state(getTotalAmount());
+const callowCoins = customerCallowCoins()?.B;
+
+function handlePaymentMethodChange(isCashAndCoins: boolean) {
+    if (isCashAndCoins) {
+        if(!callowCoins) return null;
+        if (callowCoins > totalAmount.value) {
+            updatePledgeCoins(totalAmount.value)
+            updatePaymentMethod(2)
+            updateTotalAmount(0)
+        } else {
+            updatePledgeCoins(callowCoins)
+            updatePaymentMethod(2)
+            updateTotalAmount(totalAmount.value - callowCoins)
+        }
+    } else {
+        updatePaymentMethod(1)
+        updatePledgeCoins(0)
+        computeUnpledgedTotal()
+    }
+}
 </script>
 <div class="paymentOpt-section">
     <h2 class="section-title">Payment Methods</h2>
     <div class="payment-option one">
-        <input type="radio" name="payment" id="cash" value="cash" checked onchange={()=>handlePaymentMethodChange(false)}> 
+        <input type="radio" name="payment" id="cash" value="cash" checked onchange={()=>{
+            handlePaymentMethodChange(false)
+            }}> 
         <label for="cash">
             <div class="option-content">
               <span class="option-content-title">Cash</span>
@@ -19,11 +52,13 @@
     </div>
 
     <div class="payment-option two">
-        <input type="radio" name="payment" id="cash-coins" value="cash-coins" onchange={()=>handlePaymentMethodChange(true)}>
+        <input type="radio" name="payment" id="cash-coins" value="cash-coins" onchange={()=>{handlePaymentMethodChange(true)
+    
+        }}>
         <label for="cash-coins">
             <div class="option-content">
               <span class="option-content-title">Cash + coins</span>
-              <p class="option-content-description">Callow Coin and cash for flexible payment options <a href="#" class="terms-link">terms*</a></p>
+              <p class="option-content-description">Callow Coin and cash for flexible payment options <a href="./checkout/coinTerms" class="terms-link">terms*</a></p>
             </div>
         </label>   
     </div>

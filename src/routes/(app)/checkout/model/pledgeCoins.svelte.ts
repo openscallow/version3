@@ -1,0 +1,20 @@
+/**
+ * @File_Meta_data
+ * 
+ * Created by: Gautam mer (CEO)
+ * Created at: 22/11/2025
+ * 
+ * Last edit by: Gautam mer (CEO)
+ * Edited at: 22/11/2025
+ * Last change: initialize
+ * 
+*/
+let pledgeCoins = $state(0)
+
+export function getPledgeCoins(){
+    return pledgeCoins;
+}
+
+export function updatePledgeCoins(newPledgeCoins: number){
+    pledgeCoins = newPledgeCoins
+}
