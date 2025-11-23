@@ -28,7 +28,9 @@ export function checkoutDataService() {
     let coinsEarn = coinsEarned();
 
     // Temporary patch 
+    // @ts-ignore
     used_coin = used_coin === 0 ? null : used_coin;
+
     return {
         customer_id,
         institute_name,

@@ -5,119 +5,160 @@
  * Created at: 22/11/2025
  * 
  * Last edit by: Gautam mer (CEO)
- * Edited at: 22/11/2025
- * Last change: initialize
+ * Edited at: 23/11/2025
+ * Last change: refactored whole file
  * 
 */
-
+import logtail from '$config/logtail.client';
+import {getBrowserInfo} from '$lib/utils/browserDetection';
 import { checkoutDataService } from './checkoutDataService';
 import { customerCallowCoins, updateCustomerCoins } from '$lib/components/ts/customer_correlated.svelte';
 
+// Constants
+const API_ENDPOINTS = {
+    CHECKOUT: '/checkout',
+    COUPON_USAGE: '/api/couponUsageUpdate',
+    MARK_CART_CONVERTED: '/api/cart/markCartAsConverted'
+} as const;
+
+const STORAGE_KEYS = {
+    CART: 'cart',
+    PENDING_ORDER: 'pending_order',
+    DISCOUNT_AMOUNT: 'discountamount',
+    DISCOUNT_PERCENTAGE: 'discount_percentage',
+    COUPON: 'coupon'
+} as const;
+
+const PROMO_CODES = {
+    WELCOME50: 'WELCOME50'
+} as const;
+
+const browserInfo = getBrowserInfo()
+
+// Types
+interface CheckoutData {
+    used_coin?: number;
+    cart_id?: string;
+    promo_code?: string;
+    assignment_id?: string;
+}
+
+// Main handler
 export async function placeOrder(event: MouseEvent) {
     const button = event.target as HTMLButtonElement;
     button.disabled = true;
 
-    try {
-        let checkoutData =  checkoutDataService()
-        if(!checkoutData) return null
-   
-        const response = await fetch('/checkout', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(checkoutData)
-		});
-
-        if (response.status === 200) {
-			handleSuccessfulOrder(checkoutData);
-            window.location.href = '/';
-		}
-        
-    } catch (error) {
-        // TODO: insert betterstack log tail here 
+    const checkoutData = checkoutDataService();
+    if (!checkoutData) {
         button.disabled = false;
+        return;
     }
 
+    try {
+        // @ts-ignore
+        const response = await fetchCheckout(checkoutData);
+        
+        if (response.ok) {
+            // @ts-ignore
+            await handleSuccessfulOrder(checkoutData);
+            redirect('/');
+        } else {
+            button.disabled = false;
+            logtail.error("Order processing aborted due to invalid server response.", {checkoutData, browserInfo})
+            await logtail.flush()
+        }
+    } catch (error) {
+        button.disabled = false;
+        logtail.error("Order processing aborted due error", {error, checkoutData, browserInfo})
+        await logtail.flush()
+    }
 }
 
-function handleSuccessfulOrder(checkoutData: any) {
-    // Update coin balance if coins were used
-    if (checkoutData.used_coin) {
-        let customerCallow = customerCallowCoins()?.B;
-        if (customerCallow) 
+// API Calls
+async function fetchCheckout(checkoutData: CheckoutData) {
+    return fetch(API_ENDPOINTS.CHECKOUT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(checkoutData)
+    });
+}
 
-        updateCustomerCoins(customerCallow - checkoutData.used_coin)
-    }
+async function updateCouponUsage(assignmentId: string) {
+    return fetch(API_ENDPOINTS.COUPON_USAGE, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ assignment_id: assignmentId })
+    });
+}
 
-    // handle cart
-    if(checkoutData.cart_id){
-        localStorage.removeItem('cart')
-        markCartAsConverted(checkoutData.cart_id)
+async function markCartAsConverted(cartId: string) {
+    return fetch(API_ENDPOINTS.MARK_CART_CONVERTED, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cart_id: cartId })
+    });
+}
+
+// Order Processing
+async function handleSuccessfulOrder(checkoutData: CheckoutData) {
+    await Promise.all([
+        handleCoinUpdate(checkoutData),
+        handleCart(checkoutData),
+        handlePromoCode(checkoutData)
+    ]);
+
+    clearPendingOrder();
+}
+
+async function handleCoinUpdate(checkoutData: CheckoutData) {
+    if (!checkoutData.used_coin) return;
+
+    const customerCallow = customerCallowCoins()?.B;
+    if (customerCallow) {
+        updateCustomerCoins(customerCallow - checkoutData.used_coin);
     }
-    
-    // Clear pending_order from session
-    sessionStorage.removeItem('pending_order');
-    
-    // Handle promo code usage
-    if (checkoutData.promo_code && checkoutData.promo_code !== 'WELCOME50') {
-        updateCouponUsage(checkoutData);
+}
+
+async function handleCart(checkoutData: CheckoutData) {
+    if (!checkoutData.cart_id) return;
+
+    removeStorage(STORAGE_KEYS.CART);
+    await markCartAsConverted(checkoutData.cart_id);
+}
+
+async function handlePromoCode(checkoutData: CheckoutData) {
+    if (!checkoutData.promo_code) return;
+
+    if (checkoutData.promo_code === PROMO_CODES.WELCOME50) {
+        setWelcome50Cookie();
     } else {
-        handleWelcome50Coupon(checkoutData);
+        await updateCouponUsage(checkoutData.assignment_id || '');
     }
+
+    clearCouponData();
 }
 
-function handleWelcome50Coupon(checkoutData: any) {
-    if (checkoutData.promo_code === 'WELCOME50') {
-        document.cookie = "WELCOME50=true; max-age=3600; path=/";
-    }
-    
-    // Clear coupon data and redirect
-    clearCouponData();
-    window.location.href = '/';
+// Storage & Cookie Management
+function clearPendingOrder() {
+    removeStorage(STORAGE_KEYS.PENDING_ORDER);
 }
 
 function clearCouponData() {
-    sessionStorage.removeItem('discountamount');
-    sessionStorage.removeItem('discount_percentage');
-    sessionStorage.removeItem('coupon');
+    removeStorage(STORAGE_KEYS.DISCOUNT_AMOUNT);
+    removeStorage(STORAGE_KEYS.DISCOUNT_PERCENTAGE);
+    removeStorage(STORAGE_KEYS.COUPON);
 }
 
-async function updateCouponUsage(checkoutData: any) {
-    try {
-        const response = await fetch('/api/couponUsageUpdate', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ assignment_id: checkoutData.assignment_id })
-        });
-        
-        if (response.status === 200) {
-            clearCouponData();
-            window.location.href = '/';
-        }
-    } catch (error) {
-        console.error("Failed to update coupon usage:", error);
-    }
+function removeStorage(key: string) {
+    sessionStorage.removeItem(key);
+    localStorage.removeItem(key);
 }
 
-async function markCartAsConverted(cart_id: any){
-    try {
-        const response = await fetch('/api/cart/markCartAsConverted', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ cart_id })
-        });
+function setWelcome50Cookie() {
+    document.cookie = `${PROMO_CODES.WELCOME50}=true; max-age=3600; path=/`;
+}
 
-        if(response.ok) {
-            console.log("cart status change")
-            return
-        }
-    
-    } catch (error) {
-        console.log(error)
-    }
+// Navigation
+function redirect(path: string) {
+    window.location.href = path;
 }
