@@ -2,10 +2,11 @@
  * @File_Meta_data
  * 
  * Created by: Gautam mer (CEO)
- * Created at: 21/09/2025
+ * Created at: 26/11/2025
  * 
  * Last edit by: Gautam mer (CEO)
- * Edited at: 23/09/2025
+ * Edited at: 26/11/2025
+ * Last change: initilize
  * 
 */
 
@@ -18,7 +19,7 @@ import { MongoClient, ServerApiVersion } from 'mongodb';
 const uri = env.MONGODBCLUSTER0 || process.env.MONGODBCLUSTER0;
 
 export async function POST({ request }) {
-    let { customer_id, formattedDate } = await request.json();
+    let { customer_id } = await request.json();
 
     const client = new MongoClient(uri, {
         serverApi: {
@@ -37,16 +38,13 @@ export async function POST({ request }) {
         const result = await collection.updateOne(
             { _id: customer_id },
             {
-                $inc: {
-                    "visit_analytics.total_visits": 1,
-                    [`visit_analytics.daily_visits.${formattedDate}`]: 1  // Fixed path
-                },
                 $set: {
-                    "visit_analytics.last_visit": new Date()
+                    "referralAnalytics.lastCopyTimestamp": new Date()
                 }
-            },
-            { upsert: true }
+            }
         );
+
+        console.log(result)
 
         return new Response(
             JSON.stringify({ unnecessaryMessage: "customer visit update successfully" }),

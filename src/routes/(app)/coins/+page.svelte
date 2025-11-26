@@ -1,7 +1,19 @@
 <script>
+/**
+ * @File_Meta_data
+ * 
+ * Created by: Gautam mer (CEO)
+ * Created at: initial
+ * 
+ * Last edit by: Gautam mer (CEO)
+ * Edited at: 26/11/2025
+ * Last change: Registering the referral copy action from last time.
+ * 
+*/
     import '@tailwind'
     import { UserCheck, ClipboardCopy } from 'lucide-svelte'
     import { onMount } from 'svelte';
+    import { referralAnalytics } from '$lib/analytics/features/referralAnalytics';
 
     let coin_balance = $state(0)
     let referrals = $state()
@@ -115,7 +127,7 @@
   </div>
 
   <label class="input input-bordered flex items-center gap-2 mx-4">
-    <input type="text" class="grow" bind:value={customer_referral_link}/>
+    <input type="text" class="grow" bind:value={customer_referral_link} oncopy={referralAnalytics()}/>
     <ClipboardCopy id="copyButton" class="cursor-pointer"/>
   </label>
   
