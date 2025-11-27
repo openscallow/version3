@@ -1,20 +1,5 @@
 <script>
 	import '@tailwind';
-	// import { logtailClient } from '$config/logtail';
-	import logtail from '$config/logtail.client';
-	import { onMount } from 'svelte';
-
-	onMount(()=>{
-		// console.log(logtail)
-		// logtail.error("Something bad happend.");
-		logtail.error("Error while processing payment", {
-  userId: 1234,
-  amount: 99.99,
-  method: "credit_card"
-});
-
-	})
-	
 	export let title = "About Us";
   </script>
   
