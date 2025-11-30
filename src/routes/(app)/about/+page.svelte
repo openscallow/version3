@@ -1,5 +1,87 @@
 <script>
 	import '@tailwind';
+    // import { json } from 'stream/consumers';
+    import { onMount } from 'svelte';
+	onMount(async ()=>{
+
+// 		try {
+// 			let response = await fetch('https://backend.aisensy.com/campaign/t1/api/v2', {
+// 			method: "POST",
+// 			body: JSON.stringify({
+//   "apiKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjNlMTJmZTMxNDczMGQ1Y2VjNDk5MyIsIm5hbWUiOiJDYWxsb3ciLCJhcHBOYW1lIjoiQWlTZW5zeSIsImNsaWVudElkIjoiNjkyM2UxMmZlMzE0NzMwZDVjZWM0OThlIiwiYWN0aXZlUGxhbiI6IkZSRUVfRk9SRVZFUiIsImlhdCI6MTc2Mzk1OTA4N30.49JrGF-B8Mw74YAWM9mM81BFUNn1COzOTZrUfgE86Y8",
+//   "campaignName": "welcomeMessage",
+//   "destination": "919574018290",
+//   "userName": "Callow",
+//   "templateParams": [
+//     "$FirstName"
+//   ],
+//   "source": "new-landing-page form",
+//   "media": {
+//     "url": "https://callowproduct.s3.ap-south-1.amazonaws.com/productImag/whatsAppbanner.jpg",
+//     "filename": "welcome callow banner"
+//   },
+//   "buttons": [],
+//   "carouselCards": [],
+//   "location": {},
+//   "attributes": {},
+//   "paramsFallbackValue": {
+//     "FirstName": "user"
+//   }
+// })
+// 		})
+
+// 		if(response.ok){
+// 			alert("fuck it works")
+// 		}
+// 		} catch (error) {
+// 			console.log(error)
+// 		}
+		
+		try {
+  let response = await fetch('https://backend.aisensy.com/campaign/t1/api/v2', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      apiKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjNlMTJmZTMxNDczMGQ1Y2VjNDk5MyIsIm5hbWUiOiJDYWxsb3ciLCJhcHBOYW1lIjoiQWlTZW5zeSIsImNsaWVudElkIjoiNjkyM2UxMmZlMzE0NzMwZDVjZWM0OThlIiwiYWN0aXZlUGxhbiI6IkZSRUVfRk9SRVZFUiIsImlhdCI6MTc2Mzk1OTA4N30.49JrGF-B8Mw74YAWM9mM81BFUNn1COzOTZrUfgE86Y8",
+      campaignName: "welcomeMessage",
+      destination: "919574018290",
+      userName: "Callow",
+      templateParams: ["user"], // or remove '$'
+      source: "new-landing-page-form",
+      media: {
+        url: "https://callowproduct.s3.ap-south-1.amazonaws.com/productImag/whatsAppbanner.jpg",
+        filename: "welcome callow banner"
+      },
+      buttons: [],
+      carouselCards: [],
+      location: {},
+      attributes: {},
+      paramsFallbackValue: {
+        FirstName: "user"
+      }
+    })
+  });
+
+  if (response.ok) {
+    alert("it works!");
+  } else {
+    console.log("Error:", await response.text());
+  }
+} catch (error) {
+  console.log(error);
+}
+
+
+		
+
+
+
+
+
+		
+	})
 	export let title = "About Us";
   </script>
   
