@@ -133,7 +133,7 @@
     }
 
     if(customerId()){
-      browsingHistory(data._id)
+      browsingHistory(data._id, productName)
     }
 
     

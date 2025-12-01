@@ -1,9 +1,10 @@
 import { customerId } from '$lib/components/ts/customer_correlated.svelte'
 import { getBrowserName, getDeviceType } from '$lib/components/ts/device'
 
-export async function browsingHistory(product_id) {
+export async function browsingHistory(product_id, productName) {
     const productVisitInfo = {
         customer_id: customerId(),
+        productName,
         product_id,
         timestamp: new Date().toISOString(),
         browser: getBrowserName(),
