@@ -86,6 +86,7 @@
     document.getElementById("copyButton").addEventListener("click", async () => {
         try {
             await navigator.clipboard.writeText(customer_referral_link);
+            referralAnalytics()
             alert("Text copied to clipboard!");
         } catch (err) {
             console.error("Failed to copy text: ", err);
