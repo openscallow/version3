@@ -19,9 +19,6 @@ dotenv.config();
 const OTP = generateOTP();
 
 export async function POST({ request }){
-    logtail.info('inside server', {mobileNumber})
-    logtail.flush()
-            logtail.flush()
     let { mobileNumber } = await request.json();
     const URL = `https://www.fast2sms.com/dev/bulkV2?authorization=${process.env.FAST2SMS_API_KEY || env.FAST2SMS_API_KEY}&route=otp&variables_values=${OTP}&flash=0&numbers=${mobileNumber}`
 
@@ -29,8 +26,8 @@ export async function POST({ request }){
         const response = await fetch(URL);
 
         if(response.ok) {
-            logtail.info('OTP dispatched successfully', {mobileNumber})
-            logtail.flush()
+            await logtail.info('OTP dispatched successfully', {mobileNumber})
+            await logtail.flush()
 
             return new Response(JSON.stringify({OTP}), {
                 status: 200,
@@ -40,20 +37,20 @@ export async function POST({ request }){
             })
         } else {
             const error = await response.text();
-            logtail.error('OTP dispatch failed.', {
+            await logtail.error('OTP dispatch failed.', {
                 mobileNumber,
                 response,
                 error 
             })
-            logtail.flush()
+            await logtail.flush()
         }   
     } catch (error) {
-        logtail.error('OTP dispatch failed.', {
+        awaitlogtail.error('OTP dispatch failed.', {
             mobileNumber,
             response,
             error 
         })
-        logtail.flush()
+        await logtail.flush()
         console.error('error while fetching customer cart:', error)
     }
 }

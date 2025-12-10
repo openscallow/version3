@@ -34,9 +34,6 @@ onMount(async ()=>{
             body: JSON.stringify({mobileNumber})
         })
 
-        logtail.info('request initiated', {mobileNumber})
-        logtail.flush()
-
         if(response.ok){
             let result = await response.json()
             saveOTP(result.OTP)
