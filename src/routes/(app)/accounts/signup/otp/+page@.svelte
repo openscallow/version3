@@ -34,6 +34,9 @@ onMount(async ()=>{
             body: JSON.stringify({mobileNumber})
         })
 
+        logtail.info('request initiated', {mobileNumber})
+        logtail.flush()
+
         if(response.ok){
             let result = await response.json()
             saveOTP(result.OTP)
@@ -43,7 +46,6 @@ onMount(async ()=>{
             let serverResponse = await response.json()
             logtail.error('response is not okey while dispatch OTP', {serverResponse});
             logtail.flush();
-            console.log("got wrong response", response)
 
             hasError = true
             isLoading = false

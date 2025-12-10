@@ -19,6 +19,9 @@ dotenv.config();
 const OTP = generateOTP();
 
 export async function POST({ request }){
+    logtail.info('inside server', {mobileNumber})
+    logtail.flush()
+            logtail.flush()
     let { mobileNumber } = await request.json();
     const URL = `https://www.fast2sms.com/dev/bulkV2?authorization=${process.env.FAST2SMS_API_KEY || env.FAST2SMS_API_KEY}&route=otp&variables_values=${OTP}&flash=0&numbers=${mobileNumber}`
 
