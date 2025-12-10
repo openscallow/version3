@@ -40,8 +40,8 @@ async function validateCustomerInfo() {
         return;
     }
     
-    // logtail.info('New signup initiated.', {customerName, mobileNumber});
-    // logtail.flush();
+    logtail.info('New signup initiated.', {customerName, mobileNumber});
+    logtail.flush();
 
     sessionStorage.setItem('name', `${customerName}`);
     sessionStorage.setItem('mobile', `${mobileNumber}`);

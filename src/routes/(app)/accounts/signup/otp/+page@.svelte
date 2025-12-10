@@ -39,16 +39,16 @@ onMount(async ()=>{
             saveOTP(result.OTP)
             window.location.href = `./otp/verify`;
         } else {
-            /* @TODO: incorporate logtail instead of console.error */
+            logtail.error('response is not okey while dispatch OTP', {response});
+            logtail.flush();
             console.log("got wrong response", response)
 
             hasError = true
             isLoading = false
         } 
     } catch (error) {
-        /* @TODO: incorporate logtail instead of console.error */
-        console.error('error')
-
+        logtail.error('get error is not okey while dispatch OTP', {error});
+        logtail.flush();
         hasError = true
         isLoading = false
     }
@@ -59,7 +59,7 @@ onMount(async ()=>{
     {#if isLoading}
         Loading ...
     {:else if hasError}
-        <span style="color:red">Opps! Something went wrong on our side, <br> please try later </span>
+        <span style="color:red">Opps! Something went wrong on our side, <br> please try again later </span>
     {/if}
 </main>
 
