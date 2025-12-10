@@ -45,7 +45,12 @@ export async function POST({ request }){
             logtail.flush()
         }   
     } catch (error) {
-        /* @TODO: incorporate logtail instead of console.error */
+        logtail.error('OTP dispatch failed.', {
+            mobileNumber,
+            response,
+            error 
+        })
+        logtail.flush()
         console.error('error while fetching customer cart:', error)
     }
 }

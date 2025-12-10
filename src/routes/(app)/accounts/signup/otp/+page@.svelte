@@ -39,7 +39,9 @@ onMount(async ()=>{
             saveOTP(result.OTP)
             window.location.href = `./otp/verify`;
         } else {
-            logtail.error('response is not okey while dispatch OTP', {response});
+    
+            let serverResponse = await response.json()
+            logtail.error('response is not okey while dispatch OTP', {serverResponse});
             logtail.flush();
             console.log("got wrong response", response)
 

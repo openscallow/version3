@@ -24,7 +24,7 @@
         let customer_correlated = JSON.parse(localStorage.getItem('customer_correlated'))
         let customer_id = customer_correlated.i
         let customer_referral_code = customer_correlated.r
-        customer_referral_link = `callow.in/signUp?ref=`+customer_referral_code
+        customer_referral_link = `callow.in/accounts/signup?ref=`+customer_referral_code
    
         
         try {
