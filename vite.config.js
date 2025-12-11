@@ -9,6 +9,7 @@ export default defineConfig({
 	resolve:{
 		alias:{
 			'@tailwind':path.resolve('./src/tailwind.css'),
+			'@styles': path.resolve('./src/app.css'),
 			'$config':path.resolve('./src/config')
 		}
 	}
