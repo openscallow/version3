@@ -6,30 +6,29 @@
  * Created at: initial file
  * 
  * Last edit by: Gautam mer (CEO)
- * Edited at: 23/09/2025
- * Last change: added a visit function to track user visits site-wide instead of on a single page.
+ * Edited at: 11/12/2025
+ * Last change: Replaced the old relative app.css import with the new alias-based @styles import.
  * 
 */
 
-	import Navbar from '$lib/components/navbar.svelte';
-	import '../../app.css';
-	import Footer from '$lib/components/svelte/footer.svelte';
-	import { visit } from '$lib/analytics/core/visits';
-    import { onMount } from 'svelte';
+import '@styles';
+import Navbar from '$lib/components/navbar.svelte';
+import Footer from '$lib/components/svelte/footer.svelte';
+import { visit } from '$lib/analytics/core/visits';
+import { onMount } from 'svelte';
 
     
-	
-	/**
-	 * @typedef {Object} Props
-	 * @property {import('svelte').Snippet} [children]
-	 */
+/**
+ * @typedef {Object} Props
+ * @property {import('svelte').Snippet} [children]
+*/
 
-	/** @type {Props} */
-	let { children } = $props();
+/** @type {Props} */
 
-	onMount(()=>{
-        visit()
-    })
+let { children } = $props();
+
+onMount(()=>{visit()})
+
 </script>
 <Navbar />
 
