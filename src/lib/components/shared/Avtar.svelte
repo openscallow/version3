@@ -12,12 +12,12 @@
 */
 import { Pencil } from 'lucide-svelte';
 
-let {width, height, actionIndicator=true, actionIndicatorWidth, actionIndicatorHeight} = $props()
+let {imageSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS63vYE47ZzdjITgxvrLFJiD_hpoWj2TJmR4g&s", width, height, actionIndicator=true, actionIndicatorWidth, actionIndicatorHeight} = $props()
 
 </script> 
 
 <div class="avtar-container" style:width style:height>
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS63vYE47ZzdjITgxvrLFJiD_hpoWj2TJmR4g&s" alt="avtart">
+    <img src={imageSrc} alt="avtart">
     {#if actionIndicator}
     <div class="indicator-container" style:width={actionIndicatorWidth} style:height={actionIndicatorHeight}>
         <div class="indicator">

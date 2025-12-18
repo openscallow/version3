@@ -1,3 +1,5 @@
+// Deprecated File so please do not use instead of use utils/Customer.ts
+
 export function customerId() {
     // Check if running in a browser environment
     if (typeof window !== 'undefined' && window.localStorage) {
@@ -9,3 +11,4 @@ export function customerId() {
     // Return null if not in a browser environment
     return null;
 }
+
