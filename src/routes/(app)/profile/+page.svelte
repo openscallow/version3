@@ -7,7 +7,7 @@
  * 
  * Last edit by: Gautam mer (CEO)
  * Edited at: 11/12/2025
- * Last change: redirecting logic, ui state seperation logic, getting orders. completed first phase
+ * Last change: profile pill intigrated
  * 
 */
 import { Customer } from '$lib/utils/Customer'
@@ -15,6 +15,7 @@ import Avtar from "$lib/components/shared/Avtar.svelte";
 import Button from '$lib/components/shared/Button.svelte';
 import Location from "$lib/components/shared/Location.svelte";
 import OrderCard from "$lib/components/features/profile/OrderCard.svelte";
+import ReferralPill from '$lib/components/features/profile/ReferralPill.svelte';
 import { getCustomerOrders } from '$lib/components/ts/getCustomerOrders';
 
 let customer = new Customer();
@@ -56,12 +57,8 @@ async function customerInfo() {
 </script>
 
 {#await customerInfo()}
-    <div class="profile-container">
-        <Avtar width="4rem" height="4rem" actionIndicatorWidth="2rem" actionIndicatorHeight="2rem"/>
-        <div class="user-info">
-            <h2>Gautam mer</h2>
-            <Location locationName="veer bhamasha"/>
-        </div>
+    <div class="loading-container">
+        <p>Loading ...</p>
     </div>
 {:then information} 
     <div class="profile-container">
@@ -75,6 +72,7 @@ async function customerInfo() {
             <Location locationName="School name goes here..."/>
         </div>
     </div>  
+    <ReferralPill />
 {/await}
 
 {#await customerOrders()}
