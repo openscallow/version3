@@ -18,7 +18,11 @@
 	--font-size-button: 1.2rem;
 	--font-weight-button: 400;
 	--font-family-button: "Roboto Condensed", sans-serif;
-	
+
+	/* Authentication (Login & Signup) Primary CTA Button Colors */
+	--color-auth-cta-bg: #3fa9c5;
+    --color-auth-cta-active: #2b7f96;
+    --color-auth-cta-disabled: rgba(63, 169, 197, 0.4);
 
 
 	--font-body: Arial, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,

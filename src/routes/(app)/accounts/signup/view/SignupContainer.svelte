@@ -6,15 +6,15 @@
  * Created at: 07/12/2025
  * 
  * Last edit by: Gautam mer (CEO)
- * Edited at: 07/12/2025
- * Last change: initialize
+ * Edited at: 24/12/2025
+ * Last change: State indicator Button component
  * 
  * @TODO : use function to set information into sessionStorage and make it external because in future we have to make it something else
 */
 import { page } from '$app/state';
 import logtail from '$config/logtail.client';
 import Input  from '$lib/components/svelte/Input.svelte';
-import Button from '$lib/components/svelte/Button.svelte';
+import Button from '$lib/components/shared/Button.svelte';
 import { validateMobileNumber } from '../controller/mobileController';
 
 let customerName = $state();
@@ -59,7 +59,7 @@ async function validateCustomerInfo() {
     <Input lable="Name" bind:value={customerName}/>
     <Input type="number" message={mobileValidationMessage} lable="Mobile" bind:value={mobileNumber}/>
     <span class="sms-info">You may receive WhatsApp and SMS notifications from us from us login purpose</span>
-    <Button name={buttonName} action={validateCustomerInfo}/>
+    <Button buttonName="Next" backgroundColor ="var(--color-auth-cta-bg)" activeColor = "var(--color-auth-cta-active)" onclick={validateCustomerInfo}/>
     <a href="/login"> I already have an account</a>
 </div>
 

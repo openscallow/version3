@@ -6,13 +6,14 @@
  * Created at: 10/12/2025
  * 
  * Last edit by: Gautam mer (CEO)
- * Edited at: 10/12/2025
- * Last change: initialize
+ * Edited at: 24/12/2025
+ * Last change: State indicator Button component and global style incorporated
  * 
 */
+import '@styles';
 import { createCustomer } from './createCustomer'
 import Input  from '$lib/components/svelte/Input.svelte';
-import Button from '$lib/components/svelte/Button.svelte';
+import Button from '$lib/components/shared/Button.svelte';
 
 let passwordValue: string = $state('');
 
@@ -20,7 +21,7 @@ let buttonName = $state('Next');
 let passwordValidationMessage = $state();
 
 
-function validatePassword() {
+async function validatePassword() {
   buttonName = 'Loading ...';
 
   if(passwordValue.length < 8 || passwordValue.length > 20) {
@@ -29,7 +30,7 @@ function validatePassword() {
   } else {
     passwordValidationMessage = "";
     sessionStorage.setItem('password', passwordValue);
-    createCustomer()
+    await createCustomer()
   }
 }
 
@@ -42,7 +43,7 @@ function validatePassword() {
         </header>
         <Input type="text" message={passwordValidationMessage} lable="Password" bind:value={passwordValue}/>
         <span class="sms-info">Your password must contain at least 8 characters, including one uppercase letter, one lowercase letter</span>
-        <Button name={buttonName} action={validatePassword}/>     
+        <Button buttonName="Submit" backgroundColor ="var(--color-auth-cta-bg)" activeColor = "var(--color-auth-cta-active)" onclick={validatePassword}/>
     </div>
 </main>
 

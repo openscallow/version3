@@ -7,10 +7,10 @@
  * 
  * Last edit by: Gautam mer (CEO)
  * Edited at: 10/12/2025
- * Last change: refactored whole file
+ * Last change: global style imported;
  * 
 */
-
+import '@styles';
 import SignupContainer from './view/SignupContainer.svelte';
 
 </script>

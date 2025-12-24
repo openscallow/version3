@@ -6,15 +6,17 @@
  * Created at: 09/12/2025
  * 
  * Last edit by: Gautam mer (CEO)
- * Edited at: 09/12/2025
- * Last change: initialize
+ * Edited at: 24/12/2025
+ * Last change: State indicator Button component and global style incorporated
  * 
 */
+
+import '@styles';
 import { onMount } from 'svelte';
 import { MoveLeft } from 'lucide-svelte';
 import logtail from '$config/logtail.client';
 import Input  from '$lib/components/svelte/Input.svelte';
-import Button from '$lib/components/svelte/Button.svelte';
+import Button from '$lib/components/shared/Button.svelte';
 
 let otpValue = $state();
 let otpCooldownOver = $state(false)
@@ -63,8 +65,8 @@ function verifyOTP() {
         </header>
         <Input type="number" message={otpValidationMessage} lable="OTP" bind:value={otpValue}/>
         <span class="sms-info">To confirm your mobile number, enter the 4-digit code sent via SMS to +91 {mobileNumber}</span>
-        <Button name={buttonName} action={verifyOTP}/>
-        {#if otpCooldownOver}
+        <Button buttonName="Next" backgroundColor ="var(--color-auth-cta-bg)" activeColor = "var(--color-auth-cta-active)" onclick={verifyOTP}/>
+          {#if otpCooldownOver}
             <button>resend OTP</button>
         {:else} 
             <p>you can resend otp after {otpCooldownTimer} time</p>
