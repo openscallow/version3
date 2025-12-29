@@ -1,4 +1,14 @@
 <script lang="ts">
+/**
+ * Created by: Gautam mer (CEO)
+ * Created at: Initial
+ * 
+ * Last edit by: Gautam mer (CEO)
+ * Edited at: 25/12/2025
+ * Last change: refactroed carousel incorporated
+*/
+import ProductCarousel from '$lib/components/features/product-detail-page/ProductCarousel.svelte';
+
   import { onMount } from 'svelte';
   import { addToRecentlyViewed } from '$lib/components/recentlyViewed/recentView.js';
   import '../../../../../app.css';
@@ -148,7 +158,7 @@
   const swiperConfig = {
     modules: [Navigation, FreeMode, Mousewheel],
     loop: false,
-    slidesPerView: 1.5,
+    slidesPerView: 2.2,
     spaceBetween: 2,
     freeMode: {
       enabled: true,
@@ -295,6 +305,11 @@
   </div>
 </section>
 </main>
+
+<h1 class="text-left text-lg font-bold mb-4 mt-8 pl-4">Related Products</h1>
+<ProductCarousel objectID={data._id}/>
+
+
 <h1 class="text-left text-lg font-bold mb-4 mt-8 pl-4">Related Products</h1>
 <div class="swiper bg-white">
   <div class="swiper-wrapper">
