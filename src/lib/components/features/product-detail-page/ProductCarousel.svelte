@@ -35,7 +35,6 @@ onMount(async()=>{
 
         if(response.ok) {
             relatedProducts = await response.json()
-            $inspect(relatedProducts, "froom")
         }
     } catch (error) {
         throw new Error("hit error while fetching relative product")
@@ -43,7 +42,6 @@ onMount(async()=>{
 })
 
 </script>
-
 
 <Carousel slidesPerView={2.5} swiperPadding="0.5rem" swiperBackground="white">
     {#each relatedProducts as relatedProduct}
@@ -153,4 +151,3 @@ onMount(async()=>{
         margin-left: 2px;
     }
 </style>
-

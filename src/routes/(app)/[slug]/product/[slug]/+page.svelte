@@ -4,8 +4,8 @@
  * Created at: Initial
  * 
  * Last edit by: Gautam mer (CEO)
- * Edited at: 25/12/2025
- * Last change: refactroed carousel incorporated
+ * Edited at: 31/12/2025
+ * Last change: removing redundant relative item code
 */
 import ProductCarousel from '$lib/components/features/product-detail-page/ProductCarousel.svelte';
 
@@ -17,12 +17,9 @@ import ProductCarousel from '$lib/components/features/product-detail-page/Produc
   import plus from '$lib/images/icon-plus.svg';
   import Slider from '$lib/components/productSlider/slider.svelte';
   import '@tailwind'
-  import Swiper from 'swiper/bundle';
-  import { Navigation, FreeMode, Mousewheel } from 'swiper/modules';
   import GetCoin from '$lib/components/getCoin/getCoin.svelte';
   import { handleCartInsert } from './handleCartInsert';
   import { updateViewCount } from './updateViewCount'
-  // import Dialog from '$lib/components/svelte/dialog.svelte';
   import { customerId } from '$lib/components/ts/customer_correlated.svelte'
   import { browsingHistory } from './browsingHistory';
   import CoreDetails from './components/CoreDetails.svelte';
@@ -145,70 +142,9 @@ import ProductCarousel from '$lib/components/features/product-detail-page/Produc
     if(customerId()){
       browsingHistory(data._id, productName)
     }
-
-    
-
-    const swiper = new Swiper('.swiper', swiperConfig);
   });
 
   let thumbImage = images[0]; // Using first image as thumbnail
-
-  //swiper 
-
-  const swiperConfig = {
-    modules: [Navigation, FreeMode, Mousewheel],
-    loop: false,
-    slidesPerView: 2.2,
-    spaceBetween: 2,
-    freeMode: {
-      enabled: true,
-      sticky: false,
-      momentumRatio: 0.25,
-      momentumVelocityRatio: 0.5,
-    },
-    grabCursor: true,
-    mousewheel: true,
-    breakpoints: {
-      1024: {
-        slidesPerView: 6,
-        spaceBetween: 10,
-      },
-    },
-  };
-
-  function updateRelativeProduct(id : number, data: any){
-    let product = document.querySelector(`.productId${id}`);
-    if(product){
-      product.innerHTML = `
-      <a class="no-underline text-inherit" href=${"/"+ data.productName.replaceAll(" ","-").replaceAll(".", "-") + "/product/" + data._id} target="_blank">
-        <div class="flex w-52 flex-col gap-4">
-          <img src=${data.images[0]} alt="Product Image" class="w-full h-32 object-contain rounded-sm" />
-          <p class="text-sm font-semibold whitespace-normal">${data.productName}</p>
-          <div class="flex items-center gap-1">
-            <p class="text-sm leading-3 border-r-2 pr-1 border-indigo-500">&#8377;${data.currentPrice}</p>
-            <del class="text-xs leading-3">M.R.P: &#8377;${data.mrp}</del>
-          </div>
-          <div class="text-xs p-1 rounded-full border w-fit border-black"> ${data.brand} </div>
-        </div>
-      </a>
-      `;
-    }
-  }
-
-
-  async function fetchRelativeProduct(productId : any){
-    try {
-            const response = await fetch(`/api/getProduct?productid=${productId}`);
-            if (!response.ok) throw new Error('Failed to fetch product');
-            
-            const data = await response.json();
-            updateRelativeProduct(productId, data.product);
-         
-        } catch (error) {
-            console.error('Error fetching product:', error);
-            
-        }
-  }
 
   async function generateInquiry() {
     try {
@@ -221,11 +157,6 @@ import ProductCarousel from '$lib/components/features/product-detail-page/Produc
     }
   }
 
-  onMount(() => {
-    data.relatedProducts.forEach((productId: any) => {
-      fetchRelativeProduct(productId)
-    });
-  });
 </script>
 
 <main class="main">
@@ -275,8 +206,6 @@ import ProductCarousel from '$lib/components/features/product-detail-page/Produc
         </div>
       </div>
 
-      
-      
       <GetCoin coin_rewards={data.coin_rewards} prouctQuantity={productQuantity}/>
       <form class="add-to-cart-form">
         {#if data.stockAvailability > 0}
@@ -308,36 +237,3 @@ import ProductCarousel from '$lib/components/features/product-detail-page/Produc
 
 <h1 class="text-left text-lg font-bold mb-4 mt-8 pl-4">Related Products</h1>
 <ProductCarousel objectID={data._id}/>
-
-
-<h1 class="text-left text-lg font-bold mb-4 mt-8 pl-4">Related Products</h1>
-<div class="swiper bg-white">
-  <div class="swiper-wrapper">
-    {#each data.relatedProducts as productId}
-    <div class="swiper-slide productId{productId}  ">
-      <!-- daisy ui's skelton  -->
-      <div class="flex w-52 flex-col gap-4">
-        <div class="skeleton h-32 w-full"></div>
-        <div class="skeleton h-4 w-28"></div>
-        <div class="skeleton h-4 w-full"></div>
-        <div class="skeleton h-4 w-full"></div>
-      </div>
-    </div>
-    {/each}
-  </div>
-</div>
-<br>
-<br>
-
-
-  <!--swiper is changing style via js so we have to implement here  -->
-<style>
-  .swiper{
-    padding:10px;
-  }
-
-  .swiper-slide{
-    padding-right: 10px;
-    
-  }
-</style>
