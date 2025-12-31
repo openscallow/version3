@@ -4,8 +4,8 @@
  * Created at: 28/12/2025
  * 
  * Last edit by: Gautam mer (CEO)
- * Edited at: 28/12/2025
- * Last change: initialize
+ * Edited at: 31/12/2025
+ * Last change: Applied target="_blank" to the anchor tag to ensure proper navigation, preventing URL-only changes without product data loading.
  * 
 */
 import { onMount } from 'svelte';
@@ -48,7 +48,12 @@ onMount(async()=>{
 <Carousel slidesPerView={2.5} swiperPadding="0.5rem" swiperBackground="white">
     {#each relatedProducts as relatedProduct}
         <div class="swiper-slide">
-            <a href={`/${relatedProduct.name.replaceAll(" ","-").replaceAll(".", "-")}/product/${relatedProduct.id}`} class="full-slide-link" aria-label="View Details"></a>
+            <a href={`/${relatedProduct.name.replaceAll(" ","-").replaceAll(".", "-")}/product/${relatedProduct.id}`} 
+               class="full-slide-link" 
+               aria-label="View Details" 
+               target="_blank"
+               rel="noopener noreferrer">
+            </a>
             <div class="slide_image-wrapper">
                 <img src={relatedProduct.image} alt="">
             </div>
@@ -101,7 +106,6 @@ onMount(async()=>{
 		height: 100%;
 		object-fit: scale-down; 
 		display: block;
-		/* background-color: white; */
 	}
 
 	.swiper-slide .slide_meta-data {
