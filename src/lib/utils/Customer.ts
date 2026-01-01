@@ -7,6 +7,14 @@
  * last change: initialize
  * 
 */
+interface CustomerData {
+    i: string,
+    r: string,
+    cc: {
+        B: number,
+        U: number
+    }
+}
 
 export class Customer {
     id: string | null = null
@@ -43,5 +51,12 @@ export class Customer {
 
     get ID(): string | null {
         return this.id
+    }
+
+    set setData(data:CustomerData) {
+        // Browser-safe check
+        if (typeof window === 'undefined' || !window.localStorage) return
+        
+        localStorage.setItem('customer_correlated', JSON.stringify(data))
     }
 }
