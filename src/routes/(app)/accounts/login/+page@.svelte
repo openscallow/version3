@@ -4,20 +4,23 @@
  * Created at: 01/01/2026
  * 
  * Last edit by: Gautam mer (CEO)
- * Edited at: 01/01/2026
- * Last change: initialize
+ * Edited at: 02/01/2026
+ * Last change: incorporated failure message for not found data
 */
 import '@styles';
 import Input  from '$lib/components/svelte/Input.svelte';
 import Button from '$lib/components/shared/Button.svelte';
 import { Customer } from '$lib/utils/Customer';
 
+let failure = $state(false)
 let password = $state()
 let mobileNumber = $state();
 let mobileValidationMessage = $state();
 let passwordValidationMessage = $state();
 
 async function validateCustomerInfo(){
+    failure = false;
+
     if(!mobileNumber || mobileNumber.toString().length !== 10) {
         mobileValidationMessage = 'Please type a phone number with 10 digits.';
         return;
@@ -39,7 +42,7 @@ async function validateCustomerInfo(){
             body: JSON.stringify({password, mobileNumber})
         })
 
-        if (response.ok) {
+        if (response.status === 200) {
             let {hasAccount, message, customerID, customerReferrerCode, CCB} = await response.json()
 
             if (hasAccount && message === 'found customer with credentials') {
@@ -52,12 +55,13 @@ async function validateCustomerInfo(){
                         U: Date.now()
                     }
                 }
-            }
-
-            window.location.href = '/';
+                window.location.href = '/';
+            }     
+        } else if (response.status === 404) {
+            failure = true
         }
-    } catch (error) {
-        throw new Error('Hit the error while fetching customer information');
+    } catch (error: unknown) {
+        console.log(error);
     }
 }
 </script>
@@ -77,7 +81,14 @@ async function validateCustomerInfo(){
     <div class="container">
         <header>
             <h1>Login continue to Callow</h1>
+            {#if failure}
+                <div class="failure-container">
+                    We couldn't find an account matching that mobile number and password. 
+                    Please try again or <a href="./signup" target="_blank" rel="noopener noreferrer" style="color:blue; text-decoration:underline;">create a new account</a> if you don't have one.
+                </div>
+            {/if}
         </header>
+        
         <Input type="number" message={mobileValidationMessage} lable="Mobile" bind:value={mobileNumber}/>
         <Input type="text" message={passwordValidationMessage} lable="Password" bind:value={password}/>
         <Button buttonName="Next" backgroundColor ="var(--color-auth-cta-bg)" activeColor = "var(--color-auth-cta-active)" onclick={validateCustomerInfo}/>
@@ -108,6 +119,13 @@ async function validateCustomerInfo(){
         font-weight: 300;
         font-family: var(--font-family-auth);
     }
+
+    .container .failure-container {
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        background-color: rgb(255, 162, 0);
+    }
+
     .forgot_password{
         color: var(--color-auth-hyperlink);
         display: block;
