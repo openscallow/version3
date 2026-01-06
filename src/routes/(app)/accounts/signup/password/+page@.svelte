@@ -16,16 +16,11 @@ import Input  from '$lib/components/svelte/Input.svelte';
 import Button from '$lib/components/shared/Button.svelte';
 
 let passwordValue: string = $state('');
-
-let buttonName = $state('Next');
 let passwordValidationMessage = $state();
 
 
 async function validatePassword() {
-  buttonName = 'Loading ...';
-
   if(passwordValue.length < 8 || passwordValue.length > 20) {
-    buttonName = 'Next';
     passwordValidationMessage = "Password must be between 8 and 20 characters";
   } else {
     passwordValidationMessage = "";
@@ -43,7 +38,7 @@ async function validatePassword() {
         </header>
         <Input type="text" message={passwordValidationMessage} lable="Password" bind:value={passwordValue}/>
         <span class="sms-info">Your password must contain at least 8 characters, including one uppercase letter, one lowercase letter</span>
-        <Button buttonName="Submit" backgroundColor ="var(--color-auth-cta-bg)" activeColor = "var(--color-auth-cta-active)" onclick={validatePassword}/>
+        <Button variant="primary" mode="solid" size="lg" radius="999px"  onclick={validatePassword}>Submit</Button>
     </div>
 </main>
 

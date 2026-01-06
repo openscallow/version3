@@ -20,22 +20,16 @@ import { validateMobileNumber } from '../controller/mobileController';
 let customerName = $state();
 let mobileNumber = $state();
 let mobileValidationMessage = $state();
-let buttonName = $state('Next');
+
 let referredId = page.url.searchParams.get('ref')
 console.log(referredId)
 
 async function validateCustomerInfo() {
-    buttonName = 'Loading ...';
-
-    if (!customerName || !mobileNumber) {
-        buttonName = 'Next';
-        return
-    };
-
+    if (!customerName || !mobileNumber) return
+   
     // @ts-ignore
     let mobileResult = await validateMobileNumber(mobileNumber);
     if(!mobileResult.success) {
-        buttonName = 'Next';
         mobileValidationMessage = mobileResult.message;
         return;
     }
@@ -59,7 +53,7 @@ async function validateCustomerInfo() {
     <Input lable="Name" bind:value={customerName}/>
     <Input type="number" message={mobileValidationMessage} lable="Mobile" bind:value={mobileNumber}/>
     <span class="sms-info">You may receive WhatsApp and SMS notifications from us from us login purpose</span>
-    <Button buttonName="Next" backgroundColor ="var(--color-auth-cta-bg)" activeColor = "var(--color-auth-cta-active)" onclick={validateCustomerInfo}/>
+    <Button variant="primary" mode="solid" size="lg" radius="999px"  onclick={validateCustomerInfo}>Next</Button>
     <a href="/login"> I already have an account</a>
 </div>
 

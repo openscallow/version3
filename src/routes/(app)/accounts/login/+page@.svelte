@@ -91,7 +91,7 @@ async function validateCustomerInfo(){
         
         <Input type="number" message={mobileValidationMessage} lable="Mobile" bind:value={mobileNumber}/>
         <Input type="text" message={passwordValidationMessage} lable="Password" bind:value={password}/>
-        <Button buttonName="Next" backgroundColor ="var(--color-auth-cta-bg)" activeColor = "var(--color-auth-cta-active)" onclick={validateCustomerInfo}/>
+        <Button variant="primary" mode="solid" size="lg" radius="999px"  onclick={validateCustomerInfo}>Next</Button>
         <a class="forgot_password" href="./password/reset">Forgot password?</a>
     </div>
 </main>

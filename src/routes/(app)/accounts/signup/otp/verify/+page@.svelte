@@ -21,7 +21,6 @@ import Button from '$lib/components/shared/Button.svelte';
 let otpValue = $state();
 let otpCooldownOver = $state(false)
 let otpCooldownTimer = $state(90)
-let buttonName = $state('Next');
 let otpValidationMessage = $state();
 let mobileNumber = $state();
 
@@ -38,7 +37,6 @@ onMount(()=>{
 })
 
 function verifyOTP() {
-  buttonName = 'Loading ...';
   let OTP = sessionStorage.getItem('OTP');
 
   if(OTP === `${otpValue}`) {
@@ -49,7 +47,6 @@ function verifyOTP() {
     logtail.flush();
     window.location.href = '../password';
   } else {
-    buttonName = 'Next';
     otpValidationMessage = 'wrong otp'
   }
 }
@@ -65,7 +62,7 @@ function verifyOTP() {
         </header>
         <Input type="number" message={otpValidationMessage} lable="OTP" bind:value={otpValue}/>
         <span class="sms-info">To confirm your mobile number, enter the 4-digit code sent via SMS to +91 {mobileNumber}</span>
-        <Button buttonName="Next" backgroundColor ="var(--color-auth-cta-bg)" activeColor = "var(--color-auth-cta-active)" onclick={verifyOTP}/>
+        <Button variant="primary" mode="solid" size="lg" radius="999px"  onclick={verifyOTP}>Next</Button>
           {#if otpCooldownOver}
             <button>resend OTP</button>
         {:else} 
