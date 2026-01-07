@@ -5,7 +5,7 @@
  * 
  * Last edit by: Gautam mer (CEO)
  * Edited at: 17/12/2025
- * Last change: refactored whole Button Element Now it support Loading state 
+ * Last change: usage better typescript and modify component to show unifyde experience over website 
  * 
 */
 import type { Snippet } from 'svelte';
@@ -13,7 +13,7 @@ import type { HTMLButtonAttributes } from 'svelte/elements';
 
 interface Props extends Omit<HTMLButtonAttributes, 'onclick'> {
     children?: Snippet;
-	variant?: 'primary' | 'secondary' | 'danger' | 'neutral';
+	variant?: 'primary' | 'secondary' | 'danger' | 'success' | 'neutral';
 	mode?: 'solid' | 'outline' | 'ghost';
 	size?: 'sm' | 'md' | 'lg';
 	isLoading?: boolean; // Allow parent to force loading state
@@ -21,8 +21,6 @@ interface Props extends Omit<HTMLButtonAttributes, 'onclick'> {
     radius?: string;
     width?: string;
 }
-
-
 
 let {
     children,
@@ -36,21 +34,6 @@ let {
 	onclick,
 	...rest
 }: Props = $props();
-
-
-// let {
-//     children = null, // Allows passing icons or custom text
-//     buttonName = "Button Name",
-//     color = "white",
-//     backgroundColor = "#24a0ed",
-//     activeColor = "#1a7ab8", // New prop for click state
-//     width = "100%",
-//     spinnerSize = "18px", // Dynamic spinner size
-//     spinnerColor = "white", // Dynamic spinner color
-//     onclick = async () => {}
-// } = $props();
-
-// let isLoading = $state(false);
 
 // Internal state to track async click actions
 let internalLoading = $state(false);
@@ -107,7 +90,6 @@ async function handlePointerClick(e: MouseEvent) {
 		--btn-transition: 0.2s ease;
 		
 		/* Palette - In a real app, these come from your global theme */
-		--color-primary: #24a0ed;
 		--color-primary-hover: #1a7ab8;
 		--color-danger: #ef4444;
 		--color-danger-hover: #dc2626;
@@ -129,6 +111,7 @@ async function handlePointerClick(e: MouseEvent) {
 		border-radius: var(--btn-radius);
 		transition: all var(--btn-transition);
 		overflow: hidden;
+		font-family: var(--font-family-button);
 	}
 
 	/* --- Sizing Variants --- */
@@ -148,7 +131,7 @@ async function handlePointerClick(e: MouseEvent) {
 
 	/* --- The "Solid" Mode (Default) --- */
 	.btn[data-mode='solid'][data-variant='primary'] {
-		background-color: var(--color-primary);
+		background-color: var(--color-auth-cta-bg);
 		color: white;
 	}
 	.btn[data-mode='solid'][data-variant='primary']:hover:not(:disabled) {
@@ -170,8 +153,8 @@ async function handlePointerClick(e: MouseEvent) {
 	
 	/* Primary Outline */
 	.btn[data-mode='outline'][data-variant='primary'] {
-		border-color: var(--color-primary);
-		color: var(--color-primary);
+		border-color: var(--color-auth-cta-bg);
+		color: var(--color-auth-cta-bg);
 	}
 	.btn[data-mode='outline'][data-variant='primary']:hover:not(:disabled) {
 		background-color: rgba(36, 160, 237, 0.1); /* Subtle tint on hover */
@@ -181,6 +164,15 @@ async function handlePointerClick(e: MouseEvent) {
 	.btn[data-mode='outline'][data-variant='danger'] {
 		border-color: var(--color-danger);
 		color: var(--color-danger);
+	}
+	.btn[data-mode='outline'][data-variant='danger']:hover:not(:disabled) {
+		background-color: rgba(239, 68, 68, 0.1);
+	}
+
+	/* Success Outline */
+	.btn[data-mode='outline'][data-variant='success'] {
+		border-color: #40e440;
+		color: #40e440;
 	}
 	.btn[data-mode='outline'][data-variant='danger']:hover:not(:disabled) {
 		background-color: rgba(239, 68, 68, 0.1);

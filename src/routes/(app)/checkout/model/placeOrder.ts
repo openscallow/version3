@@ -61,7 +61,7 @@ export async function placeOrder(event: MouseEvent) {
         if (response.ok) {
             // @ts-ignore
             await handleSuccessfulOrder(checkoutData);
-            redirect('/');
+            redirect('/checkout/success');
         } else {
             button.disabled = false;
             logtail.error("Order processing aborted due to invalid server response.", {checkoutData, browserInfo})

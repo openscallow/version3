@@ -17,10 +17,12 @@ import PaymentMethods from './view/PaymentMethods.svelte';
 import PaymentDetails from './view/PaymentDetails.svelte';
 import userRedirct from './utility/userRedirect';
 import addPotentialCustomer from './utility/addPotentialCustomer'
+import { preloadCode } from '$app/navigation';
 
 onMount(()=>{
     userRedirct()
     addPotentialCustomer()
+    preloadCode('/checkout/success');
     })
 </script>
 
