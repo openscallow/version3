@@ -13,8 +13,7 @@ import ProductCarousel from '$lib/components/features/product-detail-page/Produc
   import { addToRecentlyViewed } from '$lib/components/recentlyViewed/recentView.js';
   import '../../../../../app.css';
   import './product.css';
-  import minus from '$lib/images/icon-minus.svg';
-  import plus from '$lib/images/icon-plus.svg';
+
   import Slider from '$lib/components/productSlider/slider.svelte';
   import '@tailwind'
   import GetCoin from '$lib/components/getCoin/getCoin.svelte';
