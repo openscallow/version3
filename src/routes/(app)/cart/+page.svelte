@@ -47,7 +47,7 @@ import Button from '$lib/components/shared/Button.svelte';
 
 <div class="cart-container">
     
-    <div class="wrapper">
+    <Card boxShadow="var(--box-shadow-1)">
            
         <div class="cart-header">
             <h1>Subtotal: ₹{subtotal}</h1>
@@ -60,7 +60,7 @@ import Button from '$lib/components/shared/Button.svelte';
         <div class="items-wrapper">
 
             {#each products as product, index}
-            <Card padding="0.2rem">
+            <Card padding="0.2rem" boxShadow="var(--box-shadow-1)" background="white">
                 <div class="item-container">
                     <div class="image-container">
                         <img src={product.images[0]} alt="text">
@@ -79,10 +79,10 @@ import Button from '$lib/components/shared/Button.svelte';
                     </div>
                 </div> 
             </Card>
-            <br>
+            <span style="display: block; height:5px;"></span>
             {/each}
         </div>
-    </div>
+    </Card>
 </div>
 
 

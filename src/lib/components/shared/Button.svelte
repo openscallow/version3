@@ -184,6 +184,7 @@ async function handlePointerClick(e: MouseEvent) {
 		color: red;
 		border: none;
 		background-color: transparent;
+		
 	}
 
 	/* --- Loading State Logic --- */

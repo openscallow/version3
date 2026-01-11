@@ -11,13 +11,18 @@ import type { Snippet } from 'svelte';
 
 interface Props {
     children?: Snippet,
-    padding?: string
+    padding?: string,
+    boxShadow?: string,
+    background?: string,
 }
 
-let {children, padding="1rem"}: Props = $props()
+let {children, padding="0rem", boxShadow="none", background="none"}: Props = $props()
 </script>
 
-<div class="card" style:padding>
+<div class="card" 
+     style:background
+     style:padding
+     style:box-shadow={boxShadow}>
     {#if children}
         {@render children()}
     {/if}
@@ -25,9 +30,7 @@ let {children, padding="1rem"}: Props = $props()
 
 <style>
     .card {
-        width: 100%;
-        border-color: black;
-        border-width: 1px;
         border-radius: var(--radius-md);
+        width: 100%;
     }
 </style>
