@@ -25,6 +25,7 @@ let {children, padding="1rem"}: Props = $props()
 
 <style>
     .card {
+        width: 100%;
         border-color: black;
         border-width: 1px;
         border-radius: var(--radius-md);

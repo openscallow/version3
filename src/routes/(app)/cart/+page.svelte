@@ -39,7 +39,7 @@ import Button from '$lib/components/shared/Button.svelte';
     }
 
     function get() {
-        return new Promise(resolve => setTimeout(resolve, 1000));
+        return new Promise(resolve => setTimeout(resolve, 5000));
     }
 
     
@@ -58,6 +58,7 @@ import Button from '$lib/components/shared/Button.svelte';
         </div>
 
         <div class="items-wrapper">
+
             {#each products as product, index}
             <Card padding="0.2rem">
                 <div class="item-container">
@@ -87,20 +88,25 @@ import Button from '$lib/components/shared/Button.svelte';
 
 <style>
     .item-container {
+        width: 100%;
         display: flex;
     }
 
     .image-container {
-        flex-grow: 1;
-        background-color: red;
+        width: 35%;
     }
 
     .content {
-        flex-grow: 2;
+        width: 65%;
         padding: 0px 10px;
     }
 
     .content h3 {
+        display: -webkit-box;
+		-webkit-line-clamp: 1;
+		-webkit-box-orient: vertical;  
+		line-clamp: 1;
+        overflow: hidden;
         font-weight: 400;
         font-family: var(--font-family-heading);
     }
@@ -109,10 +115,5 @@ import Button from '$lib/components/shared/Button.svelte';
         font-weight: 900;
         font-family: var(--font-family-heading);
     }
-
-   
-
-
-
     
 </style>

@@ -50,10 +50,6 @@
         box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
     }
 
-    .items-wrapper {
-        padding: 1.5rem 2rem;
-    }
-
     .image-container {
         flex-shrink: 0;
         width: 80px;
@@ -68,15 +64,10 @@
         height: 100%;
         object-fit: cover;
     }
-
-   
-
     .action {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 0.75rem;
-        min-width: 120px;
     }
 
     .quantity-controls {
@@ -119,22 +110,6 @@
         background-color: white;
     }
 
-    .delete-btn {
-        padding: 0.5rem 1rem;
-        background-color: #dc3545;
-        color: white;
-        border: none;
-        border-radius: 6px;
-        font-size: 0.85rem;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.2s ease;
-    }
-
-    .delete-btn:hover {
-        background-color: #c82333;
-        transform: translateY(-1px);
-    }
 
     @media (max-width: 768px) {
         .cart-container {
@@ -150,7 +125,7 @@
         }
 
         .items-wrapper {
-            padding: 1rem 1.5rem;
+            padding: 1rem 1rem;
         }
 
         .item {
@@ -163,7 +138,6 @@
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
-            min-width: auto;
         }
 
         .text-container h3 {
