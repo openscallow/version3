@@ -210,11 +210,11 @@ import ProductCarousel from '$lib/components/features/product-detail-page/Produc
         {#if data.stockAvailability > 0}
         <div class="product-quantity">
           <button type="button" class="button minus" onclick={decrementQuantity}>
-            <img src={minus} alt="Minus Icon" />
+            <!-- <img src={minus} alt="Minus Icon" /> -->
           </button>
           <span class="product-quantity-num">{productQuantity}</span>
           <button type="button" class="button plus" onclick={incrementQuantity}>
-            <img src={plus} alt="Plus Icon" />
+            <!-- <img src={plus} alt="Plus Icon" /> -->
           </button>
         </div>
         {:else}

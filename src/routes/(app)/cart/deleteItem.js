@@ -11,6 +11,7 @@ export async function deleteItem(cartItemId, cartId, products, index) {
         if(response.ok){
             products = products.filter((_, i) => i !== index);
             alert(`item deleted successfully`)
+            window.location.reload()
         }
     } catch (error) {
         console.log(error)

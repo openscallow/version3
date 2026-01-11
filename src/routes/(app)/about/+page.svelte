@@ -1,6 +1,8 @@
 <script>
 	import '@tailwind';
 	export let title = "About Us";
+	import { getCartItemsByCartId } from '$lib/services/cart.service';
+	getCartItemsByCartId(39)
   </script>
   
   <div class="flex flex-col items-center justify-center py-10 bg-gradient-to-r from-blue-100 via-white to-blue-100 min-h-screen p-4">

@@ -13,22 +13,22 @@ import type { HTMLButtonAttributes } from 'svelte/elements';
 
 interface Props extends Omit<HTMLButtonAttributes, 'onclick'> {
     children?: Snippet;
-	variant?: 'primary' | 'secondary' | 'danger' | 'success' | 'neutral';
+	width?: string;
+	variant?: 'primary' | 'secondary' | 'danger' | 'success' | 'text';
 	mode?: 'solid' | 'outline' | 'ghost';
 	size?: 'sm' | 'md' | 'lg';
 	isLoading?: boolean; // Allow parent to force loading state
     onclick?: (e: MouseEvent) => void | Promise<void>;
     radius?: string;
-    width?: string;
 }
 
 let {
     children,
+	width = '100%',
 	variant = 'primary',
 	mode = 'solid',
 	size = 'md',
     radius = '8px',
-    width = '100%',
 	isLoading = false,
 	class: className = '',
 	onclick,
@@ -115,6 +115,7 @@ async function handlePointerClick(e: MouseEvent) {
 	}
 
 	/* --- Sizing Variants --- */
+
 	.btn[data-size='sm'] { padding: 0.4rem 0.8rem; font-size: 0.875rem; }
 	.btn[data-size='md'] { padding: 0.75rem 1.5rem; font-size: 1rem; }
 	.btn[data-size='lg'] { padding: 1rem 2rem; font-size: 1.125rem; }
@@ -176,6 +177,13 @@ async function handlePointerClick(e: MouseEvent) {
 	}
 	.btn[data-mode='outline'][data-variant='danger']:hover:not(:disabled) {
 		background-color: rgba(239, 68, 68, 0.1);
+	}
+
+	/* --- The "Tex" Mode --- */
+	.btn[data-mode='text'][data-variant='danger'] {
+		color: red;
+		border: none;
+		background-color: transparent;
 	}
 
 	/* --- Loading State Logic --- */
