@@ -79,6 +79,7 @@ import Button from '$lib/components/shared/Button.svelte';
                     </div>
                 </div> 
             </Card>
+            <br>
             {/each}
         </div>
     </div>
