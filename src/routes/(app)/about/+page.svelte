@@ -1,41 +1,86 @@
-<script>
-	import '@tailwind';
-	export let title = "About Us";
-	import { getCartItemsByCartId } from '$lib/services/cart.service';
-	import { getEligiblePromotionsByCustomerId } from '$lib/services/promotion.service';
-    import { onMount } from 'svelte';
-	// getCartItemsByCartId(39)
-	onMount(()=> {
-			getEligiblePromotionsByCustomerId('e954aeeecb6e4b05890b')
-	})
+<script lang='ts'>
+// import { getCartItemsByCartId } from '$lib/services/cart.service';
+// getCartItemsByCartId(39)
 
-  </script>
-  
-  <div class="flex flex-col items-center justify-center py-10 bg-gradient-to-r from-blue-100 via-white to-blue-100 min-h-screen p-4">
-	<div class="max-w-4xl w-full bg-white rounded-xl shadow-lg overflow-hidden">
-	  <div class="bg-primary text-white py-6 px-4 text-center">
-		<h1 class="text-4xl font-bold">{title}</h1>
-	  </div>
-	  <div class="p-8 space-y-6">
-		<p class="text-lg text-gray-700">
-		  Welcome to <span class="font-semibold text-primary">Callow</span>, your one-stop shop for all things stationery!
-		</p>
-		<p class="text-lg text-gray-700">
-		  We understand how important it is for students to have the right tools to ace their studies without breaking the bank. That’s why we’re here—to bring you a wide variety of high-quality stationery that’s affordable and perfect for every need, whether it’s for school, college, or your creative projects.
-		</p>
-		<p class="text-lg text-gray-700">
-		  At Callow, we believe that great ideas start with the simplest things—a notebook, a pen, or even a sticky note. We’re all about making sure you have everything you need to stay organized, express yourself, and keep learning without any hassle.
-		</p>
-		<p class="text-lg text-gray-700">
-		  We’re proud to call India our home and are dedicated to serving students across the country with products that fit your budget and your style.
-		</p>
-		<div class="text-center">
-		  <p class="text-lg text-gray-700">
-			Got a question or need help finding something? Reach out—we’re here for you. Let’s make studying a little more colorful, one page at a time!
-		  </p>
-		  <a href="/contact"><button class="btn btn-primary mt-4">Contact Us</button></a>
-		</div>
-	  </div>
-	</div>
-  </div>
+
+</script>
+
+<svelte:head>
+	<title>About Us</title>
+	<meta property="og:title" content="About Us" />
+	<meta property="og:description" content="Callow is built for callow-spirited students—offering affordable stationery that supports learning, creativity, and growth across India." />
+	<meta property="og:type" content="website" />
+	<meta property="og:site_name" content="Callow" />
+</svelte:head>
+
+<div class="container">
+	<h1>About Us</h1>
+	<p>At Callow, we strive to deliver products that help callow-spirited individuals build their craft so that, in the coming years, they can help shape the future of this world.</p><br>
+	<p>whatsApp: <b>+91 9574018290</b></p>
+	<table>
+		<caption>Customer support service timing</caption>
+		<thead>
+			<tr>
+				<th>Day</th>
+				<th>Time</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Monday</td>
+				<td>9:00 AM to 6:00 PM</td>
+			</tr>
+			<tr>
+				<td>Tuesday</td>
+				<td>9:00 AM to 6:00 PM</td>
+			</tr>
+			<tr>
+				<td>Wednesday</td>
+				<td>9:00 AM to 6:00 PM</td>
+			</tr>
+			<tr>
+				<td>Thurdday</td>
+				<td>9:00 AM to 6:00 PM</td>
+			</tr>
+			<tr>
+				<td>Friday</td>
+				<td>9:00 AM to 6:00 PM</td>
+			</tr>
+			<tr>
+				<td>Saturday</td>
+				<td>-</td>
+			</tr>
+			<tr>
+				<td>Sunday</td>
+				<td>-</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<style>
+.container {
+	width: 100%;
+	padding: 1rem;
+}
+
+.container h1{
+	font-size: 2rem;
+}
+
+.container table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+table caption {
+	border: 1px solid #000
+}
+
+th, td {
+	text-align: center;
+	border: 1px solid #000;
+}
+</style>
+
   
