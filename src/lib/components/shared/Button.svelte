@@ -15,7 +15,7 @@ interface Props extends Omit<HTMLButtonAttributes, 'onclick'> {
     children?: Snippet;
 	width?: string;
 	variant?: 'primary' | 'secondary' | 'danger' | 'success' | 'text';
-	mode?: 'solid' | 'outline' | 'ghost';
+	mode?: 'solid' | 'outline' | 'ghost' | 'link';
 	size?: 'sm' | 'md' | 'lg';
 	isLoading?: boolean; // Allow parent to force loading state
     onclick?: (e: MouseEvent) => void | Promise<void>;
@@ -184,7 +184,13 @@ async function handlePointerClick(e: MouseEvent) {
 		color: red;
 		border: none;
 		background-color: transparent;
-		
+	}
+
+	.btn[data-mode='link'][data-variant='text'] {
+		color: blue;
+		border: none;
+		background-color: transparent;
+		outline: none;
 	}
 
 	/* --- Loading State Logic --- */

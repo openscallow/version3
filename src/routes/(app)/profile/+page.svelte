@@ -17,6 +17,8 @@ import Location from "$lib/components/shared/Location.svelte";
 import OrderCard from "$lib/components/features/profile/OrderCard.svelte";
 import ReferralPill from '$lib/components/features/profile/ReferralPill.svelte';
 import { getCustomerOrders } from '$lib/components/ts/getCustomerOrders';
+import PromotionTasks from '$lib/components/features/profile/PromotionTasks.svelte';
+
 
 let customer = new Customer();
 
@@ -54,7 +56,9 @@ async function customerInfo() {
         
     }
 }
+
 </script>
+
 
 {#await customerInfo()}
     <div class="loading-container">
@@ -73,6 +77,8 @@ async function customerInfo() {
         </div>
     </div>  
     <ReferralPill />
+{:catch error}
+f
 {/await}
 
 {#await customerOrders()}
@@ -93,15 +99,16 @@ async function customerInfo() {
     {#if error.message === 'customer not exists'}
         <div class="suggestion-container">
             <p style="color:red;">You don't have account please create an account or login first</p> <br>
-            <Button ButtonName="Login" BackgroudColor="#1a202c" OnClick={()=> window.location.href="/login"}/>
+            <Button variant="primary" mode="solid" size="lg" radius="999px"  onclick={(e)=> {window.location.href="/accounts/login"}}>Login</Button>
             <span>--- OR ---</span>
-            <Button ButtonName="Sign Up" BackgroudColor="#1a202c" OnClick={()=> window.location.href="/accounts/signup"}/>
+            <Button variant="primary" mode="solid" size="lg" radius="999px"  onclick={(e)=> {window.location.href="/accounts/signup"}}>sign up</Button>
+
         </div> 
     {:else}
     <p>{error.message}</p>
     {/if}
 {/await}
-
+<PromotionTasks />
 <style>
     .loading-container {
         min-height: 60vh;

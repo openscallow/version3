@@ -2,7 +2,13 @@
 	import '@tailwind';
 	export let title = "About Us";
 	import { getCartItemsByCartId } from '$lib/services/cart.service';
-	getCartItemsByCartId(39)
+	import { getEligiblePromotionsByCustomerId } from '$lib/services/promotion.service';
+    import { onMount } from 'svelte';
+	// getCartItemsByCartId(39)
+	onMount(()=> {
+			getEligiblePromotionsByCustomerId('e954aeeecb6e4b05890b')
+	})
+
   </script>
   
   <div class="flex flex-col items-center justify-center py-10 bg-gradient-to-r from-blue-100 via-white to-blue-100 min-h-screen p-4">
