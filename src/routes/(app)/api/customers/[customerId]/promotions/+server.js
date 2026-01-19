@@ -26,6 +26,7 @@ export async function GET({ url, params }){
                         ON upt.promotion_id = pc.id
                        AND upt.customer_id = $1
                     WHERE
+                        upt.customer_id = $1
                         pc.is_active = TRUE
                         AND NOW() BETWEEN pc.starts_at AND pc.expires_at
                         AND COALESCE(upt.status, 'eligible') = $2;`;
