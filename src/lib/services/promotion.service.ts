@@ -33,7 +33,20 @@ export async function getEnrolledPromotionsByCustomerId(customerId: string): Pro
             method: "GET"
         });
         const items = await response.json();
-        console.log(items)
+        return items
+    } catch (error) {
+        console.log(error)
+        return [];
+    }
+}
+
+export async function qualifiedPromotionsByCustomerId(customerId: string): Promise<Promotion[]> {
+    try {
+        const response = await fetch(`/api/customers/${customerId}/promotions?status=qualified`, {
+            method: "GET"
+        });
+        const items = await response.json();
+        console.log(items, 'quelified')
         return items
     } catch (error) {
         console.log(error)
