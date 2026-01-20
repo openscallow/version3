@@ -22,7 +22,7 @@ onMount(async()=> {
     }
 })
 </script>
-<Card padding="0.5rem" boxShadow="var(--box-shadow-1)" background="white"> 
+<div class="container">
     <h3 style="font-size:1.5rem;">Your offers and discount</h3> 
     {#await qualifiedPromotions}
         loading...
@@ -45,4 +45,9 @@ onMount(async()=> {
             <EligiblePromotionsCard {elgigiblePromotions} customerId={customer.ID} />
         {/if}
     {/await} 
-</Card>
+</div>
+<style>
+    .container {
+        padding: 0.5rem;
+    }
+</style>
