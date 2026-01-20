@@ -41,7 +41,6 @@ function drawer(id: number) {
 
 <Drawer bind:isOpen={showDrawer}>
     <h2>Language: {termsLang} </h2>
-    <p>code: <b>{enrolledPromotions[drawerId].code}</b></p>
     <p>{enrolledPromotions[drawerId].descriptions.hi}</p>
     <Button variant='danger'mode='outline' width="fit-content" onclick={(e) => {showDrawer = false}}>close</Button>
 </Drawer>
