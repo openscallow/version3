@@ -58,9 +58,8 @@ async function customerInfo() {
 }
 
 </script>
-
-
-{#await customerInfo()}
+<div class="container">
+    {#await customerInfo()}
     <div class="loading-container">
         <p>Loading ...</p>
     </div>
@@ -102,14 +101,23 @@ f
             <Button variant="primary" mode="solid" size="lg" radius="999px"  onclick={(e)=> {window.location.href="/accounts/login"}}>Login</Button>
             <span>--- OR ---</span>
             <Button variant="primary" mode="solid" size="lg" radius="999px"  onclick={(e)=> {window.location.href="/accounts/signup"}}>sign up</Button>
-
         </div> 
     {:else}
     <p>{error.message}</p>
     {/if}
 {/await}
+
 <PromotionTasks />
+</div>
+
+
+
 <style>
+    .container {
+        width: 100%;
+        padding: 1rem;
+    }
+
     .loading-container {
         min-height: 60vh;
         display: flex;

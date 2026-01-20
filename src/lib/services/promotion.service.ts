@@ -46,7 +46,6 @@ export async function qualifiedPromotionsByCustomerId(customerId: string): Promi
             method: "GET"
         });
         const items = await response.json();
-        console.log(items, 'quelified')
         return items
     } catch (error) {
         console.log(error)
