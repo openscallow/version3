@@ -1,7 +1,6 @@
 <script lang="ts">
 import { onMount } from "svelte";
 import { Customer } from '$lib/utils/Customer';
-import Card from "$lib/components/shared/Card.svelte";
 import QualifiedPromotionsCard from "$lib/components/features/profile/QualifiedPromotionsCard.svelte";
 import EnrolledPromotionsCard from "$lib/components/features/profile/EnrolledPromotionsCard.svelte";
 import EligiblePromotionsCard from "$lib/components/features/profile/EligiblePromotionsCard.svelte";

@@ -137,3 +137,18 @@ button:focus:not(:focus-visible) {
 	width: 1px;
 	white-space: nowrap;
 }
+
+dialog {
+	inset: 0; 
+	margin: auto; 
+	background-color: transparent;
+}
+
+dialog .wrapper {
+	min-width: 350px;
+	padding: 0.5rem;
+	position: relative;
+	background: white;
+	border-radius: var(--radius-md);
+	box-shadow: var(--box-shadow-3);
+}

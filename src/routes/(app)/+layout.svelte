@@ -16,19 +16,23 @@ import Navbar from '$lib/components/navbar.svelte';
 import Footer from '$lib/components/svelte/footer.svelte';
 import { visit } from '$lib/analytics/core/visits';
 import { onMount } from 'svelte';
-
-    
-/**
- * @typedef {Object} Props
- * @property {import('svelte').Snippet} [children]
-*/
-
-/** @type {Props} */
+import { setDialogContext } from '$lib/dialog.svelte.ts';
 
 let { children } = $props();
 
 onMount(()=>{visit()})
 
+
+const dialog = setDialogContext();
+let dialogElement = $state();
+
+$effect(() => {
+	if (dialog.isOpen) {
+		dialogElement?.showModal();
+	} else {
+		dialogElement?.close();
+	}
+});
 </script>
 <Navbar />
 
@@ -38,3 +42,10 @@ onMount(()=>{visit()})
 
 <Footer />
 
+<dialog bind:this={dialogElement} onclose={() => dialog.close()}>
+	<div class="wrapper">
+		{#if dialog.content}
+			{@render dialog.content()}
+		{/if}
+	</div>
+</dialog>
