@@ -74,6 +74,7 @@ let termsLang: string = $state('Hindi')
 		}
 		
 		.terms {
+            color:black;
 			list-style: none; 
 			padding-left: 0;
 		}

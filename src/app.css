@@ -145,7 +145,7 @@ dialog {
 }
 
 dialog .wrapper {
-	min-width: 350px;
+	min-width: 200px;
 	padding: 0.5rem;
 	position: relative;
 	background: white;

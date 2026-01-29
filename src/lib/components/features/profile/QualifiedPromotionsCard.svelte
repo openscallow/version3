@@ -37,7 +37,7 @@ let termsLang: string = $state('Hindi')
 {/each}
 
 {#snippet myModalContent()}
-	<button class="close-button" onclick={() => dialog.close()}><CircleX /></button>
+	<button class="close-button" onclick={() => dialog.close()}><CircleX color={'black'}/></button>
 	<div class="lang-container">
 		<span>language: </span>
 		<select name="lang" id="lang">
@@ -73,6 +73,7 @@ let termsLang: string = $state('Hindi')
 		}
 		
 		.terms {
+            color:black;
 			list-style: none; 
 			padding-left: 0;
 		}
