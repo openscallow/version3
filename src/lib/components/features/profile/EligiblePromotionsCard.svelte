@@ -31,7 +31,9 @@ let termsLang: string = $state('Hindi')
                 </div>
             </div>
             <div class="interaction">
-                <Button variant='text' mode='link' width="fit-content" onclick={() => dialog.open(myModalContent)}>Terms and condition</Button> 
+                <Button variant='text' mode='link' width="fit-content" onclick={() => {
+                    drawerId = index;
+                    dialog.open(myModalContent)}}>Terms and condition</Button> 
                 <Button variant='primary' width="fit-content" onclick={async (e)=> {
                             if(customerId){
                                await enrollPromotionByCustomerId(customerId, promotion.promotion_id)
