@@ -33,7 +33,7 @@ let termsLang: string = $state('Hindi')
                 <Button variant='text' mode='link' width="fit-content" onclick={() => {
                     drawerId = index;
                     dialog.open(myModalContent)}}
-                >Terms and condition</Button>  
+                >Terms</Button>  
                 <Countdown targetDate={promotion.deadline_at} />
             </div>
         </div>
