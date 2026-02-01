@@ -1,9 +1,9 @@
 <script lang='ts'>
-import { CircleX } from 'lucide-svelte';
+import { AlignCenter, CircleX, Columns, FileX } from 'lucide-svelte';
 import { getDialogContext } from '$lib/dialog.svelte';
 import Card from "$lib/components/shared/Card.svelte";
 import Button from '$lib/components/shared/Button.svelte';
-import Drawer from "$lib/components/shared/Drawer.svelte";
+import Countdown from './Countdown.svelte';
 import type { Promotion } from "$lib/services/promotion.service";
 
 interface Props{
@@ -30,7 +30,11 @@ let termsLang: string = $state('Hindi')
                 </div>
             </div>
             <div class="interaction">
-                <Button variant='text' mode='link' width="fit-content" onclick={() => dialog.open(myModalContent)}>Terms and condition</Button>    
+                <Button variant='text' mode='link' width="fit-content" onclick={() => {
+                    drawerId = index;
+                    dialog.open(myModalContent)}}
+                >Terms and condition</Button>  
+                <Countdown targetDate={promotion.deadline_at} />
             </div>
         </div>
     </Card>
@@ -122,4 +126,5 @@ let termsLang: string = $state('Hindi')
         justify-content: space-between;
         border-top: 1px dashed black;
     }
+
 </style>
