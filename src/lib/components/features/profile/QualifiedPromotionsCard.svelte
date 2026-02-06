@@ -47,6 +47,7 @@ let termsLang: string = $state('Hindi')
 	</div>
 	
 	<ul class="terms">
+        <li>Code: {qualifiedPromotions[drawerId].code}</li>
         {#each qualifiedPromotions[drawerId].descriptions.hi as term}
             <li>{term}</li>
         {/each}
