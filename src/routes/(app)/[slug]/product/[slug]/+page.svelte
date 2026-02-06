@@ -9,6 +9,7 @@
 */
 import ProductCarousel from '$lib/components/features/product-detail-page/ProductCarousel.svelte';
 
+
   import { onMount } from 'svelte';
   import { addToRecentlyViewed } from '$lib/components/recentlyViewed/recentView.js';
   import '../../../../../app.css';
@@ -156,7 +157,31 @@ import ProductCarousel from '$lib/components/features/product-detail-page/Produc
     }
   }
 
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": data.productName,
+    "image": data.images[1],
+    "description": data.description,
+    "brand": { "@type": "Brand", "name": "Callow" },
+    "offers": {
+      "@type": "Offer",
+      "price": data.product.currentPrice,
+      "priceCurrency": "INR",
+      "availability": data.stockAvailability
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock",
+      "url": data.canonicalUrl `https://callow.in/${data.productName.replace(/ /g, "-")}/product/${data._id}`
+    }
+  };
+
 </script>
+
+<svelte:head>
+  <script type="application/ld+json">
+    {@html JSON.stringify(productSchema)}
+  </script>
+</svelte:head>
 
 <main class="main">
 <section class="product-wrapper">
