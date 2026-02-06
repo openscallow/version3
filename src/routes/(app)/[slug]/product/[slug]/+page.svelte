@@ -156,31 +156,35 @@ import ProductCarousel from '$lib/components/features/product-detail-page/Produc
       // Provide fallback behavior
     }
   }
-
-  const productSchema = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": data.productName,
-    "image": data.images[1],
-    "description": data.description,
-    "brand": { "@type": "Brand", "name": "Callow" },
-    "offers": {
-      "@type": "Offer",
-      "price": data.product.currentPrice,
-      "priceCurrency": "INR",
-      "availability": data.stockAvailability
-        ? "https://schema.org/InStock"
-        : "https://schema.org/OutOfStock",
-      "url": data.canonicalUrl `https://callow.in/${data.productName.replace(/ /g, "-")}/product/${data._id}`
+ 
+  // Defines a Schema.org Product structured data object using dynamic product details for SEO.
+  // serializeSchema() converts the schema into a JSON-LD script tag that can be injected into the page.
+  const schema = {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": data.productName,
+      "image": data.images?.[1], 
+      "description": data.description,
+      "brand": { "@type": "Brand", "name": "Callow" },
+      "offers": {
+        "@type": "Offer",
+        "price": data.currentPrice,
+        "priceCurrency": "INR",
+        "availability": data.stockAvailability
+          ? "https://schema.org/InStock"
+          : "https://schema.org/OutOfStock",
+        "url": `https://callow.in/${data.productName?.replaceAll(" ","-").replaceAll(".", "-")}/product/${data._id}`
+      }
+    };
+    
+    function serializeSchema() {
+      return `<script type="application/ld+json">${JSON.stringify(schema)}<\/script>`;
     }
-  };
-
 </script>
 
 <svelte:head>
-  <script type="application/ld+json">
-    {@html JSON.stringify(productSchema)}
-  </script>
+  {@html serializeSchema()}
+
 </svelte:head>
 
 <main class="main">
